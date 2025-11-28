@@ -1,0 +1,225 @@
+{
+  "msme_id": "MSME_001",
+  "report_id": "0cd96fa4-06a7-403c-9ce3-f4860ba25e89",
+  "generated_at": "2025-11-28 21:44:29.742424",
+  "financial_health": {
+    "total_inflow": 970000.0,
+    "total_outflow": 248000.0,
+    "net_cashflow": 722000.0,
+    "average_balance": 411950.0,
+    "min_balance": 110000.0,
+    "max_balance": 757000.0,
+    "volatility_score": 0.34914833447167215,
+    "seasonality_detected": true,
+    "stress_indicators": [
+      "High balance volatility"
+    ],
+    "cashflow_stability_score": 0.7126762013695811,
+    "transaction_count": 20,
+    "period_start": "2024-01-15 00:00:00",
+    "period_end": "2024-04-20 00:00:00",
+    "categorized_transactions": {
+      "operational": 12,
+      "financing": 6,
+      "tax": 2
+    },
+    "metadata": {
+      "pattern_analysis": {
+        "has_seasonality": true,
+        "volatility": 0.34914833447167215,
+        "regular_credits": true,
+        "regular_debits": true,
+        "monthly_breakdown": {
+          "2024-01": {
+            "credits": 150000.0,
+            "debits": 40000.0,
+            "count": 3
+          },
+          "2024-02": {
+            "credits": 300000.0,
+            "debits": 70000.0,
+            "count": 6
+          },
+          "2024-03": {
+            "credits": 350000.0,
+            "debits": 63000.0,
+            "count": 6
+          },
+          "2024-04": {
+            "credits": 170000.0,
+            "debits": 75000.0,
+            "count": 5
+          }
+        }
+      },
+      "balance_volatility": 216977.67893932023,
+      "inflow_count": 6,
+      "outflow_count": 14
+    }
+  },
+  "behavioral_score": {
+    "behavioral_score": 710.0,
+    "repayment_pattern_score": 90.0,
+    "concentration_risk_score": 50.0,
+    "cyclicality_score": 40.0,
+    "risk_level": "medium",
+    "red_flags": [
+      "High balance volatility"
+    ],
+    "anomalies": [
+      {
+        "type": "rapid_balance_change",
+        "description": "Rapid balance change: 109.1%",
+        "severity": "medium",
+        "date": "2024-02-01 00:00:00",
+        "previous_balance": 110000.0,
+        "current_balance": 230000.0
+      },
+      {
+        "type": "rapid_balance_change",
+        "description": "Rapid balance change: 97.3%",
+        "severity": "medium",
+        "date": "2024-02-20 00:00:00",
+        "previous_balance": 185000.0,
+        "current_balance": 365000.0
+      },
+      {
+        "type": "rapid_balance_change",
+        "description": "Rapid balance change: 61.5%",
+        "severity": "medium",
+        "date": "2024-03-05 00:00:00",
+        "previous_balance": 325000.0,
+        "current_balance": 525000.0
+      }
+    ],
+    "confidence": 0.9,
+    "metadata": {
+      "justification": {
+        "behavioral_score": "The overall behavioral score of 710 reflects a strong financial capacity and good repayment discipline, but with notable behavioral risks. Positives include a very high net cashflow (722,000), good cashflow stability (0.71), and 6 detected EMI payments. However, significant deductions were made due to high balance volatility (stress indicator), seasonality coupled with volatility, and three instances of rapid balance changes, which indicate lumpy and less predictable cash flow patterns.",
+        "repayment_pattern_score": "Scored 90/100. This high score is justified by the detection of 6 EMI payments, which is a strong indicator of consistent repayment behavior and discipline. Furthermore, the very high net cashflow (722,000) and good cashflow stability (0.71) demonstrate ample capacity to meet obligations.",
+        "concentration_risk_score": "Scored 50/100. This score indicates moderate concentration risk. With only 6 inflow transactions over approximately 3.5 months, and a high average inflow of 161,666, the business appears to rely on a few larger transactions rather than a highly diversified stream of smaller ones. The 'rapid_balance_change' anomalies further support the presence of significant, lumpy inflows.",
+        "cyclicality_score": "Scored 40/100. While seasonality is explicitly detected, it is accompanied by a relatively high volatility score (0.349) and identified as a 'High balance volatility' stress indicator. This suggests that while patterns exist, the associated fluctuations are significant and could lead to periods of cash flow stress, making the cyclicality a risk factor rather than a predictable, manageable pattern.",
+        "risk_level": "Assessed as 'medium'. The business exhibits strong financial fundamentals (high net cashflow, good stability, proven EMI payments) which are positive. However, the high balance volatility, rapid balance changes, and the nature of the detected seasonality introduce an element of unpredictability and potential stress, warranting a medium risk classification. The business has the capacity, but its cash flow behavior requires closer monitoring.",
+        "red_flags": "The 'High balance volatility' identified in the financial health snapshot's stress indicators is a significant red flag, indicating potential instability in the business's cash reserves.",
+        "anomalies": "Three instances of 'rapid_balance_change' were detected, indicating significant, sudden shifts in the balance. These are important to note as they contribute to the overall volatility and could represent irregular large transactions or events that impact cash flow predictability."
+      }
+    }
+  },
+  "product_recommendations": {
+    "best_fit_products": [
+      {
+        "product_id": "term_loan_001",
+        "product_name": "MSME Term Loan",
+        "lender_name": "SecureBank",
+        "eligible": true,
+        "eligibility_score": 100.0,
+        "risk_bucket": "medium",
+        "recommended_amount": 2000000.0,
+        "interest_rate_range": {
+          "min": 12.0,
+          "max": 14.0,
+          "typical": 13.0
+        },
+        "reasons": [
+          "Excellent alignment with the MSME's 'medium' risk level and strong financial capacity.",
+          "Leverages the very high net cashflow (722,000) and good cashflow stability (0.712) for comfortable repayment.",
+          "Supported by an outstanding repayment pattern score (90) with 6 detected EMI payments, demonstrating strong discipline for fixed obligations.",
+          "Offers a substantial recommended amount (2,000,000) at a competitive interest rate (12-14%) for business growth or investment."
+        ],
+        "requirements_met": {
+          "net_cashflow": true,
+          "behavioral_score": true,
+          "volatility": true,
+          "stability": true,
+          "red_flags": true
+        }
+      },
+      {
+        "product_id": "invoice_financing_001",
+        "product_name": "Invoice Financing",
+        "lender_name": "InvoiceFlow Capital",
+        "eligible": true,
+        "eligibility_score": 100.0,
+        "risk_bucket": "low",
+        "recommended_amount": 1000000.0,
+        "interest_rate_range": {
+          "min": 13.0,
+          "max": 15.0,
+          "typical": 14.0
+        },
+        "reasons": [
+          "Directly addresses key cash flow challenges: high balance volatility, moderate concentration risk, and rapid balance changes.",
+          "Provides immediate liquidity by financing receivables, smoothing out lumpy inflows and improving working capital management.",
+          "Helps mitigate the impact of seasonality and unpredictable cash flow patterns without adding fixed debt burden.",
+          "The product's 'low' risk bucket is favorable, and the interest rate is competitive (13-15%)."
+        ],
+        "requirements_met": {
+          "net_cashflow": true,
+          "behavioral_score": true,
+          "volatility": true,
+          "stability": true,
+          "red_flags": true
+        }
+      }
+    ],
+    "alternative_products": [
+      {
+        "product_id": "working_capital_001",
+        "product_name": "Quick Working Capital Loan",
+        "lender_name": "FastLend Finance",
+        "eligible": true,
+        "eligibility_score": 100.0,
+        "risk_bucket": "high",
+        "recommended_amount": 500000.0,
+        "interest_rate_range": {
+          "min": 17.0,
+          "max": 19.0,
+          "typical": 18.0
+        },
+        "reasons": [
+          "Can help manage short-term operational cash flow needs, especially given detected seasonality and high balance volatility.",
+          "Provides flexibility to bridge gaps caused by unpredictable cash flow patterns.",
+          "However, the higher interest rate and 'high' risk bucket make it a less optimal choice compared to other available products, given the MSME's strong overall financial health and repayment capacity."
+        ],
+        "requirements_met": {
+          "net_cashflow": true,
+          "behavioral_score": true,
+          "volatility": true,
+          "stability": true,
+          "red_flags": true
+        }
+      }
+    ],
+    "total_products_evaluated": 3,
+    "matching_criteria_used": [
+      "net_cashflow",
+      "behavioral_score",
+      "volatility_score",
+      "cashflow_stability_score",
+      "red_flags_count"
+    ],
+    "metadata": {
+      "evaluation_timestamp": "2025-11-28T21:43:52.543958",
+      "engine": "LangChain-Gemini"
+    }
+  },
+  "explainability": {
+    "score_explanations": {},
+    "improvement_recommendations": [],
+    "lender_arguments": {},
+    "key_insights": [],
+    "risk_factors": [],
+    "strengths": [],
+    "weaknesses": [],
+    "metadata": {
+      "fallback": true,
+      "generated_at": "2025-11-28T21:44:29.742210"
+    }
+  },
+  "overall_creditworthiness": 72.86,
+  "summary": "This credit intelligence report evaluates the MSME's financial profile with an overall creditworthiness score of 72.9/100. The analysis reveals a RiskLevel.MEDIUM risk profile with a behavioral score of 710/1000. The business demonstrates positive cashflow of \u20b9722,000.00. 2 credit products have been identified as suitable matches. Detailed analysis and recommendations are provided in the respective sections.",
+  "metadata": {
+    "generated_by": "OrchestratorAgent",
+    "version": "1.0.0"
+  }
+}

@@ -69,3 +69,5 @@ package-lock.json
 # yarn.lock
 # pnpm-lock.yaml
 .env
+.venv
+__pycache__/

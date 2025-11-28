@@ -1,0 +1,12 @@
+{
+  "report_id": "0cd96fa4-06a7-403c-9ce3-f4860ba25e89",
+  "msme_id": "MSME_001",
+  "generated_at": "2025-11-28T21:44:29.742424",
+  "overall_creditworthiness": 72.86,
+  "summary": "This credit intelligence report evaluates the MSME's financial profile with an overall creditworthiness score of 72.9/100. The analysis reveals a RiskLevel.MEDIUM risk profile with a behavioral score of 710/1000. The business demonstrates positive cashflow of \u20b9722,000.00. 2 credit products have been identified as suitable matches. Detailed analysis and recommendations are provided in the respective sections.",
+  "risk_level": "medium",
+  "behavioral_score": 710.0,
+  "net_cashflow": 722000.0,
+  "best_fit_products_count": 2,
+  "key_insights": []
+}

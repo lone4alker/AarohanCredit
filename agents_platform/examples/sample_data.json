@@ -1,0 +1,153 @@
+{
+  "msme_id": "MSME_001",
+  "business_name": "TechSolutions Pvt Ltd",
+  "transactions": [
+    {
+      "date": "2024-01-15",
+      "amount": 150000,
+      "description": "Customer Payment - Invoice #001",
+      "balance_after": 150000,
+      "type": "credit"
+    },
+    {
+      "date": "2024-01-20",
+      "amount": -25000,
+      "description": "EMI Payment - Loan Account",
+      "balance_after": 125000,
+      "type": "debit"
+    },
+    {
+      "date": "2024-01-25",
+      "amount": -15000,
+      "description": "Salary Payment",
+      "balance_after": 110000,
+      "type": "debit"
+    },
+    {
+      "date": "2024-02-01",
+      "amount": 120000,
+      "description": "Customer Payment - Invoice #002",
+      "balance_after": 230000,
+      "type": "credit"
+    },
+    {
+      "date": "2024-02-05",
+      "amount": -25000,
+      "description": "EMI Payment - Loan Account",
+      "balance_after": 205000,
+      "type": "debit"
+    },
+    {
+      "date": "2024-02-10",
+      "amount": -15000,
+      "description": "Salary Payment",
+      "balance_after": 190000,
+      "type": "debit"
+    },
+    {
+      "date": "2024-02-15",
+      "amount": -5000,
+      "description": "GST Payment",
+      "balance_after": 185000,
+      "type": "debit"
+    },
+    {
+      "date": "2024-02-20",
+      "amount": 180000,
+      "description": "Customer Payment - Invoice #003",
+      "balance_after": 365000,
+      "type": "credit"
+    },
+    {
+      "date": "2024-02-25",
+      "amount": -25000,
+      "description": "EMI Payment - Loan Account",
+      "balance_after": 340000,
+      "type": "debit"
+    },
+    {
+      "date": "2024-03-01",
+      "amount": -15000,
+      "description": "Salary Payment",
+      "balance_after": 325000,
+      "type": "debit"
+    },
+    {
+      "date": "2024-03-05",
+      "amount": 200000,
+      "description": "Customer Payment - Invoice #004",
+      "balance_after": 525000,
+      "type": "credit"
+    },
+    {
+      "date": "2024-03-10",
+      "amount": -25000,
+      "description": "EMI Payment - Loan Account",
+      "balance_after": 500000,
+      "type": "debit"
+    },
+    {
+      "date": "2024-03-15",
+      "amount": -15000,
+      "description": "Salary Payment",
+      "balance_after": 485000,
+      "type": "debit"
+    },
+    {
+      "date": "2024-03-20",
+      "amount": -8000,
+      "description": "Office Rent",
+      "balance_after": 477000,
+      "type": "debit"
+    },
+    {
+      "date": "2024-03-25",
+      "amount": 150000,
+      "description": "Customer Payment - Invoice #005",
+      "balance_after": 627000,
+      "type": "credit"
+    },
+    {
+      "date": "2024-04-01",
+      "amount": -25000,
+      "description": "EMI Payment - Loan Account",
+      "balance_after": 602000,
+      "type": "debit"
+    },
+    {
+      "date": "2024-04-05",
+      "amount": -15000,
+      "description": "Salary Payment",
+      "balance_after": 587000,
+      "type": "debit"
+    },
+    {
+      "date": "2024-04-10",
+      "amount": 170000,
+      "description": "Customer Payment - Invoice #006",
+      "balance_after": 757000,
+      "type": "credit"
+    },
+    {
+      "date": "2024-04-15",
+      "amount": -25000,
+      "description": "EMI Payment - Loan Account",
+      "balance_after": 732000,
+      "type": "debit"
+    },
+    {
+      "date": "2024-04-20",
+      "amount": -10000,
+      "description": "GST Payment",
+      "balance_after": 722000,
+      "type": "debit"
+    }
+  ],
+  "msme_profile": {
+    "business_type": "Technology Services",
+    "years_in_business": 3,
+    "employee_count": 15,
+    "annual_revenue": 2400000
+  }
+}
+
