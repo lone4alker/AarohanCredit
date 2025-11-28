@@ -1,0 +1,21 @@
+# Requirements specific to the `agents_platform` package
+# Core runtime dependencies used by the agents and API
+pydantic>=2.0.0
+pydantic-settings>=2.0.0
+fastapi>=0.104.0
+uvicorn[standard]>=0.24.0
+python-dateutil>=2.8.2
+langchain>=0.2.0
+langgraph>=0.0.52
+langchain-google-genai>=2.0.0
+google-generativeai>=0.5.0
+
+# Optional / Development
+pytest>=7.4.0
+pytest-asyncio>=0.21.0
+black>=23.0.0
+flake8>=6.1.0
+
+# Notes:
+# - Add more optional packages (e.g., PDF parsing, database drivers) as needed.
+# - To install: `pip install -r agents_platform/requirements.txt`
