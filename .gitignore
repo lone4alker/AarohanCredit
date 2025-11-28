@@ -1,2 +1,73 @@
+# -------------------------
+# GLOBAL
+# -------------------------
+
+# Node modules
+node_modules/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Env files (backend + frontend)
+.env
+.env.local
+.env.*.local
+
+# Dist / Build folders (Vite + Node)
+dist/
+build/
+out/
+
+# Temporary files
+*.tmp
+*.temp
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# -------------------------
+# FRONTEND (Vite + React)
+# -------------------------
+# Vite cache
+.vite/
+
+# VS Code settings inside project
+.vscode/
+
+# Tailwind / PostCSS cache
+.postcssrc
+.cache/
+.eslintcache
+
+# -------------------------
+# BACKEND (Node/Express)
+# -------------------------
+# Nodemon or PM2
+.pids
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage reports
+coverage/
+
+# TypeScript (if added later)
+*.tsbuildinfo
+
+# -------------------------
+# GIT
+# -------------------------
+# Ignore lock files you don’t want
+package-lock.json
+
+# If using yarn or pnpm, uncomment below:
+# yarn.lock
+# pnpm-lock.yaml
+.env
 .venv
 __pycache__/
