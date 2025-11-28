@@ -4,10 +4,8 @@ import MsmeDashboard from './pages/MsmeDashboard';
 import LenderDashboard from './pages/LenderDashboard';
 import Login from './pages/Login';
 
+
 function App() {
-
-
-export default function App() {
   return (
     <Router>
       <Routes>

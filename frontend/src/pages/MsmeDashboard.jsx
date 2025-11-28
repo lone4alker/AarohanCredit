@@ -11,7 +11,13 @@ export default function MsmeDashboard() {
   const [activeTab, setActiveTab] = useState('home');
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [isSyncing, setIsSyncing] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(true);
+
+  // Initialize theme from localStorage or default to true (dark)
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    const savedTheme = localStorage.getItem('theme');
+    return savedTheme ? savedTheme === 'dark' : true;
+  });
+
   const [user, setUser] = useState({ name: 'Guest', gstin: 'N/A' });
 
   useEffect(() => {
@@ -24,8 +30,10 @@ export default function MsmeDashboard() {
     const root = window.document.documentElement;
     if (isDarkMode) {
       root.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
     } else {
       root.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
     }
   }, [isDarkMode]);
 
@@ -67,6 +75,7 @@ export default function MsmeDashboard() {
           toggleSidebar={() => setSidebarOpen(!sidebarOpen)}
           isDarkMode={isDarkMode}
           toggleTheme={toggleTheme}
+          showSync={true}
         />
 
         {/* 3. Page Content */}

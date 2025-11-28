@@ -53,12 +53,12 @@ const SyncModal = ({ isOpen, onClose, onComplete }) => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm transition-opacity">
-      <div className={`bg-[#1a1b23] border border-gray-700 w-full max-w-2xl rounded-2xl shadow-2xl overflow-hidden flex flex-col transition-all duration-500 ${step === 'discovery' || step === 'consent' ? 'h-[80vh]' : 'h-auto min-h-[500px]'}`}>
+      <div className={`bg-white dark:bg-[#1a1b23] border border-gray-200 dark:border-gray-700 w-full max-w-2xl rounded-2xl shadow-2xl overflow-hidden flex flex-col transition-all duration-500 ${step === 'discovery' || step === 'consent' ? 'h-[80vh]' : 'h-auto min-h-[500px]'}`}>
         <ProgressBar currentStep={currentStepIndex} totalSteps={steps.length} />
         {step !== 'processing' && (
-            <button onClick={onClose} className="absolute top-4 right-4 text-gray-500 hover:text-white transition-colors">
-              <X size={24} />
-            </button>
+          <button onClick={onClose} className="absolute top-4 right-4 text-gray-400 hover:text-gray-900 dark:text-gray-500 dark:hover:text-white transition-colors">
+            <X size={24} />
+          </button>
         )}
         <div className="flex-1 p-6 overflow-y-auto relative">
           {step === 'intro' && <IntroStep setStep={setStep} />}
