@@ -1,153 +1,174 @@
 {
-  "msme_id": "MSME_001",
-  "business_name": "TechSolutions Pvt Ltd",
-  "transactions": [
+  "msme_profile": {
+    "msme_id": "MSME002",
+    "business_name": "Asha Textiles Pvt Ltd",
+    "gstin": "27ASHATX1234Z1",
+    "pan": "ASHAT9876K",
+    "sector": "Manufacturing - Textiles",
+    "msme_type": "Medium",
+    "business_vintage_years": 8,
+    "registered_address": {
+      "street": "45 Industrial Area",
+      "city": "Pune",
+      "state": "Maharashtra",
+      "pincode": "411001"
+    }
+  },
+  
+  "bank_accounts": [
     {
-      "date": "2024-01-15",
-      "amount": 150000,
-      "description": "Customer Payment - Invoice #001",
-      "balance_after": 150000,
-      "type": "credit"
+      "account_id": "BA003",
+      "bank": "SBI",
+      "account_number": "XXXX9012",
+      "ifsc": "SBIN0009012",
+      "type": "Current Account",
+      "opening_date": "2017-03-20",
+      "transactions": [
+        {"date": "2025-01-03", "desc": "Export Payment - USA Client", "amount": 285000, "type": "Credit", "balance": 285000},
+        {"date": "2025-01-06", "desc": "GST TAX PAYMENT", "amount": -42300, "type": "Debit", "balance": 242700},
+        {"date": "2025-01-10", "desc": "Raw Cotton Purchase", "amount": -85000, "type": "Debit", "balance": 157700},
+        {"date": "2025-01-15", "desc": "Machinery Maintenance", "amount": -18000, "type": "Debit", "balance": 139700},
+        {"date": "2025-01-20", "desc": "Worker Salaries", "amount": -95000, "type": "Debit", "balance": 44700},
+        {"date": "2025-01-25", "desc": "Domestic Order Payment", "amount": 120000, "type": "Credit", "balance": 164700},
+        {"date": "2025-01-28", "desc": "Rent & Utilities", "amount": -35000, "type": "Debit", "balance": 129700},
+        
+        {"date": "2025-02-02", "desc": "Export Payment - Germany", "amount": 310000, "type": "Credit", "balance": 439700},
+        {"date": "2025-02-06", "desc": "GST TAX PAYMENT", "amount": -45900, "type": "Debit", "balance": 393800},
+        {"date": "2025-02-09", "desc": "Dye & Chemical Purchase", "amount": -62000, "type": "Debit", "balance": 331800},
+        {"date": "2025-02-12", "desc": "Raw Cotton Purchase", "amount": -92000, "type": "Debit", "balance": 239800},
+        {"date": "2025-02-18", "desc": "Worker Salaries", "amount": -98000, "type": "Debit", "balance": 141800},
+        {"date": "2025-02-22", "desc": "Domestic Order Payment", "amount": 145000, "type": "Credit", "balance": 286800},
+        {"date": "2025-02-27", "desc": "Rent & Utilities", "amount": -35000, "type": "Debit", "balance": 251800},
+        
+        {"date": "2025-03-04", "desc": "Export Payment - UK", "amount": 275000, "type": "Credit", "balance": 526800},
+        {"date": "2025-03-07", "desc": "GST TAX PAYMENT", "amount": -41400, "type": "Debit", "balance": 485400},
+        {"date": "2025-03-11", "desc": "Raw Cotton Purchase", "amount": -88000, "type": "Debit", "balance": 397400},
+        {"date": "2025-03-14", "desc": "Dye & Chemical Purchase", "amount": -58000, "type": "Debit", "balance": 339400},
+        {"date": "2025-03-20", "desc": "Worker Salaries", "amount": -97000, "type": "Debit", "balance": 242400},
+        {"date": "2025-03-24", "desc": "Domestic Order Payment", "amount": 135000, "type": "Credit", "balance": 377400},
+        {"date": "2025-03-28", "desc": "Rent & Utilities", "amount": -35000, "type": "Debit", "balance": 342400},
+        
+        {"date": "2025-04-03", "desc": "Export Payment - France", "amount": 295000, "type": "Credit", "balance": 637400},
+        {"date": "2025-04-06", "desc": "GST TAX PAYMENT", "amount": -43200, "type": "Debit", "balance": 594200},
+        {"date": "2025-04-10", "desc": "Raw Cotton Purchase", "amount": -90000, "type": "Debit", "balance": 504200},
+        {"date": "2025-04-13", "desc": "Machinery Upgrade", "amount": -125000, "type": "Debit", "balance": 379200},
+        {"date": "2025-04-18", "desc": "Worker Salaries", "amount": -99000, "type": "Debit", "balance": 280200},
+        {"date": "2025-04-23", "desc": "Domestic Order Payment", "amount": 148000, "type": "Credit", "balance": 428200},
+        {"date": "2025-04-28", "desc": "Rent & Utilities", "amount": -35000, "type": "Debit", "balance": 393200},
+        
+        {"date": "2025-05-03", "desc": "Export Payment - Canada", "amount": 265000, "type": "Credit", "balance": 658200},
+        {"date": "2025-05-07", "desc": "GST TAX PAYMENT", "amount": -38700, "type": "Debit", "balance": 619500},
+        {"date": "2025-05-11", "desc": "Raw Cotton Purchase", "amount": -82000, "type": "Debit", "balance": 537500},
+        {"date": "2025-05-15", "desc": "Dye & Chemical Purchase", "amount": -55000, "type": "Debit", "balance": 482500},
+        {"date": "2025-05-20", "desc": "Worker Salaries", "amount": -96000, "type": "Debit", "balance": 386500},
+        {"date": "2025-05-25", "desc": "Domestic Order Payment", "amount": 130000, "type": "Credit", "balance": 516500},
+        {"date": "2025-05-29", "desc": "Rent & Utilities", "amount": -35000, "type": "Debit", "balance": 481500},
+        
+        {"date": "2025-06-04", "desc": "Export Payment - Australia", "amount": 305000, "type": "Credit", "balance": 786500},
+        {"date": "2025-06-07", "desc": "GST TAX PAYMENT", "amount": -44550, "type": "Debit", "balance": 741950},
+        {"date": "2025-06-11", "desc": "Raw Cotton Purchase", "amount": -94000, "type": "Debit", "balance": 647950},
+        {"date": "2025-06-14", "desc": "Dye & Chemical Purchase", "amount": -60000, "type": "Debit", "balance": 587950},
+        {"date": "2025-06-19", "desc": "Worker Salaries", "amount": -98000, "type": "Debit", "balance": 489950},
+        {"date": "2025-06-24", "desc": "Domestic Order Payment", "amount": 152000, "type": "Credit", "balance": 641950},
+        {"date": "2025-06-28", "desc": "Rent & Utilities", "amount": -35000, "type": "Debit", "balance": 606950},
+        
+        {"date": "2025-07-03", "desc": "Export Payment - Japan", "amount": 320000, "type": "Credit", "balance": 926950},
+        {"date": "2025-07-06", "desc": "GST TAX PAYMENT", "amount": -46800, "type": "Debit", "balance": 880150},
+        {"date": "2025-07-10", "desc": "Raw Cotton Purchase", "amount": -98000, "type": "Debit", "balance": 782150},
+        {"date": "2025-07-13", "desc": "Dye & Chemical Purchase", "amount": -64000, "type": "Debit", "balance": 718150},
+        {"date": "2025-07-18", "desc": "Worker Salaries", "amount": -100000, "type": "Debit", "balance": 618150},
+        {"date": "2025-07-23", "desc": "Domestic Order Payment", "amount": 158000, "type": "Credit", "balance": 776150},
+        {"date": "2025-07-28", "desc": "Rent & Utilities", "amount": -35000, "type": "Debit", "balance": 741150},
+        
+        {"date": "2025-08-03", "desc": "Export Payment - Singapore", "amount": 290000, "type": "Credit", "balance": 1031150},
+        {"date": "2025-08-06", "desc": "GST TAX PAYMENT", "amount": -42390, "type": "Debit", "balance": 988760},
+        {"date": "2025-08-10", "desc": "Raw Cotton Purchase", "amount": -87000, "type": "Debit", "balance": 901760},
+        {"date": "2025-08-14", "desc": "Machinery Maintenance", "amount": -22000, "type": "Debit", "balance": 879760},
+        {"date": "2025-08-19", "desc": "Worker Salaries", "amount": -99000, "type": "Debit", "balance": 780760},
+        {"date": "2025-08-24", "desc": "Domestic Order Payment", "amount": 142000, "type": "Credit", "balance": 922760},
+        {"date": "2025-08-29", "desc": "Rent & Utilities", "amount": -35000, "type": "Debit", "balance": 887760},
+        
+        {"date": "2025-09-04", "desc": "Export Payment - Italy", "amount": 315000, "type": "Credit", "balance": 1202760},
+        {"date": "2025-09-07", "desc": "GST TAX PAYMENT", "amount": -46080, "type": "Debit", "balance": 1156680},
+        {"date": "2025-09-11", "desc": "Raw Cotton Purchase", "amount": -95000, "type": "Debit", "balance": 1061680},
+        {"date": "2025-09-15", "desc": "Dye & Chemical Purchase", "amount": -62000, "type": "Debit", "balance": 999680},
+        {"date": "2025-09-20", "desc": "Worker Salaries", "amount": -101000, "type": "Debit", "balance": 898680},
+        {"date": "2025-09-25", "desc": "Domestic Order Payment", "amount": 155000, "type": "Credit", "balance": 1053680},
+        {"date": "2025-09-29", "desc": "Rent & Utilities", "amount": -35000, "type": "Debit", "balance": 1018680},
+        
+        {"date": "2025-10-04", "desc": "Export Payment - Spain", "amount": 280000, "type": "Credit", "balance": 1298680},
+        {"date": "2025-10-07", "desc": "GST TAX PAYMENT", "amount": -40950, "type": "Debit", "balance": 1257730},
+        {"date": "2025-10-11", "desc": "Raw Cotton Purchase", "amount": -84000, "type": "Debit", "balance": 1173730},
+        {"date": "2025-10-15", "desc": "Dye & Chemical Purchase", "amount": -57000, "type": "Debit", "balance": 1116730},
+        {"date": "2025-10-20", "desc": "Worker Salaries", "amount": -98000, "type": "Debit", "balance": 1018730},
+        {"date": "2025-10-25", "desc": "Domestic Order Payment", "amount": 138000, "type": "Credit", "balance": 1156730},
+        {"date": "2025-10-29", "desc": "Rent & Utilities", "amount": -35000, "type": "Debit", "balance": 1121730},
+        
+        {"date": "2025-11-03", "desc": "Export Payment - Netherlands", "amount": 298000, "type": "Credit", "balance": 1419730},
+        {"date": "2025-11-06", "desc": "GST TAX PAYMENT", "amount": -43560, "type": "Debit", "balance": 1376170},
+        {"date": "2025-11-10", "desc": "Raw Cotton Purchase", "amount": -89000, "type": "Debit", "balance": 1287170},
+        {"date": "2025-11-14", "desc": "Dye & Chemical Purchase", "amount": -59000, "type": "Debit", "balance": 1228170},
+        {"date": "2025-11-19", "desc": "Worker Salaries", "amount": -100000, "type": "Debit", "balance": 1128170},
+        {"date": "2025-11-24", "desc": "Domestic Order Payment", "amount": 147000, "type": "Credit", "balance": 1275170},
+        {"date": "2025-11-28", "desc": "Rent & Utilities", "amount": -35000, "type": "Debit", "balance": 1240170},
+        
+        {"date": "2025-12-03", "desc": "Export Payment - Belgium", "amount": 305000, "type": "Credit", "balance": 1545170},
+        {"date": "2025-12-06", "desc": "GST TAX PAYMENT", "amount": -44595, "type": "Debit", "balance": 1500575},
+        {"date": "2025-12-10", "desc": "Raw Cotton Purchase", "amount": -92000, "type": "Debit", "balance": 1408575},
+        {"date": "2025-12-13", "desc": "Year-end Bonus", "amount": -150000, "type": "Debit", "balance": 1258575},
+        {"date": "2025-12-18", "desc": "Worker Salaries", "amount": -102000, "type": "Debit", "balance": 1156575},
+        {"date": "2025-12-23", "desc": "Domestic Order Payment", "amount": 160000, "type": "Credit", "balance": 1316575},
+        {"date": "2025-12-28", "desc": "Rent & Utilities", "amount": -35000, "type": "Debit", "balance": 1281575}
+      ]
     },
     {
-      "date": "2024-01-20",
-      "amount": -25000,
-      "description": "EMI Payment - Loan Account",
-      "balance_after": 125000,
-      "type": "debit"
-    },
-    {
-      "date": "2024-01-25",
-      "amount": -15000,
-      "description": "Salary Payment",
-      "balance_after": 110000,
-      "type": "debit"
-    },
-    {
-      "date": "2024-02-01",
-      "amount": 120000,
-      "description": "Customer Payment - Invoice #002",
-      "balance_after": 230000,
-      "type": "credit"
-    },
-    {
-      "date": "2024-02-05",
-      "amount": -25000,
-      "description": "EMI Payment - Loan Account",
-      "balance_after": 205000,
-      "type": "debit"
-    },
-    {
-      "date": "2024-02-10",
-      "amount": -15000,
-      "description": "Salary Payment",
-      "balance_after": 190000,
-      "type": "debit"
-    },
-    {
-      "date": "2024-02-15",
-      "amount": -5000,
-      "description": "GST Payment",
-      "balance_after": 185000,
-      "type": "debit"
-    },
-    {
-      "date": "2024-02-20",
-      "amount": 180000,
-      "description": "Customer Payment - Invoice #003",
-      "balance_after": 365000,
-      "type": "credit"
-    },
-    {
-      "date": "2024-02-25",
-      "amount": -25000,
-      "description": "EMI Payment - Loan Account",
-      "balance_after": 340000,
-      "type": "debit"
-    },
-    {
-      "date": "2024-03-01",
-      "amount": -15000,
-      "description": "Salary Payment",
-      "balance_after": 325000,
-      "type": "debit"
-    },
-    {
-      "date": "2024-03-05",
-      "amount": 200000,
-      "description": "Customer Payment - Invoice #004",
-      "balance_after": 525000,
-      "type": "credit"
-    },
-    {
-      "date": "2024-03-10",
-      "amount": -25000,
-      "description": "EMI Payment - Loan Account",
-      "balance_after": 500000,
-      "type": "debit"
-    },
-    {
-      "date": "2024-03-15",
-      "amount": -15000,
-      "description": "Salary Payment",
-      "balance_after": 485000,
-      "type": "debit"
-    },
-    {
-      "date": "2024-03-20",
-      "amount": -8000,
-      "description": "Office Rent",
-      "balance_after": 477000,
-      "type": "debit"
-    },
-    {
-      "date": "2024-03-25",
-      "amount": 150000,
-      "description": "Customer Payment - Invoice #005",
-      "balance_after": 627000,
-      "type": "credit"
-    },
-    {
-      "date": "2024-04-01",
-      "amount": -25000,
-      "description": "EMI Payment - Loan Account",
-      "balance_after": 602000,
-      "type": "debit"
-    },
-    {
-      "date": "2024-04-05",
-      "amount": -15000,
-      "description": "Salary Payment",
-      "balance_after": 587000,
-      "type": "debit"
-    },
-    {
-      "date": "2024-04-10",
-      "amount": 170000,
-      "description": "Customer Payment - Invoice #006",
-      "balance_after": 757000,
-      "type": "credit"
-    },
-    {
-      "date": "2024-04-15",
-      "amount": -25000,
-      "description": "EMI Payment - Loan Account",
-      "balance_after": 732000,
-      "type": "debit"
-    },
-    {
-      "date": "2024-04-20",
-      "amount": -10000,
-      "description": "GST Payment",
-      "balance_after": 722000,
-      "type": "debit"
+      "account_id": "BA004",
+      "bank": "Axis Bank",
+      "account_number": "XXXX3456",
+      "ifsc": "UTIB0003456",
+      "type": "Current Account",
+      "opening_date": "2019-08-12",
+      "transactions": [
+        {"date": "2025-01-08", "desc": "Domestic Sale", "amount": 85000, "type": "Credit", "balance": 85000},
+        {"date": "2025-01-22", "desc": "Transfer to SBI", "amount": -50000, "type": "Debit", "balance": 35000},
+        {"date": "2025-02-10", "desc": "Domestic Sale", "amount": 92000, "type": "Credit", "balance": 127000},
+        {"date": "2025-02-25", "desc": "Supplier Payment", "amount": -60000, "type": "Debit", "balance": 67000},
+        {"date": "2025-03-12", "desc": "Domestic Sale", "amount": 78000, "type": "Credit", "balance": 145000},
+        {"date": "2025-03-28", "desc": "Transfer to SBI", "amount": -70000, "type": "Debit", "balance": 75000},
+        {"date": "2025-04-09", "desc": "Domestic Sale", "amount": 88000, "type": "Credit", "balance": 163000},
+        {"date": "2025-04-24", "desc": "Supplier Payment", "amount": -55000, "type": "Debit", "balance": 108000},
+        {"date": "2025-05-11", "desc": "Domestic Sale", "amount": 81000, "type": "Credit", "balance": 189000},
+        {"date": "2025-05-27", "desc": "Transfer to SBI", "amount": -65000, "type": "Debit", "balance": 124000},
+        {"date": "2025-06-10", "desc": "Domestic Sale", "amount": 94000, "type": "Credit", "balance": 218000},
+        {"date": "2025-06-26", "desc": "Supplier Payment", "amount": -70000, "type": "Debit", "balance": 148000},
+        {"date": "2025-07-12", "desc": "Domestic Sale", "amount": 97000, "type": "Credit", "balance": 245000},
+        {"date": "2025-07-28", "desc": "Transfer to SBI", "amount": -80000, "type": "Debit", "balance": 165000},
+        {"date": "2025-08-11", "desc": "Domestic Sale", "amount": 89000, "type": "Credit", "balance": 254000},
+        {"date": "2025-08-26", "desc": "Supplier Payment", "amount": -62000, "type": "Debit", "balance": 192000},
+        {"date": "2025-09-13", "desc": "Domestic Sale", "amount": 96000, "type": "Credit", "balance": 288000},
+        {"date": "2025-09-28", "desc": "Transfer to SBI", "amount": -75000, "type": "Debit", "balance": 213000},
+        {"date": "2025-10-10", "desc": "Domestic Sale", "amount": 84000, "type": "Credit", "balance": 297000},
+        {"date": "2025-10-25", "desc": "Supplier Payment", "amount": -58000, "type": "Debit", "balance": 239000},
+        {"date": "2025-11-12", "desc": "Domestic Sale", "amount": 91000, "type": "Credit", "balance": 330000},
+        {"date": "2025-11-27", "desc": "Transfer to SBI", "amount": -72000, "type": "Debit", "balance": 258000},
+        {"date": "2025-12-11", "desc": "Domestic Sale", "amount": 98000, "type": "Credit", "balance": 356000},
+        {"date": "2025-12-26", "desc": "Supplier Payment", "amount": -85000, "type": "Debit", "balance": 271000}
+      ]
     }
   ],
-  "msme_profile": {
-    "business_type": "Technology Services",
-    "years_in_business": 3,
-    "employee_count": 15,
-    "annual_revenue": 2400000
-  }
+  
+  "gst_filings": [
+    {"period": "2025-01", "type": "GSTR-3B", "total_sales": 470000, "total_purchases": 235000, "output_tax": 84600, "input_tax": 42300, "net_tax_paid": 42300, "b2b_sales": 370000, "b2c_sales": 100000, "filing_date": "2025-02-18", "status": "Filed", "nil_return": false},
+    {"period": "2025-02", "type": "GSTR-3B", "total_sales": 510000, "total_purchases": 255000, "output_tax": 91800, "input_tax": 45900, "net_tax_paid": 45900, "b2b_sales": 405000, "b2c_sales": 105000, "filing_date": "2025-03-19", "status": "Filed", "nil_return": false},
+    {"period": "2025-03", "type": "GSTR-3B", "total_sales": 460000, "total_purchases": 230000, "output_tax": 82800, "input_tax": 41400, "net_tax_paid": 41400, "b2b_sales": 360000, "b2c_sales": 100000, "filing_date": "2025-04-18", "status": "Filed", "nil_return": false},
+    {"period": "2025-04", "type": "GSTR-3B", "total_sales": 480000, "total_purchases": 240000, "output_tax": 86400, "input_tax": 43200, "net_tax_paid": 43200, "b2b_sales": 380000, "b2c_sales": 100000, "filing_date": "2025-05-17", "status": "Filed", "nil_return": false},
+    {"period": "2025-05", "type": "GSTR-3B", "total_sales": 430000, "total_purchases": 215000, "output_tax": 77400, "input_tax": 38700, "net_tax_paid": 38700, "b2b_sales": 340000, "b2c_sales": 90000, "filing_date": "2025-06-19", "status": "Filed", "nil_return": false},
+    {"period": "2025-06", "type": "GSTR-3B", "total_sales": 495000, "total_purchases": 247500, "output_tax": 89100, "input_tax": 44550, "net_tax_paid": 44550, "b2b_sales": 395000, "b2c_sales": 100000, "filing_date": "2025-07-18", "status": "Filed", "nil_return": false},
+    {"period": "2025-07", "type": "GSTR-3B", "total_sales": 520000, "total_purchases": 260000, "output_tax": 93600, "input_tax": 46800, "net_tax_paid": 46800, "b2b_sales": 415000, "b2c_sales": 105000, "filing_date": "2025-08-17", "status": "Filed", "nil_return": false},
+    {"period": "2025-08", "type": "GSTR-3B", "total_sales": 471000, "total_purchases": 235500, "output_tax": 84780, "input_tax": 42390, "net_tax_paid": 42390, "b2b_sales": 370000, "b2c_sales": 101000, "filing_date": "2025-09-18", "status": "Filed", "nil_return": false},
+    {"period": "2025-09", "type": "GSTR-3B", "total_sales": 512000, "total_purchases": 256000, "output_tax": 92160, "input_tax": 46080, "net_tax_paid": 46080, "b2b_sales": 410000, "b2c_sales": 102000, "filing_date": "2025-10-19", "status": "Filed", "nil_return": false},
+    {"period": "2025-10", "type": "GSTR-3B", "total_sales": 455000, "total_purchases": 227500, "output_tax": 81900, "input_tax": 40950, "net_tax_paid": 40950, "b2b_sales": 355000, "b2c_sales": 100000, "filing_date": "2025-11-18", "status": "Filed", "nil_return": false},
+    {"period": "2025-11", "type": "GSTR-3B", "total_sales": 484000, "total_purchases": 242000, "output_tax": 87120, "input_tax": 43560, "net_tax_paid": 43560, "b2b_sales": 385000, "b2c_sales": 99000, "filing_date": "2025-12-18", "status": "Filed", "nil_return": false},
+    {"period": "2025-12", "type": "GSTR-3B", "total_sales": 495500, "total_purchases": 247750, "output_tax": 89190, "input_tax": 44595, "net_tax_paid": 44595, "b2b_sales": 395000, "b2c_sales": 100500, "filing_date": "2026-01-17", "status": "Filed", "nil_return": false}
+  ]
 }
-

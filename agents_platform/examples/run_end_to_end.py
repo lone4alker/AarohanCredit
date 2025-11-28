@@ -32,17 +32,23 @@ def main():
     # Load sample data
     print("Step 1: Loading sample data...")
     data = load_sample_data()
-    print(f"   ✓ Loaded {len(data.get('transactions', []))} transactions")
+    
+    # Count transactions from new format (bank_accounts) or old format
+    transaction_count = len(data.get('transactions', []))
+    if transaction_count == 0 and 'bank_accounts' in data:
+        transaction_count = sum(len(acc.get('transactions', [])) for acc in data.get('bank_accounts', []))
+    
+    print(f"   ✓ Loaded data with {transaction_count} transactions")
     print()
     
-    # Prepare input
-    input_data = {
-        'transactions': data.get('transactions', [])
-    }
+    # Prepare input - pass entire data structure (agents will extract what they need)
+    input_data = data.copy()  # This preserves bank_accounts, gst_filings, msme_profile structure
     
+    # Extract msme_id and business_name for context
+    msme_profile = data.get('msme_profile', {})
     context = {
-        'msme_id': data.get('msme_id', 'MSME_001'),
-        'business_name': data.get('business_name', 'Unknown')
+        'msme_id': msme_profile.get('msme_id', data.get('msme_id', 'MSME_001')),
+        'business_name': msme_profile.get('business_name', data.get('business_name', 'Unknown'))
     }
     
     # Initialize orchestrator

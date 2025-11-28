@@ -50,7 +50,7 @@ The MSME Credit Intelligence Platform follows an **agentic AI architecture** whe
 
 **Purpose**: Specialized AI agents for different analysis tasks
 
-**Framework**: Financial data prep relies on deterministic Python toolchains, while credit scoring, policy matching, and explainability agents are implemented as LangChain `Runnable` pipelines backed by Google Gemini.
+**Framework**: Financial data prep relies on deterministic Python toolchains, while credit scoring, policy matching, explainability, and recommendation agents are implemented as LangChain `Runnable` pipelines backed by Google Gemini (see `core/llm.py`).
 
 **Agents**:
 
@@ -91,6 +91,22 @@ The MSME Credit Intelligence Platform follows an **agentic AI architecture** whe
   4. Extract insights
 - **Output**: `ExplainabilityReport`
 
+#### Health Analysis Agent
+- **Input**: Raw transactions (and optional derived metrics)
+- **Process**:
+  1. Analyze operational health signals (e.g., overdraft/low-balance days)
+  2. Summarize GST-related signals when available
+  3. Detect cheque bounce and EMI patterns
+- **Output**: `HealthAnalysisSummary` (optional in unified report)
+
+#### Recommendation Agent
+- **Input**: MSME Profile + Financial Health + Health Analysis + Behavioral Score + Product Recommendations
+- **Process**:
+  1. Use Gemini to generate actionable profile improvement guidance
+  2. Categorize into quick wins and long-term strategies
+  3. Focus on cashflow optimization, GST compliance, score enhancement, risk mitigation
+- **Output**: `RecommendationReport` (optional in unified report)
+
 ### 4. Orchestrator Layer (`orchestrator/`)
 
 **Purpose**: Coordinate all agents and produce unified output
@@ -99,10 +115,14 @@ The MSME Credit Intelligence Platform follows an **agentic AI architecture** whe
 1. Execute Financial Health Agent
 2. Execute Credit Scoring Agent (with financial health)
 3. Execute Policy Matching Agent (with both outputs)
-4. Execute Explainability Agent (with all outputs)
-5. Build Unified Credit Report
+4. Execute Health Analysis Agent (additional operational signals)
+5. Execute Explainability Agent (with previous outputs)
+6. Execute Recommendation Agent (aggregated guidance)
+7. Build Unified Credit Report
 
 **Error Handling**: Continues with partial data if non-critical agents fail
+- Financial Health is critical (pipeline stops on failure)
+- Policy Matching, Explainability, Health Analysis, Recommendation are non-critical; pipeline continues with sensible fallbacks
 
 ### 5. API Layer (`api/`)
 
@@ -114,6 +134,8 @@ The MSME Credit Intelligence Platform follows an **agentic AI architecture** whe
 - `POST /api/v1/agent/credit-scoring`
 - `POST /api/v1/agent/policy-matching`
 - `POST /api/v1/agent/explainability`
+- `POST /api/v1/agent/health-analysis` (optional)
+- `POST /api/v1/agent/recommendation` (optional)
 - `GET /api/v1/report/{id}`: Get full report
 - `GET /api/v1/report/{id}/summary`: Get summary
 - `GET /api/v1/report/{id}/lender`: Lender view
@@ -151,9 +173,17 @@ Orchestrator
     │       │
     │       └──► Policy Database/JSON
     │
-    └──► Explainability Agent
+    ├──► Health Analysis Agent
+    │       │
+    │       └──► Tools (operational signals, GST heuristics)
+    │
+    ├──► Explainability Agent
             │
-            └──► All previous outputs
+      └──► All previous outputs
+    │
+    └──► Recommendation Agent
+      │
+      └──► Aggregated outputs for guidance
     │
     ▼
 Unified Credit Report
@@ -217,6 +247,7 @@ Configuration via environment variables or `.env` file:
 
 - **API Settings**: Host, port, title
 - **Scoring Weights**: Customize scoring algorithm
+  - Orchestrator combines components using `FINANCIAL_HEALTH_WEIGHT`, `BEHAVIORAL_SCORE_WEIGHT`, `POLICY_MATCH_WEIGHT` from `core/config.py`
 - **Data Paths**: Where to store data
 - **Agent Settings**: Timeouts, retries
 - **Logging**: Log level, file paths
@@ -234,6 +265,8 @@ Configuration via environment variables or `.env` file:
 **Fallback**:
 - If explainability fails: Continue with basic explanations
 - If policy matching fails: Continue with empty recommendations
+- If health analysis fails: Continue with `None` health analysis
+- If recommendation fails: Continue with deterministic recommendations or `None`
 - If financial health fails: Pipeline stops (critical)
 
 ---
@@ -282,6 +315,7 @@ Configuration via environment variables or `.env` file:
 - Test orchestrator with all agents
 - Test API endpoints
 - Test end-to-end flow
+ - Validate fallbacks when individual agents fail
 
 **Example**:
 ```python
@@ -328,6 +362,7 @@ def test_financial_health_agent():
 - Batch transaction processing
 - Use async I/O for file operations
 - Database indexing for queries
+ - Memoize LangChain inputs when appropriate
 
 **Current Performance**:
 - ~1-2 seconds for 20 transactions
@@ -353,5 +388,13 @@ def test_financial_health_agent():
 
 ---
 
-**Last Updated**: 2024-01-15
+## LLM Usage Notes
+
+- Agents using Gemini via LangChain: `CreditScoringAgent`, `PolicyMatchingAgent`, `ExplainabilityAgent`, `RecommendationAgent`.
+- Each such agent constructs a `ChatPromptTemplate`, invokes `get_gemini_llm()` (`core/llm.py`), and parses JSON with `JsonOutputParser` bound to the corresponding Pydantic model.
+- Robust normalization ensures outputs are converted to model-compatible dicts even when LLM responses vary; deterministic fallbacks exist where applicable.
+
+---
+
+**Last Updated**: 2025-11-29
 

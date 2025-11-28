@@ -114,6 +114,35 @@ class ExplainabilityReport(BaseModel):
     metadata: Dict[str, Any] = {}
 
 
+class HealthAnalysisSummary(BaseModel):
+    """Health Analysis Agent output."""
+    monthly_inflow: Dict[str, float]  # Month -> total inflow
+    monthly_outflow: Dict[str, float]  # Month -> total outflow
+    net_cashflow: float
+    cashflow_volatility: float = Field(ge=0, le=1)
+    avg_balance: float  # Average monthly balance
+    low_balance_days: int  # Days with balance below threshold
+    emi_transactions: int  # Count of EMI transactions
+    cheque_bounces: int  # Count of cheque bounces
+    overdraft_days: int  # Days with negative balance
+    gst_analysis: Dict[str, Any]  # GST filing analysis
+    period_start: datetime
+    period_end: datetime
+    metadata: Dict[str, Any] = {}
+
+
+class RecommendationReport(BaseModel):
+    """Recommendation Agent (xAI) output for profile improvement."""
+    profile_improvement_recommendations: List[Dict[str, str]]  # List of recommendations with priority, category, action
+    cashflow_optimization: List[str]
+    gst_compliance_improvements: List[str]
+    credit_score_enhancement: List[str]
+    risk_mitigation: List[str]
+    quick_wins: List[str]  # Easy improvements
+    long_term_strategies: List[str]
+    metadata: Dict[str, Any] = {}
+
+
 class UnifiedCreditReport(BaseModel):
     """Final unified credit report."""
     msme_id: str
@@ -123,6 +152,8 @@ class UnifiedCreditReport(BaseModel):
     behavioral_score: BehavioralScore
     product_recommendations: ProductRecommendation
     explainability: ExplainabilityReport
+    health_analysis: Optional[HealthAnalysisSummary] = None
+    recommendations: Optional[RecommendationReport] = None
     overall_creditworthiness: float = Field(ge=0, le=100)
     summary: str
     metadata: Dict[str, Any] = {}

@@ -66,8 +66,19 @@ def extract_transactions_from_json(data: Dict[str, Any]) -> List[Dict[str, Any]]
     """
     transactions = []
     
+    # Handle bank_accounts structure (new format)
+    if 'bank_accounts' in data:
+        for account in data['bank_accounts']:
+            if 'transactions' in account:
+                for tx in account['transactions']:
+                    # Add account info to transaction
+                    tx_with_account = tx.copy()
+                    tx_with_account['account_id'] = account.get('account_id', '')
+                    tx_with_account['bank'] = account.get('bank', '')
+                    transactions.append(tx_with_account)
+    
     # Handle various JSON structures
-    if 'transactions' in data:
+    elif 'transactions' in data:
         transactions = data['transactions']
     elif 'bank_statements' in data:
         for statement in data['bank_statements']:
@@ -89,10 +100,12 @@ def extract_transactions_from_json(data: Dict[str, Any]) -> List[Dict[str, Any]]
         normalized_tx = {
             'date': parse_date(tx.get('date', tx.get('transaction_date', ''))),
             'amount': float(tx.get('amount', tx.get('transaction_amount', 0))),
-            'description': str(tx.get('description', tx.get('narration', tx.get('remarks', '')))),
+            'description': str(tx.get('description', tx.get('desc', tx.get('narration', tx.get('remarks', ''))))),
             'balance_after': float(tx.get('balance_after', tx.get('balance', 0))) if tx.get('balance_after') or tx.get('balance') else None,
             'type': tx.get('type', 'unknown'),
-            'category': tx.get('category')
+            'category': tx.get('category'),
+            'account_id': tx.get('account_id', ''),
+            'bank': tx.get('bank', '')
         }
         normalized.append(normalized_tx)
     
@@ -148,12 +161,29 @@ def extract_gst_data(data: Dict[str, Any]) -> Dict[str, Any]:
         Dictionary with GST data
     """
     gst_data = {
+        'gst_filings': [],
         'gst_payments': [],
         'gst_receipts': [],
         'total_gst_paid': 0.0,
-        'total_gst_collected': 0.0
+        'total_gst_collected': 0.0,
+        'total_sales': 0.0,
+        'total_purchases': 0.0,
+        'total_output_tax': 0.0,
+        'total_input_tax': 0.0,
+        'total_net_tax_paid': 0.0
     }
     
+    # Handle gst_filings structure (new format)
+    if 'gst_filings' in data:
+        gst_data['gst_filings'] = data['gst_filings']
+        for filing in data['gst_filings']:
+            gst_data['total_sales'] += float(filing.get('total_sales', 0))
+            gst_data['total_purchases'] += float(filing.get('total_purchases', 0))
+            gst_data['total_output_tax'] += float(filing.get('output_tax', 0))
+            gst_data['total_input_tax'] += float(filing.get('input_tax', 0))
+            gst_data['total_net_tax_paid'] += float(filing.get('net_tax_paid', 0))
+    
+    # Handle old format
     if 'gst_statements' in data:
         for statement in data['gst_statements']:
             if 'payments' in statement:
@@ -161,9 +191,11 @@ def extract_gst_data(data: Dict[str, Any]) -> Dict[str, Any]:
             if 'receipts' in statement:
                 gst_data['gst_receipts'].extend(statement['receipts'])
     
-    # Calculate totals
-    gst_data['total_gst_paid'] = sum(p.get('amount', 0) for p in gst_data['gst_payments'])
-    gst_data['total_gst_collected'] = sum(r.get('amount', 0) for r in gst_data['gst_receipts'])
+    # Calculate totals from payments/receipts if available
+    if gst_data['gst_payments']:
+        gst_data['total_gst_paid'] = sum(p.get('amount', 0) for p in gst_data['gst_payments'])
+    if gst_data['gst_receipts']:
+        gst_data['total_gst_collected'] = sum(r.get('amount', 0) for r in gst_data['gst_receipts'])
     
     return gst_data
 

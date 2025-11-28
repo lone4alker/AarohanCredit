@@ -18,6 +18,7 @@ from ..agents.financial_health_agent import FinancialHealthAgent
 from ..agents.credit_scoring_agent import CreditScoringAgent
 from ..agents.policy_matching_agent import PolicyMatchingAgent
 from ..agents.explainability_agent import ExplainabilityAgent
+from ..tools.data_parser import parse_json_data
 
 # Configure logging
 logging.basicConfig(
@@ -163,12 +164,25 @@ async def analyze_credit(
         
         # Prepare input data
         input_data = {}
+        
+        # Handle file_path: load JSON and merge into input_data
+        if request.file_path:
+            file_data = parse_json_data(request.file_path)
+            # Merge file data into input_data (preserves bank_accounts, gst_filings, msme_profile structure)
+            input_data.update(file_data)
+            # If file had transactions at root, keep them; otherwise agents will extract from bank_accounts
+            if 'transactions' in file_data:
+                input_data['transactions'] = file_data['transactions']
+        
+        # Handle direct transactions (overrides file data if provided)
         if request.transactions:
             input_data['transactions'] = request.transactions
-        if request.file_path:
-            input_data['file_path'] = request.file_path
         
-        input_data['msme_profile'] = request.msme_profile or {}
+        # Merge msme_profile (request takes precedence over file data)
+        if request.msme_profile:
+            input_data['msme_profile'] = request.msme_profile
+        elif 'msme_profile' not in input_data:
+            input_data['msme_profile'] = {}
         
         # Prepare context
         context = request.context.copy() if request.context else {}

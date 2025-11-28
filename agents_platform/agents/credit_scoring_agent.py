@@ -12,6 +12,7 @@ from langchain_core.runnables import Runnable
 
 from ..core.base_agent import BaseAgent
 from ..core.types import AgentOutput, BehavioralScore
+from ..tools.data_parser import extract_transactions_from_json
 from ..tools.financial_calculator import compute_cashflow_metrics, compute_stability_score
 from ..tools.anomaly_detector import detect_anomalies, detect_red_flags
 from ..core.llm import get_gemini_llm
@@ -66,7 +67,8 @@ class CreditScoringAgent(BaseAgent):
         try:
             self.log_step("Starting credit scoring analysis (LangChain + Gemini)")
 
-            transactions = input_data.get("transactions", [])
+            # Extract transactions (handles both old and new formats)
+            transactions = self._extract_transactions(input_data)
             financial_health = input_data.get("financial_health", {})
 
             if not transactions and not financial_health:
@@ -151,4 +153,32 @@ class CreditScoringAgent(BaseAgent):
             "red_flags_detected": red_flags,
             "emi_payments_detected": emi_count,
         }
+    
+    def _extract_transactions(self, input_data: Dict[str, Any]) -> list:
+        """
+        Extract transactions from input data.
+        Handles both old format (transactions at root) and new format (transactions in bank_accounts).
+        
+        Args:
+            input_data: Input data dictionary
+            
+        Returns:
+            List of transaction dictionaries
+        """
+        # If transactions are already at root level (old format or already extracted)
+        if 'transactions' in input_data and isinstance(input_data['transactions'], list):
+            return input_data['transactions']
+        
+        # If input_data has a file_path key
+        if 'file_path' in input_data:
+            from ..tools.data_parser import parse_json_data
+            data = parse_json_data(input_data['file_path'])
+            return extract_transactions_from_json(data)
+        
+        # Try to extract from JSON structure (new format with bank_accounts)
+        try:
+            return extract_transactions_from_json(input_data)
+        except Exception as e:
+            self.logger.warning(f"Failed to extract transactions: {e}")
+            return []
 
