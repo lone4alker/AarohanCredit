@@ -6,54 +6,118 @@ import LenderSidebar from '../components/Lender/LenderSidebar';
 import Header from '../components/Header';
 import { Plus, Edit, Trash2, Zap, Save, X, Settings } from 'lucide-react';
 
-// --- Local Storage Key ---
-const POLICY_STORAGE_KEY = 'lenderPolicies';
-
 // Neon Blue Accent Color
 const NEON_BLUE = '#4da3ff';
+const API_BASE = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
 
 /**
- * Custom hook for managing policies with local storage persistence
+ * Custom hook for managing policies with API persistence
  */
-const usePolicies = () => {
+const usePolicies = (lenderId) => {
     const [policies, setPolicies] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        // Load policies from localStorage on mount
-        const storedPolicies = localStorage.getItem(POLICY_STORAGE_KEY);
-        if (storedPolicies) {
-            setPolicies(JSON.parse(storedPolicies));
+        if (lenderId) {
+            fetchPolicies();
         }
-    }, []);
+    }, [lenderId]);
 
-    useEffect(() => {
-        // Save policies to localStorage whenever they change
-        localStorage.setItem(POLICY_STORAGE_KEY, JSON.stringify(policies));
-    }, [policies]);
-
-    const addPolicy = (newPolicy) => {
-        const policyWithId = {
-            ...newPolicy,
-            id: Date.now(), // Simple unique ID
-            dateCreated: new Date().toLocaleDateString(),
-            lastUpdated: new Date().toLocaleString(),
-        };
-        setPolicies(prev => [...prev, policyWithId]);
+    const fetchPolicies = async () => {
+        try {
+            setLoading(true);
+            const response = await fetch(`${API_BASE}/api/policies/lender/${lenderId}`);
+            
+            if (!response.ok) {
+                const errorText = await response.text();
+                console.error('Error response:', response.status, errorText);
+                throw new Error(`HTTP ${response.status}: ${errorText.substring(0, 100)}`);
+            }
+            
+            const data = await response.json();
+            if (data.success) {
+                setPolicies(data.policies || []);
+            } else {
+                console.error('API returned error:', data.message);
+                setPolicies([]);
+            }
+        } catch (error) {
+            console.error('Error fetching policies:', error);
+            setPolicies([]);
+            // Show user-friendly error
+            if (error.message.includes('404')) {
+                console.warn('No policies found for lender:', lenderId);
+            }
+        } finally {
+            setLoading(false);
+        }
     };
 
-    const updatePolicy = (updatedPolicy) => {
-        setPolicies(prev => 
-            prev.map(policy => 
-                policy.id === updatedPolicy.id ? { ...updatedPolicy, lastUpdated: new Date().toLocaleString() } : policy
-            )
-        );
+    const addPolicy = async (newPolicy) => {
+        try {
+            const response = await fetch(`${API_BASE}/api/policies`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ ...newPolicy, lender_id: lenderId })
+            });
+            
+            if (!response.ok) {
+                const errorText = await response.text();
+                console.error('Error response:', response.status, errorText);
+                throw new Error(`HTTP ${response.status}`);
+            }
+            
+            const data = await response.json();
+            if (data.success) {
+                await fetchPolicies();
+                return true;
+            } else {
+                console.error('API error:', data.message);
+                return false;
+            }
+        } catch (error) {
+            console.error('Error creating policy:', error);
+            return false;
+        }
     };
 
-    const deletePolicy = (id) => {
-        setPolicies(prev => prev.filter(policy => policy.id !== id));
+    const updatePolicy = async (updatedPolicy) => {
+        try {
+            const response = await fetch(`${API_BASE}/api/policies/${updatedPolicy._id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(updatedPolicy)
+            });
+            const data = await response.json();
+            if (data.success) {
+                await fetchPolicies();
+                return true;
+            }
+            return false;
+        } catch (error) {
+            console.error('Error updating policy:', error);
+            return false;
+        }
     };
 
-    return { policies, addPolicy, updatePolicy, deletePolicy };
+    const deletePolicy = async (id) => {
+        try {
+            const response = await fetch(`${API_BASE}/api/policies/${id}`, {
+                method: 'DELETE'
+            });
+            const data = await response.json();
+            if (data.success) {
+                await fetchPolicies();
+                return true;
+            }
+            return false;
+        } catch (error) {
+            console.error('Error deleting policy:', error);
+            return false;
+        }
+    };
+
+    return { policies, addPolicy, updatePolicy, deletePolicy, loading, refetch: fetchPolicies };
 };
 
 
@@ -69,6 +133,7 @@ const PolicyForm = ({ isOpen, onClose, policyToEdit, savePolicy }) => {
         minCreditScore: 700,
         minFinancialHealth: 'Good',
         minVintageMonths: 12,
+        isActive: true, // Default to active
         ...policyToEdit // Overwrites defaults if editing
     };
 
@@ -82,10 +147,10 @@ const PolicyForm = ({ isOpen, onClose, policyToEdit, savePolicy }) => {
     if (!isOpen) return null;
 
     const handleChange = (e) => {
-        const { name, value, type } = e.target;
+        const { name, value, type, checked } = e.target;
         setFormData(prev => ({
             ...prev,
-            [name]: type === 'number' ? parseFloat(value) : value,
+            [name]: type === 'checkbox' ? checked : (type === 'number' ? parseFloat(value) : value),
         }));
     };
 
@@ -219,6 +284,34 @@ const PolicyForm = ({ isOpen, onClose, policyToEdit, savePolicy }) => {
                             className={`w-full px-4 py-2.5 bg-[#0f1116] border border-gray-700 rounded-lg focus:ring-[${NEON_BLUE}] focus:border-[${NEON_BLUE}] text-white transition-all`}
                         />
                     </div>
+
+                    {/* Policy Status (Active/Inactive) */}
+                    <div className="flex items-center justify-between p-4 bg-[#0f1116] border border-gray-700 rounded-lg">
+                        <div>
+                            <label htmlFor="isActive" className="block text-sm font-medium text-gray-300 mb-1">
+                                Policy Status
+                            </label>
+                            <p className="text-xs text-gray-400">
+                                {formData.isActive 
+                                    ? 'Policy is active and visible to MSMEs' 
+                                    : 'Policy is inactive and hidden from MSMEs'}
+                            </p>
+                        </div>
+                        <label className="relative inline-flex items-center cursor-pointer">
+                            <input
+                                type="checkbox"
+                                id="isActive"
+                                name="isActive"
+                                checked={formData.isActive !== undefined ? formData.isActive : true}
+                                onChange={handleChange}
+                                className="sr-only peer"
+                            />
+                            <div className="w-11 h-6 bg-gray-700 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-[#4da3ff] rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#4da3ff]"></div>
+                            <span className="ml-3 text-sm font-medium text-gray-300">
+                                {formData.isActive ? 'Active' : 'Inactive'}
+                            </span>
+                        </label>
+                    </div>
                     
                     {/* Modal Footer (Submit Button) */}
                     <div className="pt-4 flex justify-end">
@@ -244,12 +337,25 @@ const PolicyForm = ({ isOpen, onClose, policyToEdit, savePolicy }) => {
  */
 export default function LenderPolicies() {
     const navigate = useNavigate();
-    const { policies, addPolicy, updatePolicy, deletePolicy } = usePolicies();
+    const [user] = useState(() => {
+        const stored = localStorage.getItem('user');
+        return stored ? JSON.parse(stored) : { name: 'HDFC Bank Team', branch: 'Mumbai-HQ', id: 'L101', customId: 'L101', role: 'lender' };
+    });
+    
+    // Check if user is a lender
+    useEffect(() => {
+        if (user.role !== 'lender') {
+            alert('This page is only accessible to lenders. Redirecting...');
+            navigate('/');
+        }
+    }, [user.role, navigate]);
+    
+    const lenderId = user.customId || user.id || 'L101';
+    const { policies, addPolicy, updatePolicy, deletePolicy, loading } = usePolicies(lenderId);
     const [isDarkMode] = useState(true);
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [policyToEdit, setPolicyToEdit] = useState(null); 
-    const [user] = useState({ name: 'HDFC Bank Team', branch: 'Mumbai-HQ' }); 
 
     useEffect(() => {
         const root = window.document.documentElement;
@@ -269,13 +375,27 @@ export default function LenderPolicies() {
         setIsModalOpen(true);
     };
 
-    const savePolicy = (policyData) => {
-        if (policyData.id) {
-            updatePolicy(policyData);
-        } else {
-            addPolicy(policyData);
+    const savePolicy = async (policyData) => {
+        let success = false;
+        let errorMessage = 'Failed to save policy. Please try again.';
+        
+        try {
+            if (policyData._id) {
+                success = await updatePolicy(policyData);
+            } else {
+                success = await addPolicy(policyData);
+            }
+            
+            if (success) {
+                setPolicyToEdit(null);
+                setIsModalOpen(false);
+            } else {
+                alert(errorMessage);
+            }
+        } catch (error) {
+            console.error('Error saving policy:', error);
+            alert(errorMessage + '\nError: ' + error.message);
         }
-        setPolicyToEdit(null);
     };
 
     const handleLogout = () => {
@@ -324,7 +444,11 @@ export default function LenderPolicies() {
                         // Neon-styled container
                         className="bg-[#111217] rounded-xl shadow-lg border border-[#4da3ff]/50 shadow-[0_0_25px_#4da3ff]/40 overflow-hidden"
                     >
-                        {policies.length === 0 ? (
+                        {loading ? (
+                            <div className="text-center p-10 text-gray-500">
+                                <p className="text-lg font-semibold text-white">Loading policies...</p>
+                            </div>
+                        ) : policies.length === 0 ? (
                             <div className="text-center p-10 text-gray-500">
                                 <Zap size={48} className={`mx-auto mb-3 text-[${NEON_BLUE}]`} style={{ color: NEON_BLUE }} />
                                 <p className="text-lg font-semibold text-white">No policies defined yet.</p>
@@ -340,20 +464,30 @@ export default function LenderPolicies() {
                                             <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Min. Score</th>
                                             <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Interest Rate (%)</th>
                                             <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Health</th>
+                                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Status</th>
                                             <th className="px-6 py-3 text-right text-xs font-medium text-gray-400 uppercase tracking-wider">Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody className="divide-y divide-gray-700/50">
                                         {policies.map((policy) => (
-                                            <tr key={policy.id} className="hover:bg-[#1a1b23]/50 transition-colors">
+                                            <tr key={policy._id} className="hover:bg-[#1a1b23]/50 transition-colors">
                                                 <td className="px-6 py-4 whitespace-nowrap text-sm font-semibold text-white">{policy.name}</td>
                                                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{policy.maxAmount}</td>
                                                 {/* Neon Blue accent for score */}
                                                 <td className={`px-6 py-4 whitespace-nowrap text-sm font-mono text-[${NEON_BLUE}]`} style={{ color: NEON_BLUE }}>{policy.minCreditScore}</td>
-                                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{policy.interestRate.toFixed(2)}</td>
+                                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{policy.interestRate?.toFixed(2) || policy.interestRate}</td>
                                                 <td className="px-6 py-4 whitespace-nowrap text-sm">
                                                     <span className={`px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full border ${policy.minFinancialHealth === 'Excellent' ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30' : 'bg-amber-500/20 text-amber-400 border-amber-500/30'}`}>
                                                         {policy.minFinancialHealth}
+                                                    </span>
+                                                </td>
+                                                <td className="px-6 py-4 whitespace-nowrap text-sm">
+                                                    <span className={`px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full border ${
+                                                        policy.isActive !== false 
+                                                            ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30' 
+                                                            : 'bg-gray-500/20 text-gray-400 border-gray-500/30'
+                                                    }`}>
+                                                        {policy.isActive !== false ? 'Active' : 'Inactive'}
                                                     </span>
                                                 </td>
                                                 <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-3">
@@ -366,9 +500,9 @@ export default function LenderPolicies() {
                                                         <Edit size={16} />
                                                     </button>
                                                     <button
-                                                        onClick={() => {
+                                                        onClick={async () => {
                                                             if (window.confirm(`Are you sure you want to delete policy: ${policy.name}?`)) {
-                                                                deletePolicy(policy.id);
+                                                                await deletePolicy(policy._id);
                                                             }
                                                         }}
                                                         className="text-rose-400 hover:text-rose-300 transition-colors p-1 rounded-md hover:bg-rose-600/10"

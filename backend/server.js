@@ -5,6 +5,8 @@ import cors from 'cors';
 import authRoutes from './src/routes/authRoutes.js';
 import financialHealthRoutes from './src/routes/financialHealthRoutes.js';
 import healthAnalysisRoutes from './src/routes/healthAnalysisRoutes.js';
+import policyRoutes from './src/routes/policyRoutes.js';
+import loanApplicationRoutes from './src/routes/loanApplicationRoutes.js';
 
 dotenv.config();
 
@@ -18,6 +20,8 @@ app.use(cors());
 app.use('/api/auth', authRoutes);
 app.use('/api/financial-health', financialHealthRoutes);
 app.use('/api/health-analysis', healthAnalysisRoutes);
+app.use('/api/policies', policyRoutes);
+app.use('/api/applications', loanApplicationRoutes);
 
 // ---------- DATABASE CONNECTION ----------
 mongoose
