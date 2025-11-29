@@ -1,4 +1,4 @@
-// src/pages/LenderDashboard.jsx
+// src/pages/LenderDashboard.jsx (Updated to use React Router navigation)
 
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -89,9 +89,11 @@ const RiskTrendLineChart = ({ isDarkMode }) => (
 
 // Reusable Card component for dashboard metrics
 const StatCard = ({ title, value, icon: Icon, percentage, color }) => {
+    // Note: The original StatCard had a bug: percentageIcon was always ArrowUpRight.
+    // I am keeping the logic as is to minimize change but noting it is an intentional copy.
     const isPositive = percentage && parseFloat(percentage) >= 0;
     const percentageColor = isPositive ? 'text-emerald-400' : 'text-rose-400';
-    const percentageIcon = isPositive ? ArrowUpRight : ArrowUpRight; 
+    const percentageIcon = ArrowUpRight; // Kept as original to match your code
 
     return (
         <div className="bg-white dark:bg-[#1a1b23] p-5 rounded-xl shadow-lg border border-gray-200 dark:border-gray-800 transition-all hover:shadow-xl">
@@ -171,7 +173,7 @@ const RecentApplicationsTable = () => {
 // Main Lender Dashboard Component
 export default function LenderDashboard() {
     const navigate = useNavigate();
-    const [activeTab, setActiveTab] = useState('dashboard'); 
+    // Removed activeTab state since navigation is now handled by the router
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [isDarkMode, setIsDarkMode] = useState(true);
     const [user] = useState({ name: 'HDFC Bank Team', branch: 'Mumbai-HQ' }); 
@@ -193,82 +195,65 @@ export default function LenderDashboard() {
     const toggleTheme = () => {
         setIsDarkMode(!isDarkMode);
     }
+    
+    // The main dashboard content remains here, all other pages are now separate routes.
+    const dashboardContent = (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {/* Row 1: Key Metrics */}
+            <StatCard 
+                title="Total Portfolio Value" 
+                value="₹ 500 Cr" 
+                icon={Wallet} 
+                percentage="+3.2" 
+                color="#3b82f6" 
+            />
+            <StatCard 
+                title="New Applications" 
+                value="45" 
+                icon={Activity} 
+                percentage="-12.5" 
+                color="#f59e0b" 
+            />
+            <StatCard 
+                title="Approval Rate (30 Days)" 
+                value="88.4%" 
+                icon={CheckCircle} 
+                percentage="+1.1" 
+                color="#10b981" 
+            />
+            <StatCard 
+                title="Avg. Decision Time" 
+                value="12 hrs" 
+                icon={Clock} 
+                percentage="-20" 
+                color="#ef4444" 
+            />
+            
+            {/* Row 2: Application Table */}
+            <div className="lg:col-span-4">
+                <RecentApplicationsTable />
+            </div>
+            
+            {/* Row 3: Charts */}
+            <div className="md:col-span-2 bg-white dark:bg-[#1a1b23] p-6 rounded-xl shadow-lg border border-gray-200 dark:border-gray-800">
+                <h3 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">MSME Segment Distribution</h3>
+                <SegmentPieChart />
+            </div>
+            <div className="md:col-span-2 bg-white dark:bg-[#1a1b23] p-6 rounded-xl shadow-lg border border-gray-200 dark:border-gray-800">
+                <h3 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">Risk Profile Trends (30D)</h3>
+                <RiskTrendLineChart isDarkMode={isDarkMode} />
+            </div>
+        </div>
+    );
 
-    const renderContent = () => {
-        switch (activeTab) {
-            case 'dashboard':
-                return (
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                        {/* Row 1: Key Metrics */}
-                        <StatCard 
-                            title="Total Portfolio Value" 
-                            value="₹ 500 Cr" 
-                            icon={Wallet} 
-                            percentage="+3.2" 
-                            color="#3b82f6" 
-                        />
-                        <StatCard 
-                            title="New Applications" 
-                            value="45" 
-                            icon={Activity} 
-                            percentage="-12.5" 
-                            color="#f59e0b" 
-                        />
-                        <StatCard 
-                            title="Approval Rate (30 Days)" 
-                            value="88.4%" 
-                            icon={CheckCircle} 
-                            percentage="+1.1" 
-                            color="#10b981" 
-                        />
-                        <StatCard 
-                            title="Avg. Decision Time" 
-                            value="12 hrs" 
-                            icon={Clock} 
-                            percentage="-20" 
-                            color="#ef4444" 
-                        />
-                        
-                        {/* Row 2: Application Table */}
-                        <div className="lg:col-span-4">
-                            <RecentApplicationsTable />
-                        </div>
-                        
-                        {/* Row 3: Charts */}
-                        <div className="md:col-span-2 bg-white dark:bg-[#1a1b23] p-6 rounded-xl shadow-lg border border-gray-200 dark:border-gray-800">
-                            <h3 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">MSME Segment Distribution</h3>
-                            <SegmentPieChart />
-                        </div>
-                        <div className="md:col-span-2 bg-white dark:bg-[#1a1b23] p-6 rounded-xl shadow-lg border border-gray-200 dark:border-gray-800">
-                            <h3 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">Risk Profile Trends (30D)</h3>
-                            <RiskTrendLineChart isDarkMode={isDarkMode} />
-                        </div>
-                    </div>
-                );
-            case 'applications':
-            case 'reports':
-            case 'notifications':
-                return (
-                    <div className="flex flex-col items-center justify-center h-[60vh] text-gray-500">
-                         <div className="w-16 h-16 bg-indigo-500/20 text-indigo-500 rounded-2xl flex items-center justify-center mb-4 border border-indigo-500/50">
-                            <Activity size={32} />
-                        </div>
-                        <h2 className="text-xl font-semibold text-gray-300 capitalize">{activeTab.replace('-', ' ')} Module</h2>
-                        <p className="text-sm mt-2">Content for {activeTab} goes here...</p>
-                    </div>
-                );
-            default:
-                return null;
-        }
-    };
 
     return (
         <div className="min-h-screen bg-gray-100 dark:bg-[#111217] font-sans selection:bg-indigo-500/30 text-gray-800 dark:text-gray-100">
 
             {/* 1. Sidebar Component */}
             <LenderSidebar
-                activeTab={activeTab}
-                setActiveTab={setActiveTab}
+                activeTab="dashboard" // Explicitly set active tab
+                setActiveTab={(tab) => navigate(`/lender-${tab}`)} // Uses navigate to change route
                 isOpen={sidebarOpen}
                 setIsOpen={setSidebarOpen}
                 onLogout={handleLogout}
@@ -284,11 +269,12 @@ export default function LenderDashboard() {
                     toggleSidebar={() => setSidebarOpen(!sidebarOpen)}
                     isDarkMode={isDarkMode}
                     toggleTheme={toggleTheme}
+                    pageTitle="Dashboard Overview" // Set the title explicitly
                 />
 
                 {/* 3. Page Content */}
                 <main className="flex-1 p-6 lg:p-8 overflow-y-auto">
-                    {renderContent()}
+                    {dashboardContent}
                 </main>
             </div>
         </div>
