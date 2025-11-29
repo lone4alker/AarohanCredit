@@ -7,7 +7,8 @@ import Login from './pages/Login';
 
 // MSME Imports
 import MsmeDashboard from './pages/MsmeDashboard';
-import LoanApplications from './pages/LoanApplications'; // From your 2nd snippet (likely used by MSME)
+import LoanApplications from './pages/LoanApplications'; 
+import ApprovalsAndOffers from './pages/Approvals';// From your 2nd snippet (likely used by MSME)
 
 // Lender Imports
 import LenderDashboard from './pages/LenderDashboard';
@@ -28,10 +29,10 @@ function App() {
 
                 {/* --- MSME Routes --- */}
                 <Route path="/msme-dashboard" element={<MsmeDashboard />} />
+                <Route path="/approvals" element={<ApprovalsAndOffers />} />
 
                 {/* These routes were missing in snippet 1, causing MSME features to break */}
                 <Route path="/loan-applications" element={<LoanApplications />} />
-                <Route path="/approvals" element={<LoanApplications />} />
                 <Route path="/reports" element={<LoanApplications />} />
                 <Route path="/notifications" element={<LoanApplications />} />
 
