@@ -1,166 +1,158 @@
 {
-  "msme_id": "MSME002",
-  "report_id": "e4497f72-f785-47c2-900c-0254d1699c97",
-  "generated_at": "2025-11-29 05:31:31.250180",
+  "msme_id": "MSME001",
+  "report_id": "0a92167a-9c3b-49a7-8ef6-47c27aa00c79",
+  "generated_at": "2025-11-29 11:27:49.323107",
   "financial_health": {
-    "total_inflow": 6346000.0,
-    "total_outflow": 4793425.0,
-    "net_cashflow": 1552575.0,
-    "average_balance": 627303.0555555555,
-    "min_balance": 35000.0,
-    "max_balance": 1545170.0,
-    "volatility_score": 0.06055404073754739,
+    "total_inflow": 1708747.0,
+    "total_outflow": 1266036.0,
+    "net_cashflow": 442711.0,
+    "average_balance": 192653.89915966385,
+    "min_balance": 2180.0,
+    "max_balance": 454584.0,
+    "volatility_score": 0.1197991314643552,
     "seasonality_detected": true,
     "stress_indicators": [
       "High balance volatility"
     ],
-    "cashflow_stability_score": 0.9405155578498308,
-    "transaction_count": 108,
-    "period_start": "2025-01-03 00:00:00",
+    "cashflow_stability_score": 0.888789256051707,
+    "transaction_count": 119,
+    "period_start": "2025-01-02 00:00:00",
     "period_end": "2025-12-28 00:00:00",
     "categorized_transactions": {
-      "operational": 88,
+      "operational": 104,
       "tax": 12,
-      "financing": 8
+      "investment": 3
     },
     "metadata": {
       "pattern_analysis": {
         "has_seasonality": true,
-        "volatility": 0.06055404073754739,
+        "volatility": 0.1197991314643552,
         "regular_credits": true,
         "regular_debits": true,
         "monthly_breakdown": {
           "2025-01": {
-            "credits": 490000.0,
-            "debits": 325300.0,
-            "count": 9
+            "credits": 135850.0,
+            "debits": 97800.0,
+            "count": 10
           },
           "2025-02": {
-            "credits": 547000.0,
-            "debits": 392900.0,
-            "count": 9
+            "credits": 140820.0,
+            "debits": 102396.0,
+            "count": 10
           },
           "2025-03": {
-            "credits": 488000.0,
-            "debits": 389400.0,
-            "count": 9
+            "credits": 141780.0,
+            "debits": 81920.0,
+            "count": 10
           },
           "2025-04": {
-            "credits": 531000.0,
-            "debits": 447200.0,
-            "count": 9
+            "credits": 131730.0,
+            "debits": 101154.0,
+            "count": 10
           },
           "2025-05": {
-            "credits": 476000.0,
-            "debits": 371700.0,
-            "count": 9
+            "credits": 125695.0,
+            "debits": 93158.0,
+            "count": 10
           },
           "2025-06": {
-            "credits": 551000.0,
-            "debits": 401550.0,
-            "count": 9
+            "credits": 128880.0,
+            "debits": 113044.0,
+            "count": 10
           },
           "2025-07": {
-            "credits": 575000.0,
-            "debits": 423800.0,
-            "count": 9
+            "credits": 153792.0,
+            "debits": 110200.0,
+            "count": 10
           },
           "2025-08": {
-            "credits": 521000.0,
-            "debits": 347390.0,
-            "count": 9
+            "credits": 167710.0,
+            "debits": 108154.0,
+            "count": 10
           },
           "2025-09": {
-            "credits": 566000.0,
-            "debits": 414080.0,
-            "count": 9
+            "credits": 173920.0,
+            "debits": 124400.0,
+            "count": 10
           },
           "2025-10": {
-            "credits": 502000.0,
-            "debits": 372950.0,
-            "count": 9
+            "credits": 132840.0,
+            "debits": 107190.0,
+            "count": 10
           },
           "2025-11": {
-            "credits": 536000.0,
-            "debits": 398560.0,
+            "credits": 115795.0,
+            "debits": 103760.0,
             "count": 9
           },
           "2025-12": {
-            "credits": 563000.0,
-            "debits": 508595.0,
-            "count": 9
+            "credits": 159935.0,
+            "debits": 122860.0,
+            "count": 10
           }
         }
       },
-      "balance_volatility": 422329.8724260221,
-      "inflow_count": 36,
-      "outflow_count": 72
+      "balance_volatility": 142418.6373613759,
+      "inflow_count": 50,
+      "outflow_count": 69
     }
   },
   "behavioral_score": {
-    "behavioral_score": 720.0,
+    "behavioral_score": 645.0,
     "repayment_pattern_score": 70.0,
-    "concentration_risk_score": 60.0,
-    "cyclicality_score": 85.0,
+    "concentration_risk_score": 75.0,
+    "cyclicality_score": 50.0,
     "risk_level": "medium",
-    "red_flags": [
-      "Frequent rapid balance drops (e.g., 65-68% decreases) indicating potential short-term liquidity stress and aggressive cash management.",
-      "Minimum balance of 35,000.0, suggesting periods of very low cash reserves which increases vulnerability to unexpected expenses or delayed inflows.",
-      "Low inflow transaction count (36 over 12 months, averaging 3 per month) potentially indicating revenue concentration risk on a few large clients or infrequent payments."
-    ],
+    "red_flags": [],
     "anomalies": [
       {
         "type": "rapid_balance_change",
-        "description": "Rapid balance change: 65.0%",
+        "description": "Rapid balance change: 218.8%",
         "severity": "medium",
-        "date": "2025-01-08 00:00:00",
-        "previous_balance": 242700.0,
-        "current_balance": 85000.0
+        "date": "2025-01-12 00:00:00",
+        "previous_balance": 19200.0,
+        "current_balance": 61200.0
       },
       {
         "type": "rapid_balance_change",
-        "description": "Rapid balance change: 85.5%",
+        "description": "Rapid balance change: 71.8%",
         "severity": "medium",
-        "date": "2025-01-10 00:00:00",
-        "previous_balance": 85000.0,
-        "current_balance": 157700.0
+        "date": "2025-01-18 00:00:00",
+        "previous_balance": 56200.0,
+        "current_balance": 15850.0
       },
       {
         "type": "rapid_balance_change",
-        "description": "Rapid balance change: 68.0%",
-        "severity": "medium",
-        "date": "2025-01-20 00:00:00",
-        "previous_balance": 139700.0,
-        "current_balance": 44700.0
-      },
-      {
-        "type": "rapid_balance_change",
-        "description": "Rapid balance change: 370.6%",
+        "description": "Rapid balance change: 179.2%",
         "severity": "medium",
         "date": "2025-01-25 00:00:00",
-        "previous_balance": 35000.0,
-        "current_balance": 164700.0
+        "previous_balance": 21200.0,
+        "current_balance": 59200.0
       },
       {
         "type": "rapid_balance_change",
-        "description": "Rapid balance change: 239.0%",
+        "description": "Rapid balance change: 127.1%",
         "severity": "medium",
-        "date": "2025-02-02 00:00:00",
-        "previous_balance": 129700.0,
-        "current_balance": 439700.0
+        "date": "2025-02-01 00:00:00",
+        "previous_balance": 47200.0,
+        "current_balance": 107200.0
+      },
+      {
+        "type": "rapid_balance_change",
+        "description": "Rapid balance change: 83.0%",
+        "severity": "medium",
+        "date": "2025-02-05 00:00:00",
+        "previous_balance": 97804.0,
+        "current_balance": 16670.0
       }
     ],
     "confidence": 0.9,
     "metadata": {
-      "justification_behavioral_score": "The business demonstrates strong overall financial health with a significant positive net cashflow (1.55M over 12 months) and a very high cashflow stability score (0.94). Regular EMI payments (8 detected) and consistent operational transactions are positive indicators of financial discipline and activity. However, the score is moderated by recurring rapid balance drops and a low minimum balance (35k), which highlight potential short-term liquidity management challenges. While the business shows resilience by recovering from these dips, these periods represent increased vulnerability.",
-      "justification_repayment_pattern_score": "EMI payments were detected, indicating a history of meeting financial obligations. The business also exhibits regular credits and debits, suggesting consistent operational cash flow. However, the frequent rapid balance changes, particularly the significant drops to a low minimum balance, suggest that while payments are made, the underlying liquidity position can be stressed. This poses a risk to future repayment capacity if not managed carefully, hence the moderate score.",
-      "justification_concentration_risk_score": "The relatively low inflow transaction count (36 over 12 months, averaging 3 per month) compared to outflow transactions (72 over 12 months) suggests a potential reliance on a limited number of customers or large, infrequent payments. This implies a moderate level of revenue concentration risk. Further investigation into the nature and diversity of these inflows would be beneficial to ascertain the true extent of this risk.",
-      "justification_cyclicality_score": "Seasonality is explicitly detected in the cash flow patterns. Despite this, the overall cashflow stability score is very high (0.94), and the monthly breakdown shows consistent positive net cashflow across the year. This indicates that the business effectively manages its cyclical nature, mitigating the associated risks and demonstrating adaptability to market fluctuations.",
-      "justification_risk_level": "The business exhibits strong fundamental cash generation and stability, which are significant positives. However, the identified liquidity management issues (frequent rapid balance drops, low minimum balance) and potential revenue concentration elevate the risk from low to medium. These factors suggest periods of vulnerability that require careful monitoring and potentially a deeper dive into working capital management practices.",
-      "additional_observations": {
-        "balance_volatility_clarification": "The 'stress_indicators' mention 'High balance volatility' and 'metadata.balance_volatility' is high in absolute terms (422k). However, the 'volatility_score' (relative standard deviation) is low (0.06), and the 'cashflow_stability_score' is high (0.94). This suggests that while the absolute swings in balance are large, they are generally proportional to the business's scale and are managed effectively, except for the specific instances of rapid drops to very low balances which are flagged as anomalies.",
-        "emi_payments_context": "8 EMI payments detected over a 12-month period is positive, indicating a history of meeting repayment obligations. The frequency (less than monthly average) could imply specific loan structures (e.g., quarterly payments) or multiple loans, but the detection itself is favorable for repayment behavior."
-      }
+      "behavioral_score_justification": "The overall behavioral score reflects a business with strong positive net cashflow and a high cashflow stability score (0.8887), indicating generally sound financial health. However, these positives are significantly tempered by several concerning factors: 'High balance volatility' is explicitly flagged as a stress indicator, the minimum balance of 2180.0 is critically low relative to the average balance, suggesting potential liquidity crunches. Furthermore, five instances of 'rapid balance change' anomalies (ranging from 71.8% to 218.8%) indicate unpredictable and significant fluctuations in funds, which can pose operational and repayment risks. Seasonality, while not inherently negative, adds a layer of complexity to cash flow management.",
+      "repayment_pattern_score_justification": "The repayment pattern score is moderately good, primarily due to the detection of 'regular debits' and a high 'cashflow_stability_score'. These suggest a predictable pattern of outflows, which is favorable for managing repayments. However, the absence of detected EMI payments means there's no direct evidence of past loan repayment behavior. The very low minimum balance and the 'rapid balance change' anomalies raise concerns about the business's ability to maintain sufficient liquidity to meet obligations consistently, especially if these anomalies represent unplanned large outflows.",
+      "concentration_risk_score_justification": "The concentration risk score is good, indicating a moderate level of diversification. With 50 inflows and 69 outflows over the period, and transactions categorized across 'operational', 'tax', and 'investment', the business does not appear to be overly reliant on a single source of income or a single type of expenditure. While granular details on specific counterparties are not available, the volume and categorization of transactions suggest a healthy spread for an MSME. No explicit red flags for concentration risk were identified.",
+      "cyclicality_score_justification": "The cyclicality score is in the moderate range due to the explicit detection of 'seasonality'. The monthly breakdown of credits and debits clearly shows fluctuations, with a peak in Q3 (July-September) and a dip in Q4 (November). While seasonality is a natural characteristic for many businesses, it introduces inherent cash flow management challenges. The 'High balance volatility' stress indicator and the critically low minimum balance could be exacerbated by these seasonal swings, indicating that the business might face difficulties in managing liquidity during leaner periods if not adequately prepared.",
+      "risk_level_justification": "The risk level is assessed as 'medium'. While the business demonstrates strong positive net cashflow and high cashflow stability, which are significant strengths, the presence of 'High balance volatility', a critically low minimum balance, and multiple 'rapid balance change' anomalies point to underlying liquidity management challenges and operational unpredictability. The detected seasonality further contributes to this risk, requiring robust financial planning to navigate lean periods. These factors collectively elevate the risk from low to medium, as they suggest potential vulnerabilities despite overall positive performance."
     }
   },
   "product_recommendations": {
@@ -178,7 +170,12 @@
           "max": 15.0,
           "typical": 14.0
         },
-        "reasons": [],
+        "reasons": [
+          "This product directly addresses the MSME's primary challenges: 'High balance volatility', critically low minimum balance, and 'rapid balance change' anomalies by providing immediate liquidity against receivables.",
+          "Its structure helps smooth out cash flow fluctuations, which is crucial given the detected 'seasonality' in the business.",
+          "With a 'low' risk bucket and the lowest interest rate among eligible products, it offers a financially attractive and less risky solution.",
+          "Unlike term loans or general working capital loans, it does not add a fixed EMI burden, which is beneficial for a business with volatile cash flows."
+        ],
         "requirements_met": {
           "net_cashflow": true,
           "behavioral_score": true,
@@ -193,32 +190,34 @@
         "product_id": "working_capital_001",
         "product_name": "Quick Working Capital Loan",
         "lender_name": "FastLend Finance",
-        "eligible": false,
-        "eligibility_score": 80.0,
-        "risk_bucket": "low",
+        "eligible": true,
+        "eligibility_score": 100.0,
+        "risk_bucket": "high",
         "recommended_amount": 500000.0,
         "interest_rate_range": {
-          "min": 11.0,
-          "max": 13.0,
-          "typical": 12.0
+          "min": 17.0,
+          "max": 19.0,
+          "typical": 18.0
         },
         "reasons": [
-          "Red flags count 3 exceeds maximum 2"
+          "Provides general working capital for day-to-day operations, inventory management, and supplier payments, which is essential for a Retail - FMCG business.",
+          "Can help bridge short-term cash flow gaps and support operational needs.",
+          "The recommended amount is appropriate for immediate operational requirements."
         ],
         "requirements_met": {
           "net_cashflow": true,
           "behavioral_score": true,
           "volatility": true,
           "stability": true,
-          "red_flags": false
+          "red_flags": true
         }
       },
       {
         "product_id": "term_loan_001",
         "product_name": "MSME Term Loan",
         "lender_name": "SecureBank",
-        "eligible": false,
-        "eligibility_score": 80.0,
+        "eligible": true,
+        "eligibility_score": 100.0,
         "risk_bucket": "high",
         "recommended_amount": 2000000.0,
         "interest_rate_range": {
@@ -227,14 +226,16 @@
           "typical": 16.0
         },
         "reasons": [
-          "Red flags count 3 exceeds maximum 1"
+          "Offers a larger capital infusion suitable for long-term investments, business expansion, or asset acquisition.",
+          "The interest rate is competitive for a term loan and lower than the Quick Working Capital Loan.",
+          "Can support strategic growth initiatives if the MSME has a clear plan for capital expenditure."
         ],
         "requirements_met": {
           "net_cashflow": true,
           "behavioral_score": true,
           "volatility": true,
           "stability": true,
-          "red_flags": false
+          "red_flags": true
         }
       }
     ],
@@ -247,122 +248,111 @@
       "red_flags_count"
     ],
     "metadata": {
-      "evaluation_timestamp": "2025-11-29T05:30:49.003467",
+      "evaluation_timestamp": "2025-11-29T11:27:03.478236",
       "engine": "LangChain-Gemini"
     }
   },
   "explainability": {
     "score_explanations": {
-      "Behavioral Score (720)": "The business demonstrates strong overall financial health with a significant positive net cashflow (\u20b91.55M over 12 months) and a very high cashflow stability score (0.94). Regular EMI payments and consistent operational transactions are positive indicators of financial discipline and activity. However, recurring rapid balance drops and a low minimum balance (\u20b935k) moderate the score, highlighting potential short-term liquidity management challenges despite the business's resilience in recovering from these dips.",
-      "Repayment Pattern Score (70)": "EMI payments were detected, indicating a history of meeting financial obligations. The business also exhibits regular credits and debits, suggesting consistent operational cash flow. However, the frequent rapid balance changes, particularly significant drops to a low minimum balance, suggest that while payments are made, the underlying liquidity position can be stressed. This poses a risk to future repayment capacity if not managed carefully, hence the moderate score.",
-      "Concentration Risk Score (60)": "The relatively low inflow transaction count (36 over 12 months, averaging 3 per month) compared to outflow transactions (72) suggests a potential reliance on a limited number of customers or large, infrequent payments. This implies a moderate level of revenue concentration risk. Further investigation into the nature and diversity of these inflows would be beneficial to ascertain the true extent of this risk.",
-      "Cyclicality Score (85)": "Seasonality is explicitly detected in the cash flow patterns. Despite this, the overall cashflow stability score is very high (0.94), and the monthly breakdown shows consistent positive net cashflow across the year. This indicates that the business effectively manages its cyclical nature, mitigating the associated risks and demonstrating adaptability to market fluctuations.",
-      "Risk Level (Medium)": "The business exhibits strong fundamental cash generation and stability, which are significant positives. However, the identified liquidity management issues (frequent rapid balance drops, low minimum balance) and potential revenue concentration elevate the risk from low to medium. These factors suggest periods of vulnerability that require careful monitoring and potentially a deeper dive into working capital management practices."
+      "behavioral_score": "The overall behavioral score of 645 reflects a business with strong positive net cashflow (\u20b9442,711.00) and a high cashflow stability score (0.8887), indicating generally sound financial health. However, these positives are significantly tempered by 'High balance volatility' (0.1198), a critically low minimum balance (\u20b92,180.00), and five instances of 'rapid balance change' anomalies (ranging from 71.8% to 218.8%), which suggest unpredictable fluctuations and potential liquidity issues. Seasonality adds another layer of complexity to cash flow management.",
+      "repayment_pattern_score": "The repayment pattern score of 70 is moderately good, primarily due to the detection of 'regular debits' and a high 'cashflow_stability_score'. These suggest a predictable pattern of outflows, which is favorable for managing repayments. However, the absence of detected EMI payments means there's no direct evidence of past loan repayment behavior. The very low minimum balance and the 'rapid balance change' anomalies raise concerns about the business's ability to maintain sufficient liquidity to meet obligations consistently, especially if these anomalies represent unplanned large outflows.",
+      "concentration_risk_score": "The concentration risk score of 75 is good, indicating a moderate level of diversification. With 50 inflows and 69 outflows over the period, and transactions categorized across 'operational', 'tax', and 'investment', the business does not appear to be overly reliant on a single source of income or a single type of expenditure. While granular details on specific counterparties are not available, the volume and categorization of transactions suggest a healthy spread for an MSME. No explicit red flags for concentration risk were identified.",
+      "cyclicality_score": "The cyclicality score of 50 is in the moderate range due to the explicit detection of 'seasonality'. The monthly breakdown of credits and debits clearly shows fluctuations, with a peak in Q3 (July-September) and a dip in Q4 (November). While seasonality is a natural characteristic for many businesses, it introduces inherent cash flow management challenges. The 'High balance volatility' stress indicator and the critically low minimum balance could be exacerbated by these seasonal swings, indicating that the business might face difficulties in managing liquidity during leaner periods if not adequately prepared."
     },
     "improvement_recommendations": [
       {
-        "title": "Enhance Liquidity Management",
-        "description": "Implement a more robust cash flow forecasting system to anticipate periods of low liquidity. Consider establishing a dedicated liquidity buffer to cover at least 1-2 months of operational expenses, reducing reliance on aggressive cash management and mitigating the impact of rapid balance drops."
+        "description": "Implement robust cash flow forecasting to anticipate seasonal dips and periods of high volatility. This will help in proactive planning for liquidity needs and managing operational expenses more effectively."
       },
       {
-        "title": "Maintain Higher Minimum Balance",
-        "description": "Aim to consistently maintain a higher minimum operating balance, significantly above the current \u20b935,000. This will provide a cushion against unexpected expenses or delayed inflows, improving financial resilience and reducing vulnerability."
+        "description": "Establish a minimum operating reserve significantly higher than the current \u20b92,180.00 to mitigate the impact of 'rapid balance changes' and ensure the business doesn't operate with critically low balances. A healthy buffer is crucial for financial resilience."
       },
       {
-        "title": "Diversify Revenue Streams",
-        "description": "Actively work on diversifying your client base or revenue sources to reduce reliance on a few large or infrequent payments. This will help mitigate revenue concentration risk and improve the consistency of your cash inflows. Explore smaller, more frequent contracts or expand into new markets."
+        "description": "Explore strategies to smooth out seasonal income, such as offering off-season promotions, diversifying product/service lines, or securing contracts that provide consistent revenue streams, if applicable to your business model."
       },
       {
-        "title": "Utilize Invoice Financing",
-        "description": "Given the recommendation for Invoice Financing, consider leveraging this product to bridge gaps between invoicing and payment collection. This can significantly improve working capital and reduce the impact of infrequent large inflows, especially if your few clients have longer payment cycles."
+        "description": "Consider utilizing Invoice Financing (like 'InvoiceFlow Capital's Invoice Financing') to convert receivables into immediate cash. This directly addresses balance volatility and improves liquidity without adding fixed EMI burdens, especially beneficial given your cash flow patterns."
+      },
+      {
+        "description": "Regularly review and optimize operational expenses to reduce unnecessary outflows, particularly during periods of lower income, to improve overall cash flow management."
       }
     ],
     "lender_arguments": {
-      "For Invoice Financing (Approval)": "This business demonstrates strong underlying financial health with a positive net cashflow of \u20b91.55M and a high cashflow stability score of 0.94. Its behavioral score of 720 indicates good financial discipline, including a history of EMI payments. Invoice financing is an ideal fit as it directly addresses the identified short-term liquidity challenges and potential revenue concentration by monetizing receivables, providing immediate working capital without increasing long-term debt burden. The low volatility score (0.06) further supports the predictability of the underlying business operations.",
-      "For Other Products (Caution/Rejection)": "While the business has strong fundamentals, the presence of multiple red flags, specifically frequent rapid balance drops and a very low minimum balance, indicates periods of significant short-term liquidity stress. These factors exceed the risk tolerance thresholds for products like the 'Quick Working Capital Loan' (max 2 red flags) and 'MSME Term Loan' (max 1 red flag). These products require a more consistent and robust liquidity buffer to ensure timely repayments without undue stress on the business's cash reserves."
+      "for_lending": "The business demonstrates strong positive net cashflow (\u20b9442,711.00) and a high cashflow stability score (0.8887), indicating a fundamentally healthy operation. Regular credit and debit transactions suggest consistent business activity. The concentration risk is moderate, showing diversification. The recommended product, Invoice Financing, directly mitigates the identified liquidity risks by leveraging existing receivables, making it a suitable and lower-risk lending opportunity for the lender.",
+      "against_lending": "Despite positive net cashflow, the business exhibits 'High balance volatility' and a critically low minimum balance (\u20b92,180.00), signaling potential liquidity management issues. Multiple 'rapid balance change' anomalies (up to 218.8%) indicate unpredictable cash flow fluctuations, which could impact repayment capacity. The detected seasonality further complicates cash flow, potentially exacerbating liquidity challenges during lean periods and increasing the risk of default if not managed effectively."
     },
     "key_insights": [
-      "The business exhibits strong fundamental financial health with substantial positive net cashflow (\u20b91.55M) and high cashflow stability (0.94).",
-      "Despite overall stability, the business faces short-term liquidity challenges, evidenced by frequent rapid balance drops and a low minimum balance (\u20b935k).",
-      "There is a potential revenue concentration risk due to a low number of inflow transactions (3 per month average), suggesting reliance on a few clients or infrequent large payments.",
-      "Seasonality is present but effectively managed, indicating adaptability and resilience in cash flow patterns.",
-      "Invoice Financing is the most suitable product, directly addressing the identified liquidity and concentration risks by leveraging existing receivables."
+      "Your business shows strong overall financial health with significant positive net cashflow and stable cash flow patterns.",
+      "However, managing liquidity is a critical area for improvement due to high balance volatility, rapid balance changes, and a very low minimum balance.",
+      "Seasonality is a natural part of your business, but it requires careful cash flow planning to avoid liquidity crunches.",
+      "Invoice Financing is identified as the best-fit product, offering an effective solution to your liquidity challenges by converting receivables into immediate cash without adding fixed EMI burdens.",
+      "Proactive financial planning and establishing a healthy cash reserve are essential for sustainable growth and mitigating risks."
     ],
     "risk_factors": [
       {
-        "title": "Frequent Rapid Balance Drops",
-        "description": "The business experiences frequent rapid balance drops (e.g., 65-68% decreases), indicating potential short-term liquidity stress and aggressive cash management. This can lead to vulnerability during unexpected expenses or delayed inflows.",
-        "severity": "medium"
+        "description": "High balance volatility: The business experiences significant fluctuations in its bank balance (volatility score of 0.1198 and balance volatility of \u20b9142,418.64), making cash flow management challenging and unpredictable."
       },
       {
-        "title": "Low Minimum Balance",
-        "description": "A minimum balance of \u20b935,000 suggests periods of very low cash reserves, increasing vulnerability to unexpected expenses or delayed inflows and limiting operational flexibility.",
-        "severity": "medium"
+        "description": "Critically low minimum balance: A minimum balance of \u20b92,180.00 suggests the business operates with very little buffer, making it highly vulnerable to unexpected expenses or delayed payments and increasing liquidity risk."
       },
       {
-        "title": "Revenue Concentration Risk",
-        "description": "A low inflow transaction count (36 over 12 months, averaging 3 per month) potentially indicates reliance on a few large clients or infrequent payments, posing a risk if one of these key revenue sources is disrupted.",
-        "severity": "medium"
+        "description": "Rapid balance changes: Multiple instances of 'rapid balance change' anomalies (ranging from 71.8% to 218.8%) highlight unpredictable and substantial shifts in funds, posing operational and repayment risks due to sudden cash inflows or outflows."
       },
       {
-        "title": "Specific Rapid Balance Changes",
-        "description": "Multiple instances of significant rapid balance changes, such as a 65.0% drop on 2025-01-08 (from \u20b9242,700 to \u20b985,000) and a 68.0% drop on 2025-01-20 (from \u20b9139,700 to \u20b944,700), highlight acute short-term liquidity fluctuations.",
-        "severity": "medium"
+        "description": "Seasonality impact: Detected seasonality in cash flow, with peaks and dips throughout the year, requires careful management to ensure sufficient liquidity during leaner periods and can exacerbate other liquidity challenges."
       }
     ],
     "strengths": [
-      "Positive net cashflow of \u20b91,552,575.00 over the past 12 months, demonstrating strong profitability and cash generation.",
-      "High cashflow stability score of 0.94, indicating predictable and consistent cash flow patterns.",
-      "Low cashflow volatility score of 0.06, suggesting that while absolute balance swings can be large, they are generally proportional and managed effectively.",
-      "Strong behavioral score of 720/1000, reflecting overall financial discipline and good repayment behavior.",
-      "Detection of 8 EMI payments over the period, indicating a history of meeting financial obligations.",
-      "Regular credits and debits, suggesting consistent operational activity and revenue generation.",
-      "Effective management of detected seasonality, maintaining positive net cashflow throughout the year despite cyclical patterns."
+      "Strong positive net cashflow of \u20b9442,711.00 over the period, indicating profitability and financial health.",
+      "High cashflow stability score of 0.8887, suggesting predictable and consistent cash inflows and outflows overall.",
+      "Regular credits and debits detected, reflecting ongoing and active business operations.",
+      "Good concentration risk score (75), implying diversification of income and expenditure sources, reducing reliance on single points.",
+      "No explicit lending red flags detected, which is positive for overall creditworthiness."
     ],
     "weaknesses": [
-      "Frequent rapid balance drops, indicating potential short-term liquidity stress and aggressive cash management practices.",
-      "A low minimum balance of \u20b935,000, suggesting periods of very low cash reserves which increases vulnerability to unexpected expenses or delayed inflows.",
-      "Low inflow transaction count (36 over 12 months, averaging 3 per month), potentially indicating revenue concentration risk on a few large clients or infrequent payments."
+      "High balance volatility (0.1198) and a high balance volatility value (\u20b9142,418.64) indicating significant and potentially disruptive fluctuations in the bank balance.",
+      "Critically low minimum balance of \u20b92,180.00, exposing the business to severe liquidity risk and potential inability to cover immediate expenses.",
+      "Presence of multiple 'rapid balance change' anomalies, highlighting unpredictable and large shifts in funds that can disrupt financial planning.",
+      "Detected seasonality in cash flow, which can lead to periods of reduced liquidity if not managed effectively, requiring careful planning."
     ],
     "metadata": {
-      "generated_at": "2025-11-29T05:31:11.878819",
+      "generated_at": "2025-11-29T11:27:25.046776",
       "engine": "LangChain-Gemini"
     }
   },
   "health_analysis": {
     "monthly_inflow": {
-      "2025-01": 490000.0,
-      "2025-02": 547000.0,
-      "2025-03": 488000.0,
-      "2025-04": 531000.0,
-      "2025-05": 476000.0,
-      "2025-06": 551000.0,
-      "2025-07": 575000.0,
-      "2025-08": 521000.0,
-      "2025-09": 566000.0,
-      "2025-10": 502000.0,
-      "2025-11": 536000.0,
-      "2025-12": 563000.0
+      "2025-01": 135850.0,
+      "2025-02": 140820.0,
+      "2025-03": 141780.0,
+      "2025-04": 131730.0,
+      "2025-05": 125695.0,
+      "2025-06": 128880.0,
+      "2025-07": 153792.0,
+      "2025-08": 167710.0,
+      "2025-09": 173920.0,
+      "2025-10": 132840.0,
+      "2025-11": 115795.0,
+      "2025-12": 159935.0
     },
     "monthly_outflow": {
-      "2025-01": 325300.0,
-      "2025-02": 392900.0,
-      "2025-03": 389400.0,
-      "2025-04": 447200.0,
-      "2025-05": 371700.0,
-      "2025-06": 401550.0,
-      "2025-07": 423800.0,
-      "2025-08": 347390.0,
-      "2025-09": 414080.0,
-      "2025-10": 372950.0,
-      "2025-11": 398560.0,
-      "2025-12": 508595.0
+      "2025-01": 97800.0,
+      "2025-02": 102396.0,
+      "2025-03": 81920.0,
+      "2025-04": 101154.0,
+      "2025-05": 93158.0,
+      "2025-06": 113044.0,
+      "2025-07": 110200.0,
+      "2025-08": 108154.0,
+      "2025-09": 124400.0,
+      "2025-10": 107190.0,
+      "2025-11": 103760.0,
+      "2025-12": 122860.0
     },
-    "net_cashflow": 1552575.0,
-    "cashflow_volatility": 0.14051287986192287,
-    "avg_balance": 627303.0555555555,
-    "low_balance_days": 2,
-    "emi_transactions": 8,
+    "net_cashflow": 442711.0,
+    "cashflow_volatility": 0.2041424759224332,
+    "avg_balance": 193734.70185185183,
+    "low_balance_days": 28,
+    "emi_transactions": 0,
     "cheque_bounces": 0,
     "overdraft_days": 0,
     "gst_analysis": {
@@ -370,84 +360,90 @@
       "filed_count": 12,
       "pending_count": 0,
       "nil_returns": 0,
-      "avg_monthly_sales": 481875.0,
-      "avg_monthly_purchases": 240937.5,
-      "avg_monthly_tax_paid": 43368.75,
+      "avg_monthly_sales": 179800.0,
+      "avg_monthly_purchases": 136727.91666666666,
+      "avg_monthly_tax_paid": 7753.0,
       "compliance_rate": 100.0,
-      "total_sales": 5782500.0,
-      "total_purchases": 2891250.0,
-      "total_net_tax_paid": 520425.0,
-      "b2b_sales_ratio": 0.7920449632511889
+      "total_sales": 2157600.0,
+      "total_purchases": 1640735.0,
+      "total_net_tax_paid": 93036.0,
+      "b2b_sales_ratio": 0.6933629959213942
     },
-    "period_start": "2025-01-03 00:00:00",
+    "period_start": "2025-01-02 00:00:00",
     "period_end": "2025-12-28 00:00:00",
     "metadata": {
-      "total_inflow": 6346000.0,
-      "total_outflow": 4793425.0,
+      "total_inflow": 1708747.0,
+      "total_outflow": 1266036.0,
       "months_analyzed": 12
     }
   },
   "recommendations": {
     "profile_improvement_recommendations": [
       {
-        "category": "Overall Creditworthiness",
-        "recommendation": "Prioritize stabilizing bank balances to eliminate frequent rapid drops and maintain a higher minimum balance. This is the most critical step to improve the 'risk_level' from medium and enhance the 'repayment_pattern_score'."
+        "recommendation": "Implement robust cash flow forecasting, especially considering the detected seasonality, to anticipate and manage liquidity needs proactively."
       },
       {
-        "category": "Revenue Diversification",
-        "recommendation": "Actively diversify the customer base to reduce reliance on a few large clients, thereby mitigating 'concentration risk' highlighted by the low inflow transaction count (36 over 12 months)."
+        "recommendation": "Actively monitor and maintain a healthy minimum bank balance (e.g., equivalent to 1-2 months of operating expenses) to mitigate liquidity stress and avoid critically low balances."
       },
       {
-        "category": "Leverage Strengths",
-        "recommendation": "Capitalize on the excellent 100% GST compliance, consistent positive net cashflow, and strong cashflow stability score (0.94) to negotiate better terms for future credit facilities once liquidity issues are addressed."
+        "recommendation": "Leverage the excellent 100% GST compliance record as a strong indicator of financial discipline when engaging with lenders."
+      },
+      {
+        "recommendation": "Address the root causes of 'rapid balance change' anomalies to stabilize cash flow and improve predictability."
       }
     ],
     "cashflow_optimization": [
-      "Implement a strict minimum cash reserve policy: Aim to maintain a minimum bank balance equivalent to at least 1-2 months of average operational outflows (e.g., \u20b9800,000 - \u20b91,000,000) to buffer against rapid drops and unexpected expenses. This directly addresses the 'min_balance' of \u20b935,000 and 'rapid balance drops' red flags.",
-      "Optimize Accounts Receivable (AR) collection: Given the low inflow transaction count, ensure timely collection from key clients. Consider offering small early payment discounts (e.g., 1-2% for payment within 7 days) or implementing stricter payment terms for new clients.",
-      "Utilize Invoice Financing: Actively pursue the recommended Invoice Financing product (InvoiceFlow Capital) to bridge working capital gaps, especially during seasonal peaks or when awaiting large payments. This will help smooth out cash flow and prevent sudden balance drops.",
-      "Negotiate extended payment terms with suppliers: Where feasible and without impacting relationships, negotiate slightly longer payment cycles with suppliers to retain cash longer within the business.",
-      "Implement a detailed 13-week cash flow forecast: Develop and regularly update a rolling 13-week cash flow forecast to anticipate inflows and outflows, allowing proactive management of potential shortfalls and surpluses before they become critical."
+      "Implement stricter accounts receivable management: promptly follow up on outstanding invoices, consider offering early payment discounts (e.g., 2% discount for payment within 7 days), and enforce clear payment terms, especially given the high B2B sales ratio (69.3%).",
+      "Negotiate extended payment terms with key suppliers where feasible, without jeopardizing relationships, to optimize working capital.",
+      "Establish a dedicated cash reserve or emergency fund equivalent to at least 1-2 months of average operating expenses (approx. \u20b9100,000 - \u20b9200,000) to act as a buffer against volatility and critically low balances.",
+      "Explore and utilize Invoice Financing (as recommended) to convert receivables into immediate cash, particularly during seasonal downturns or when facing large outflows, thereby improving liquidity.",
+      "Implement a detailed budget and expense tracking system to identify and control non-essential outflows and improve cost efficiency.",
+      "Optimize inventory levels for FMCG products to reduce capital tied up in stock while ensuring adequate supply to meet demand, especially considering seasonal fluctuations."
     ],
     "gst_compliance_improvements": [
-      "Maintain 100% compliance: Continue the excellent record of timely and accurate GST filings (GSTR-1, GSTR-3B). This is a significant positive indicator for lenders and should be consistently upheld.",
-      "Regularly reconcile GSTR-2A/2B with purchase records: Ensure maximum Input Tax Credit (ITC) utilization by diligently reconciling supplier invoices with GSTR-2A/2B data monthly. Address any discrepancies promptly with suppliers to avoid loss of ITC.",
-      "Explore e-invoicing implementation: If not already mandated or implemented, consider adopting e-invoicing. It streamlines compliance, reduces errors, and improves transparency, which can indirectly benefit credit assessment by providing verifiable transaction data."
+      "Maintain the current excellent 100% on-time GST filing and payment record, as this is a significant positive for creditworthiness and demonstrates strong financial discipline.",
+      "Ensure accurate and timely claiming of all eligible Input Tax Credit (ITC) to optimize working capital and reduce tax outflow.",
+      "Regularly reconcile GSTR-2A/2B with internal purchase records to identify discrepancies and maximize ITC utilization."
     ],
     "credit_score_enhancement": [
-      "Address Liquidity Red Flags: The primary focus for credit score enhancement must be on eliminating 'Frequent rapid balance drops' and consistently maintaining a higher 'Minimum balance'. Lenders view consistent, stable balances as a strong indicator of financial health.",
-      "Demonstrate Improved Working Capital Management: By implementing cash reserve policies and utilizing invoice financing effectively, Asha Textiles can show improved liquidity management, directly impacting the 'repayment_pattern_score' and overall 'risk_level' positively.",
-      "Diversify Inflow Sources: Actively seek new clients or smaller, more frequent payment contracts to increase the 'inflow transaction count' and reduce 'concentration risk'. This will improve the 'concentration_risk_score' and overall credit perception.",
-      "Maintain a Clean Repayment History: Continue making all EMI payments on time. The 8 detected EMI transactions are a positive; ensure this continues without any defaults or delays.",
-      "Regularly Review Credit Report: Obtain and review the company's credit report (e.g., from CIBIL, Experian) periodically to identify any inaccuracies and monitor changes in the credit score."
+      "Apply for a small, secured business loan or a business credit card and ensure timely and consistent repayments to establish a formal credit history, as no EMI transactions were detected.",
+      "Ensure all business utility bills, rent, and vendor payments are made on time and through formal banking channels to create a clear and positive transaction history.",
+      "If utilizing Invoice Financing, ensure timely settlement of advances to build a strong repayment track record with the lender.",
+      "Regularly review the business's credit report (e.g., CIBIL for MSMEs) to identify and rectify any errors or discrepancies."
     ],
     "risk_mitigation": [
-      "Diversify Customer Base: Actively pursue strategies to acquire new customers and reduce reliance on a few large clients. This directly addresses the 'Low inflow transaction count' and 'concentration risk' flagged in the behavioral score.",
-      "Build a Contingency Fund: Beyond the operational cash reserve, establish a separate contingency fund for unforeseen events (e.g., equipment breakdown, sudden market downturn) to further mitigate the risk associated with periods of low minimum balance.",
-      "Formalize Seasonality Management: Since seasonality is detected but managed, formalize strategies for managing inventory, production, and staffing during peak and lean periods to optimize costs and cash flow, ensuring consistent performance despite market fluctuations.",
-      "Secure a Revolving Credit Line (Post-Improvement): Once liquidity issues are demonstrably addressed, explore securing a modest, revolving credit line. Even if not fully utilized, its availability acts as a safety net and demonstrates access to credit, improving the credit profile.",
-      "Review Business Insurance: Ensure adequate business insurance coverage (e.g., property, liability, business interruption) to protect against operational risks that could impact financial stability and cash flow."
+      "Set a minimum threshold for the bank balance (e.g., \u20b950,000) and implement automated alerts to proactively manage liquidity and prevent balances from dropping to critically low levels.",
+      "Conduct a thorough analysis of the 'rapid balance change' anomalies to understand their specific triggers (e.g., large irregular purchases, unexpected repairs, delayed large customer payments) and develop strategies to manage or mitigate them.",
+      "Develop a detailed seasonal cash flow management plan: During peak seasons (July-September), consciously build up cash reserves to cover anticipated expenses and manage liquidity during leaner periods (November-February).",
+      "Diversify the customer base and supplier relationships to reduce dependency on a few entities, even though current concentration risk is assessed as good.",
+      "Consider appropriate business insurance (e.g., business interruption insurance) to protect against unforeseen events that could severely impact cash flow."
     ],
     "quick_wins": [
-      "Apply for Invoice Financing: Immediately pursue the recommended Invoice Financing product to address short-term liquidity needs and smooth out cash flow, leveraging the strong B2B sales ratio.",
-      "Set an immediate target for minimum bank balance: Aim to increase the minimum balance from \u20b935,000 to at least \u20b9100,000 within the next 30-60 days by aggressively collecting receivables and managing discretionary outflows.",
-      "Review top 3-5 customer payment terms: Identify if any terms can be shortened or if incentives for early payment can be offered to accelerate cash inflow from key clients.",
-      "Automate GST reconciliation: Implement software or processes to automate the matching of purchase invoices with GSTR-2A/2B to maximize ITC and reduce manual effort."
+      "Implement stricter accounts receivable management, including prompt follow-ups and clear payment terms.",
+      "Negotiate extended payment terms with key suppliers where feasible.",
+      "Establish a minimum bank balance threshold (e.g., \u20b950,000) and set up automated alerts for low balances.",
+      "Apply for a small, secured business loan or business credit card to initiate formal credit history building.",
+      "Continue maintaining the 100% on-time GST filing and payment record.",
+      "Analyze the immediate causes of recent 'rapid balance change' anomalies to identify quick fixes and prevent recurrence."
     ],
     "long_term_strategies": [
-      "Develop a robust Working Capital Management Policy: Formalize comprehensive policies for inventory management, accounts receivable, and accounts payable to optimize the cash conversion cycle and reduce reliance on short-term fixes.",
-      "Market Diversification: Explore new markets or product lines to broaden the customer base and significantly reduce revenue concentration risk over time, ensuring more stable and frequent inflows.",
-      "Invest in Financial Planning Software: Utilize advanced financial planning and analysis (FP&A) tools to improve forecasting accuracy, scenario planning, and real-time cash flow monitoring, moving beyond basic accounting.",
-      "Build Strong Banking Relationships: Cultivate relationships with multiple banks to ensure access to diverse financial products, advisory services, and competitive lending rates.",
-      "Strategic Growth Planning: Develop a strategic growth plan that considers both revenue expansion and the associated working capital requirements, ensuring sustainable growth without stressing liquidity or increasing financial vulnerability."
+      "Implement robust cash flow forecasting tools and practices, integrating seasonal trends and potential future growth.",
+      "Actively pursue and utilize Invoice Financing to stabilize working capital, manage receivables effectively, and reduce reliance on emergency funds.",
+      "Develop and adhere to a comprehensive annual budget and detailed expense tracking system for better financial control.",
+      "Optimize inventory management processes to reduce carrying costs, minimize stockouts, and improve capital efficiency.",
+      "Regularly reconcile GSTR-2A/2B and ensure maximum utilization of Input Tax Credit to improve profitability and cash flow.",
+      "Consistently demonstrate responsible financial behavior across all credit facilities to build and maintain a strong credit score.",
+      "Develop a strategic seasonal cash flow plan to build reserves during peak periods for lean periods, ensuring sustained liquidity.",
+      "Periodically review and understand the business's credit report to ensure accuracy and identify areas for further improvement.",
+      "Explore opportunities for customer and supplier diversification to enhance business resilience and reduce potential risks."
     ],
     "metadata": {
-      "generated_at": "2025-11-29T05:31:31.250000",
+      "generated_at": "2025-11-29T11:27:49.322108",
       "engine": "LangChain-Gemini"
     }
   },
-  "overall_creditworthiness": 67.72,
-  "summary": "This credit intelligence report evaluates the MSME's financial profile with an overall creditworthiness score of 67.7/100. The analysis reveals a RiskLevel.MEDIUM risk profile with a behavioral score of 720/1000. The business demonstrates positive cashflow of \u20b91,552,575.00. 1 credit products have been identified as suitable matches. Detailed analysis and recommendations are provided in the respective sections.",
+  "overall_creditworthiness": 63.75,
+  "summary": "This credit intelligence report evaluates the MSME's financial profile with an overall creditworthiness score of 63.8/100. The analysis reveals a RiskLevel.MEDIUM risk profile with a behavioral score of 645/1000. The business demonstrates positive cashflow of \u20b9442,711.00. 1 credit products have been identified as suitable matches. Detailed analysis and recommendations are provided in the respective sections.",
   "metadata": {
     "generated_by": "OrchestratorAgent",
     "version": "1.0.0"

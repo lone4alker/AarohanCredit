@@ -52,7 +52,7 @@ def save_results_to_db(report: UnifiedCreditReport, summary: dict):
         report_data = json.loads(ReportBuilder.to_json(report))
         report_data["created_at"] = datetime.utcnow()
         reports_collection.insert_one(report_data)
-        print(f"   ✓ Full report saved to 'credit_reports' collection")
+        print(f"   [OK] Full report saved to 'credit_reports' collection")
         
         # Save summary
         summaries_collection = db["credit_summaries"]
@@ -61,7 +61,7 @@ def save_results_to_db(report: UnifiedCreditReport, summary: dict):
         summary_data["report_id"] = report.report_id
         summary_data["created_at"] = datetime.utcnow()
         summaries_collection.insert_one(summary_data)
-        print(f"   ✓ Summary saved to 'credit_summaries' collection")
+        print(f"   [OK] Summary saved to 'credit_summaries' collection")
         
     except Exception as e:
         print(f"Error saving results to MongoDB: {e}")
@@ -83,7 +83,7 @@ def main():
     if transaction_count == 0 and 'bank_accounts' in data:
         transaction_count = sum(len(acc.get('transactions', [])) for acc in data.get('bank_accounts', []))
     
-    print(f"   ✓ Loaded data with {transaction_count} transactions")
+    print(f"   [OK] Loaded data with {transaction_count} transactions")
     print()
     
     # Prepare input - pass entire data structure (agents will extract what they need)
@@ -99,7 +99,7 @@ def main():
     # Initialize orchestrator
     print("Step 2: Initializing orchestrator...")
     orchestrator = OrchestratorAgent()
-    print("   ✓ Orchestrator initialized")
+    print("   [OK] Orchestrator initialized")
     print()
     
     # Run analysis
@@ -113,18 +113,18 @@ def main():
     result = orchestrator.run(input_data, context)
     
     if not result.success:
-        print("❌ Analysis failed!")
+        print("[X] Analysis failed!")
         print(f"Errors: {', '.join(result.errors)}")
         return
     
-    print("   ✓ Analysis completed successfully!")
+    print("   [OK] Analysis completed successfully!")
     print()
     
     # Build report
     print("Step 4: Building unified credit report...")
     report = UnifiedCreditReport(**result.data)
-    print(f"   ✓ Report ID: {report.report_id}")
-    print(f"   ✓ MSME ID: {report.msme_id}")
+    print(f"   [OK] Report ID: {report.report_id}")
+    print(f"   [OK] MSME ID: {report.msme_id}")
     print()
     
     # Display summary
@@ -151,7 +151,7 @@ def main():
     if best_fit:
         for i, product in enumerate(best_fit[:3], 1):
             print(f"  {i}. {product.product_name} ({product.lender_name})")
-            print(f"     Eligibility: {'✓ Eligible' if product.eligible else '✗ Not Eligible'}")
+            print(f"     Eligibility: {'[YES] Eligible' if product.eligible else '[NO] Not Eligible'}")
             print(f"     Score: {product.eligibility_score:.1f}/100")
             if product.recommended_amount:
                 print(f"     Recommended Amount: ₹{product.recommended_amount:,.2f}")
@@ -161,18 +161,18 @@ def main():
     
     print("Key Insights:")
     for insight in report.explainability.key_insights[:5]:
-        print(f"  • {insight}")
+        print(f"  * {insight}")
     print()
     
     print("Strengths:")
     for strength in report.explainability.strengths[:3]:
-        print(f"  ✓ {strength}")
+        print(f"  + {strength}")
     print()
     
     if report.explainability.weaknesses:
         print("Areas for Improvement:")
         for weakness in report.explainability.weaknesses[:3]:
-            print(f"  ⚠ {weakness}")
+            print(f"  ! {weakness}")
         print()
     
     # Save full report and summary to MongoDB
@@ -188,12 +188,12 @@ def main():
     output_file = Path(__file__).parent / "output_report.json"
     with open(output_file, 'w') as f:
         f.write(ReportBuilder.to_json(report))
-    print(f"   ✓ Full report also saved to file: {output_file}")
+    print(f"   [OK] Full report also saved to file: {output_file}")
     
     summary_file = Path(__file__).parent / "output_summary.json"
     with open(summary_file, 'w') as f:
         json.dump(summary, f, indent=2, default=str)
-    print(f"   ✓ Summary also saved to file: {summary_file}")
+    print(f"   [OK] Summary also saved to file: {summary_file}")
     print()
     
     print("=" * 80)

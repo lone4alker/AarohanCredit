@@ -1,4 +1,5 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
 import './App.css';
 
 // Pages
@@ -17,7 +18,7 @@ import LenderNotifications from './pages/LenderNotifications';
 
 function App() {
     return (
-        <Router>
+        <BrowserRouter>
             <Routes>
                 {/* --- Public Routes --- */}
                 <Route path="/" element={<LandingPage />} />
@@ -39,7 +40,7 @@ function App() {
                 <Route path="/lender-notifications" element={<LenderNotifications />} />
 
             </Routes>
-        </Router>
+        </BrowserRouter>
     );
 }
 

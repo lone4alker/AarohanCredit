@@ -7,6 +7,7 @@ import financialHealthRoutes from './src/routes/financialHealthRoutes.js';
 import healthAnalysisRoutes from './src/routes/healthAnalysisRoutes.js';
 import policyRoutes from './src/routes/policyRoutes.js';
 import loanApplicationRoutes from './src/routes/loanApplicationRoutes.js';
+import syncRoutes from './src/routes/syncRoutes.js';
 
 dotenv.config();
 
@@ -19,7 +20,7 @@ app.use(cors());
 // ---------- ROUTES ----------
 app.use('/api/auth', authRoutes);
 app.use('/api/financial-health', financialHealthRoutes);
-app.use('/api/health-analysis', healthAnalysisRoutes);
+app.use('/api/sync', syncRoutes);
 app.use('/api/policies', policyRoutes);
 app.use('/api/applications', loanApplicationRoutes);
 

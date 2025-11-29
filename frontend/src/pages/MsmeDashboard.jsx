@@ -16,6 +16,7 @@ export default function MsmeDashboard() {
   const [activeTab, setActiveTab] = useState('home');
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [isSyncing, setIsSyncing] = useState(false);
+  const [analysisComplete, setAnalysisComplete] = useState(false);
 
   // Initialize theme from localStorage or default to true (dark)
   const [isDarkMode, setIsDarkMode] = useState(() => {
@@ -49,8 +50,11 @@ export default function MsmeDashboard() {
 
   const handleSync = () => {
     setIsSyncing(true);
-    // Simulate API call
-    setTimeout(() => setIsSyncing(false), 2000);
+  };
+
+  const handleAnalysisComplete = () => {
+    setIsSyncing(false);
+    setAnalysisComplete(prev => !prev); // Toggle to trigger re-fetch
   };
 
   const toggleTheme = () => {
@@ -87,7 +91,7 @@ export default function MsmeDashboard() {
   const renderContent = () => {
     switch (activeTab) {
       case 'home':
-        return <Home isDarkMode={isDarkMode} />;
+        return <Home isDarkMode={isDarkMode} analysisComplete={analysisComplete} />;
       case 'search':
         return <SearchLoans />;
       case 'loans':
@@ -96,8 +100,8 @@ export default function MsmeDashboard() {
         return <Approvals />;
       case 'finhealth-analysis':
         return <FinHealthAnalysis msmeId={msmeId} />;
-      case 'reports':
-        return <Reports isDarkMode={isDarkMode} />;
+      // case 'reports':
+      //   return <Reports isDarkMode={isDarkMode} />;
       case 'notifications':
         return <Notifications />;
       default:
@@ -116,7 +120,7 @@ export default function MsmeDashboard() {
   return (
     <div className="min-h-screen bg-[#0a0d12] font-sans text-white">
       {/* Subtle grid overlay */}
-      <div 
+      <div
         className="fixed inset-0 opacity-[0.03] pointer-events-none z-0"
         style={{
           backgroundImage: 'linear-gradient(rgba(0,255,117,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(0,255,117,0.1) 1px, transparent 1px)',
@@ -140,6 +144,7 @@ export default function MsmeDashboard() {
         <Header
           user={user}
           onSync={handleSync}
+          onAnalysisComplete={handleAnalysisComplete}
           isSyncing={isSyncing}
           toggleSidebar={() => setSidebarOpen(!sidebarOpen)}
           isDarkMode={isDarkMode}

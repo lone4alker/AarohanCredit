@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { 
-  TrendingUp, 
-  TrendingDown, 
-  DollarSign, 
-  BarChart3, 
+import {
+  TrendingUp,
+  TrendingDown,
+  DollarSign,
+  BarChart3,
   ArrowUpRight,
   ArrowDownRight,
   Activity,
@@ -11,46 +11,53 @@ import {
   AlertCircle,
   CheckCircle2
 } from 'lucide-react';
-import { 
-  ResponsiveContainer, 
-  AreaChart, 
-  Area, 
+import {
+  ResponsiveContainer,
+  AreaChart,
+  Area,
   LineChart,
   Line,
   BarChart,
   Bar,
-  CartesianGrid, 
-  XAxis, 
-  YAxis, 
-  Tooltip, 
+  CartesianGrid,
+  XAxis,
+  YAxis,
+  Tooltip,
   Legend,
   Cell
 } from 'recharts';
 
-const Home = ({ isDarkMode = true }) => {
+const Home = ({ isDarkMode = true, analysisComplete }) => {
   const [financialHealth, setFinancialHealth] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     // Fetch financial health data from API
     fetchFinancialHealthData();
-  }, []);
+  }, [analysisComplete]);
 
   const fetchFinancialHealthData = async () => {
     try {
-      // TODO: Replace with actual API endpoint
-      // For now, using mock data structure matching output_report.json
       const user = JSON.parse(localStorage.getItem('user') || '{}');
-      const msmeId = user.msme_id || user.id || 'MSME002';
-      
+      // FORCE DEMO ID: Always use MSME001 for this demo to show the analyzed data
+      const msmeId = 'MSME001';
+
       // Try to fetch from backend API
       const response = await fetch(`http://localhost:5000/api/financial-health/${msmeId}`);
-      
+
       if (response.ok) {
         const result = await response.json();
-        // Handle both direct financial_health object and nested structure
-        const healthData = result.financial_health || result.data?.financial_health || result;
-        setFinancialHealth(healthData);
+        // The API returns { success: true, financial_health: { ...document } }
+        const doc = result.financial_health || result.data?.financial_health || result;
+
+        // Flatten the nested financial_health object (from Python script structure) to top level
+        // This ensures net_cashflow, total_inflow etc are accessible directly
+        const flattenedData = {
+          ...doc,
+          ...(doc.financial_health || {})
+        };
+
+        setFinancialHealth(flattenedData);
       } else {
         // Fallback to mock data if API not available
         loadMockData();
@@ -121,9 +128,9 @@ const Home = ({ isDarkMode = true }) => {
   };
 
   const formatNumber = (num) => {
-    return new Intl.NumberFormat('en-IN', { 
-      minimumFractionDigits: 0, 
-      maximumFractionDigits: 2 
+    return new Intl.NumberFormat('en-IN', {
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 2
     }).format(num);
   };
 
@@ -150,10 +157,10 @@ const Home = ({ isDarkMode = true }) => {
   }
 
   // Prepare chart data
-  const monthlyBreakdown = financialHealth?.metadata?.pattern_analysis?.monthly_breakdown 
-    || financialHealth?.monthly_breakdown 
+  const monthlyBreakdown = financialHealth?.metadata?.pattern_analysis?.monthly_breakdown
+    || financialHealth?.monthly_breakdown
     || {};
-    
+
   const monthlyData = Object.entries(monthlyBreakdown).map(([month, data]) => {
     const credits = data.credits || 0;
     const debits = data.debits || 0;
@@ -167,25 +174,39 @@ const Home = ({ isDarkMode = true }) => {
     };
   }).sort((a, b) => a.fullMonth.localeCompare(b.fullMonth));
 
-  const transactionData = financialHealth.categorized_transactions 
+  const transactionData = financialHealth.categorized_transactions
     ? [
-        { name: 'Operational', value: financialHealth.categorized_transactions.operational || 0, color: '#00FF75' },
-        { name: 'Tax', value: financialHealth.categorized_transactions.tax || 0, color: '#10b981' },
-        { name: 'Financing', value: financialHealth.categorized_transactions.financing || 0, color: '#0DF86A' }
-      ]
+      { name: 'Operational', value: financialHealth.categorized_transactions.operational || 0, color: '#00FF75' },
+      { name: 'Tax', value: financialHealth.categorized_transactions.tax || 0, color: '#10b981' },
+      { name: 'Financing', value: financialHealth.categorized_transactions.financing || 0, color: '#0DF86A' }
+    ]
     : [];
 
   const stabilityScore = Math.round((financialHealth.cashflow_stability_score || 0) * 100);
   const volatilityScore = (financialHealth.volatility_score || 0) * 100;
+  const creditScore = financialHealth.overall_creditworthiness ? Math.round(financialHealth.overall_creditworthiness) : null;
 
   return (
     <div className="space-y-6">
       {/* Page Header */}
-      <div className="mb-6">
-        <h1 className="text-3xl font-bold text-white mb-2">Financial Health Analysis</h1>
-        <p className="text-white/60 text-sm">
-          Period: {new Date(financialHealth.period_start || Date.now()).toLocaleDateString()} - {new Date(financialHealth.period_end || Date.now()).toLocaleDateString()}
-        </p>
+      <div className="mb-6 flex justify-between items-end">
+        <div>
+          <h1 className="text-3xl font-bold text-white mb-2">Financial Health Analysis</h1>
+          <p className="text-white/60 text-sm">
+            Period: {new Date(financialHealth.period_start || Date.now()).toLocaleDateString()} - {new Date(financialHealth.period_end || Date.now()).toLocaleDateString()}
+          </p>
+        </div>
+        {creditScore && (
+          <div className="bg-[#151920] border border-[#00FF75]/20 px-6 py-3 rounded-xl flex items-center space-x-4">
+            <div>
+              <p className="text-white/60 text-xs uppercase tracking-wider">Credit Score</p>
+              <p className="text-3xl font-bold text-[#00FF75]">{creditScore}/100</p>
+            </div>
+            <div className={`px-3 py-1 rounded-full text-xs font-bold ${financialHealth.risk_level === 'low' ? 'bg-[#00FF75]/20 text-[#00FF75]' : 'bg-yellow-500/20 text-yellow-500'}`}>
+              {financialHealth.risk_level?.toUpperCase() || 'UNKNOWN'} RISK
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Key Metrics Cards */}
@@ -259,6 +280,24 @@ const Home = ({ isDarkMode = true }) => {
         </div>
       </div>
 
+      {/* Key Insights Section */}
+      {financialHealth.explainability?.key_insights && (
+        <div className="bg-[#151920]/50 rounded-2xl p-6 border border-[#00FF75]/10">
+          <h3 className="text-white font-semibold mb-4 flex items-center">
+            <Activity className="w-5 h-5 text-[#00FF75] mr-2" />
+            AI-Driven Key Insights
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {financialHealth.explainability.key_insights.slice(0, 4).map((insight, index) => (
+              <div key={index} className="bg-[#0a0d12]/50 p-4 rounded-xl border border-white/5 flex items-start">
+                <div className="w-2 h-2 rounded-full bg-[#00FF75] mt-2 mr-3 flex-shrink-0" />
+                <p className="text-white/80 text-sm leading-relaxed">{insight.split('/')[0]}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
       {/* Cashflow Stability & Metrics Row */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Cashflow Stability Score */}
@@ -315,19 +354,19 @@ const Home = ({ isDarkMode = true }) => {
               <BarChart data={transactionData} layout="vertical" barSize={40}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#374151" horizontal={true} vertical={false} />
                 <XAxis type="number" hide />
-                <YAxis 
-                  dataKey="name" 
-                  type="category" 
-                  stroke="#9ca3af" 
-                  tickLine={false} 
+                <YAxis
+                  dataKey="name"
+                  type="category"
+                  stroke="#9ca3af"
+                  tickLine={false}
                   axisLine={false}
                   width={100}
                   tick={{ fill: '#9ca3af', fontSize: 12 }}
                 />
-                <Tooltip 
-                  contentStyle={{ 
-                    backgroundColor: '#0a0d12', 
-                    border: '1px solid #00FF75/30', 
+                <Tooltip
+                  contentStyle={{
+                    backgroundColor: '#0a0d12',
+                    border: '1px solid #00FF75/30',
                     borderRadius: '8px',
                     color: '#fff'
                   }}
@@ -335,7 +374,7 @@ const Home = ({ isDarkMode = true }) => {
                 />
                 <Bar dataKey="value" radius={[0, 8, 8, 0]}>
                   {transactionData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={entry.color} />
+                    <Cell key={`cell-${index}-${entry.name}`} fill={entry.color} />
                   ))}
                 </Bar>
               </BarChart>
@@ -345,8 +384,8 @@ const Home = ({ isDarkMode = true }) => {
             {transactionData.map((item, index) => (
               <div key={index} className="text-center">
                 <div className="flex items-center justify-center mb-1">
-                  <div 
-                    className="w-3 h-3 rounded-full mr-2" 
+                  <div
+                    className="w-3 h-3 rounded-full mr-2"
                     style={{ backgroundColor: item.color }}
                   />
                   <span className="text-white/60 text-xs">{item.name}</span>
@@ -382,71 +421,71 @@ const Home = ({ isDarkMode = true }) => {
             <AreaChart data={monthlyData}>
               <defs>
                 <linearGradient id="colorCredits" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#00FF75" stopOpacity={0.4}/>
-                  <stop offset="95%" stopColor="#00FF75" stopOpacity={0}/>
+                  <stop offset="5%" stopColor="#00FF75" stopOpacity={0.4} />
+                  <stop offset="95%" stopColor="#00FF75" stopOpacity={0} />
                 </linearGradient>
                 <linearGradient id="colorDebits" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#ef4444" stopOpacity={0.4}/>
-                  <stop offset="95%" stopColor="#ef4444" stopOpacity={0}/>
+                  <stop offset="5%" stopColor="#ef4444" stopOpacity={0.4} />
+                  <stop offset="95%" stopColor="#ef4444" stopOpacity={0} />
                 </linearGradient>
                 <linearGradient id="colorNet" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.3}/>
-                  <stop offset="95%" stopColor="#3b82f6" stopOpacity={0}/>
+                  <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.3} />
+                  <stop offset="95%" stopColor="#3b82f6" stopOpacity={0} />
                 </linearGradient>
               </defs>
               <CartesianGrid strokeDasharray="3 3" stroke="#374151" opacity={0.3} vertical={false} />
-              <XAxis 
-                dataKey="month" 
-                stroke="#9ca3af" 
-                tickLine={false} 
+              <XAxis
+                dataKey="month"
+                stroke="#9ca3af"
+                tickLine={false}
                 axisLine={false}
                 tick={{ fill: '#9ca3af', fontSize: 12 }}
               />
-              <YAxis 
-                stroke="#9ca3af" 
-                tickLine={false} 
+              <YAxis
+                stroke="#9ca3af"
+                tickLine={false}
                 axisLine={false}
                 tick={{ fill: '#9ca3af', fontSize: 12 }}
                 tickFormatter={(value) => `${(value / 100000).toFixed(0)}L`}
               />
-              <Tooltip 
-                contentStyle={{ 
-                  backgroundColor: '#0a0d12', 
-                  border: '1px solid #00FF75/30', 
+              <Tooltip
+                contentStyle={{
+                  backgroundColor: '#0a0d12',
+                  border: '1px solid #00FF75/30',
                   borderRadius: '8px',
                   color: '#fff'
                 }}
                 formatter={(value, name) => [formatCurrency(value), name]}
                 labelStyle={{ color: '#fff' }}
               />
-              <Legend 
+              <Legend
                 wrapperStyle={{ paddingTop: '20px' }}
                 iconType="circle"
                 formatter={(value) => <span style={{ color: '#9ca3af', fontSize: '12px' }}>{value}</span>}
               />
-              <Area 
-                type="monotone" 
-                dataKey="credits" 
-                name="Credits" 
-                stroke="#00FF75" 
+              <Area
+                type="monotone"
+                dataKey="credits"
+                name="Credits"
+                stroke="#00FF75"
                 strokeWidth={2}
-                fillOpacity={1} 
-                fill="url(#colorCredits)" 
+                fillOpacity={1}
+                fill="url(#colorCredits)"
               />
-              <Area 
-                type="monotone" 
-                dataKey="debits" 
-                name="Debits" 
-                stroke="#ef4444" 
+              <Area
+                type="monotone"
+                dataKey="debits"
+                name="Debits"
+                stroke="#ef4444"
                 strokeWidth={2}
-                fillOpacity={1} 
-                fill="url(#colorDebits)" 
+                fillOpacity={1}
+                fill="url(#colorDebits)"
               />
-              <Line 
-                type="monotone" 
-                dataKey="net" 
-                name="Net Cashflow" 
-                stroke="#3b82f6" 
+              <Line
+                type="monotone"
+                dataKey="net"
+                name="Net Cashflow"
+                stroke="#3b82f6"
                 strokeWidth={3}
                 dot={{ fill: '#3b82f6', r: 4 }}
                 activeDot={{ r: 6 }}
@@ -464,7 +503,7 @@ const Home = ({ isDarkMode = true }) => {
           {financialHealth.stress_indicators && financialHealth.stress_indicators.length > 0 ? (
             <div className="space-y-3">
               {financialHealth.stress_indicators.map((indicator, index) => (
-                <div 
+                <div
                   key={index}
                   className="flex items-start p-3 rounded-lg bg-[#0a0d12]/50 border border-red-400/20"
                 >
@@ -515,3 +554,5 @@ const Home = ({ isDarkMode = true }) => {
 };
 
 export default Home;
+
+
