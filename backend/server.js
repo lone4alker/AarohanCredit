@@ -18,6 +18,7 @@ app.use(cors());
 // ---------- ROUTES ----------
 app.use('/api/auth', authRoutes);
 app.use('/api/financial-health', financialHealthRoutes);
+app.use('/api/sync', syncRoutes);
 
 // ---------- DATABASE CONNECTION ----------
 mongoose

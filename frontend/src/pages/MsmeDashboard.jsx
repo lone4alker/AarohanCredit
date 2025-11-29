@@ -91,7 +91,7 @@ export default function MsmeDashboard() {
   const renderContent = () => {
     switch (activeTab) {
       case 'home':
-        return <Home isDarkMode={isDarkMode} />;
+        return <Home isDarkMode={isDarkMode} analysisComplete={analysisComplete} />;
       case 'search':
         return <SearchLoans />;
       case 'loans':
@@ -100,8 +100,8 @@ export default function MsmeDashboard() {
         return <Approvals />;
       case 'finhealth-analysis':
         return <FinHealthAnalysis msmeId={msmeId} />;
-      case 'reports':
-        return <Reports isDarkMode={isDarkMode} />;
+      // case 'reports':
+      //   return <Reports isDarkMode={isDarkMode} />;
       case 'notifications':
         return <Notifications />;
       default:
@@ -155,18 +155,7 @@ export default function MsmeDashboard() {
 
         {/* 3. Page Content */}
         <main className="flex-1 p-6 lg:p-8 overflow-y-auto relative z-10">
-          {activeTab === 'home' && <Home isDarkMode={isDarkMode} analysisComplete={analysisComplete} />}
-          {activeTab === 'reports' && <Reports isDarkMode={isDarkMode} />}
-          {/* Placeholders for other routes */}
-          {activeTab !== 'home' && activeTab !== 'reports' && (
-            <div className="flex flex-col items-center justify-center h-[60vh] text-white/60">
-              <div className="w-16 h-16 bg-[#151920] rounded-2xl flex items-center justify-center mb-4 border border-[#00FF75]/20">
-                <Activity size={32} className="text-[#00FF75]" />
-              </div>
-              <h2 className="text-xl font-semibold text-white capitalize">{activeTab} Module</h2>
-              <p className="text-sm mt-2 text-white/40">Connecting to backend services...</p>
-            </div>
-          )}
+          {renderContent()}
         </main>
       </div>
     </div>

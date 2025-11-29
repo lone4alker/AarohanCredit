@@ -72,12 +72,13 @@ export default function SignupForm({ onSwitch }) {
 
             // GSTIN Validation for MSME
             if (formData.role === 'msme') {
+                const gstinRegex = /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/;
                 if (!formData.gstin) {
                     setError('Please enter your GSTIN.');
                     return;
                 }
-                if (formData.gstin.length !== 15) {
-                    setError('GSTIN must be exactly 15 characters.');
+                if (!gstinRegex.test(formData.gstin)) {
+                    setError('Invalid GSTIN format. Example: 27ABCDE1234F1Z5');
                     return;
                 }
             }
@@ -103,9 +104,29 @@ export default function SignupForm({ onSwitch }) {
 
     const prevStep = () => setStep(step - 1);
 
+    const validateStep3 = () => {
+        if (formData.role === 'msme') {
+            if (!formData.sector || !formData.business_vintage_years) return 'Please fill in all business details.';
+            if (!formData.address.street || !formData.address.city || !formData.address.state || !formData.address.pincode) {
+                return 'Please fill in complete address.';
+            }
+            if (formData.address.pincode.length !== 6) return 'Pincode must be 6 digits.';
+        } else {
+            if (!formData.institution || !formData.designation) return 'Please fill in all professional details.';
+        }
+        return null;
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
+
+        const step3Error = validateStep3();
+        if (step3Error) {
+            setError(step3Error);
+            return;
+        }
+
         setLoading(true);
 
         try {
