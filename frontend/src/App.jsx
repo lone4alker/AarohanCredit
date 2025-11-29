@@ -12,10 +12,8 @@ import MsmeDashboard from './pages/MsmeDashboard';
 import LenderDashboard from './pages/LenderDashboard';
 import LenderApplications from './pages/LenderApplications'; // From your 1st snippet
 import LenderPolicies from './pages/LenderPolicies';
-
-// Placeholder Components for Lender
-const LenderReports = () => <div className="p-8"><h1>Lender Reports Page</h1><p>Content coming soon.</p></div>;
-const LenderNotifications = () => <div className="p-8"><h1>Lender Notifications Page</h1><p>Content coming soon.</p></div>;
+import LenderReports from './pages/LenderReports';
+import LenderNotifications from './pages/LenderNotifications';
 
 function App() {
     return (
