@@ -1,18 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Bell, Search, TrendingUp, Plane, Bus, Train, Fuel, Dumbbell, CreditCard, Zap, Shield, BarChart3, ChevronDown, Check, Twitter, Linkedin, Facebook, Instagram } from 'lucide-react';
+import { Menu, X, Bell, Search, TrendingUp, Plane, Bus, Train, Fuel, Dumbbell, CreditCard, Zap, Shield, BarChart3, Check, Twitter, Linkedin, Facebook, Instagram } from 'lucide-react';
 import { Link } from "react-router-dom";
 
-// Testimonials Column Component
+// Testimonials Column Component (seamless circular vertical loop)
 const TestimonialsColumn = ({ testimonials, className = '', duration = 15 }) => {
   return (
-    <div className={className}>
+    <div className={`testimonial-column ${className}`}>
       <div
         className="flex flex-col gap-6 pb-6 animate-scroll-up"
         style={{
-          animationDuration: `${duration}s`
+          animationDuration: `${duration}s`,
+          animationTimingFunction: 'linear',
+          animationIterationCount: 'infinite'
         }}
       >
         {[
+          // duplicate the list once to create a seamless loop
           ...new Array(2).fill(0).map((_, index) => (
             <React.Fragment key={index}>
               {testimonials.map(({ text, name, username, avatar }) => (
@@ -43,6 +46,28 @@ const TestimonialsColumn = ({ testimonials, className = '', duration = 15 }) => 
 const LandingPage = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  
+  const scrollToSection = (name) => {
+    const map = {
+      Home: 'hero',
+      About: 'dashboard',
+      Features: 'features',
+      Pricing: 'pricing',
+      Contact: 'contact'
+    };
+    const id = map[name] || 'hero';
+    const el = document.getElementById(id);
+    if (el) {
+      // account for fixed navbar height so content isn't hidden behind it
+      const nav = document.querySelector('nav');
+      const navHeight = nav ? nav.offsetHeight : 80;
+      const top = el.getBoundingClientRect().top + window.pageYOffset - navHeight - 12;
+      window.scrollTo({ top, behavior: 'smooth' });
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    setMobileMenuOpen(false);
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -54,87 +79,71 @@ const LandingPage = () => {
 
   const testimonials = [
     {
-      text: "As a CFO always on the lookout for innovative financial tools, ProfitWise instantly grabbed my attention with its seamless payroll automation.",
+      text: "The moment we connected our AA data, the platform delivered a complete financial health view. This level of transparency is exactly what MSMEs need.",
       name: "Jamie Rivera",
       username: "@jamiefinancepro",
       avatar: "JR"
     },
     {
-      text: "Our team's productivity has skyrocketed since we started using ProfitWise. The instant payout feature has transformed how we manage contractor payments.",
+      text: "The behavioral credit score gave us insights no traditional bureau ever could. Finally, a system that understands how small businesses actually operate.",
       name: "Josh Smith",
       username: "@jjsmithcfo",
       avatar: "JS"
     },
     {
-      text: "This platform has completely transformed how we handle payroll and financial operations. The real-time analytics are incredibly insightful.",
+      text: "The explainable AI reports help us understand exactly why a loan was approved or rejected. This clarity has transformed our credit evaluation.",
       name: "Morgan Lee",
       username: "@morganleefinance",
       avatar: "ML"
     },
     {
-      text: "I was amazed at how quickly we were able to integrate ProfitWise into our existing workflow. The API documentation is excellent.",
+      text: "Integration with the Account Aggregator framework was unbelievably smooth. The API-first design made onboarding effortless for our lending workflows.",
       name: "Casey Jordan",
       username: "@caseyjpayroll",
       avatar: "CJ"
     },
     {
-      text: "Managing payroll for hundreds of employees has never been easier. ProfitWise helps us keep track of all payments, ensuring nothing slips through the cracks.",
+      text: "For years, underwriting MSMEs was slow and uncertain. This platform cuts our evaluation time drastically while boosting confidence in our decisions.",
       name: "Taylor Kim",
       username: "@taylorkimfinance",
       avatar: "TK"
-    },
+    },  
     {
-      text: "The customizability and integration capabilities of ProfitWise are top-notch. It seamlessly connects with all our existing tools.",
+      text: "The lender product-matching engine is incredibly accurate. It helps us align the right MSMEs to the right credit products with minimal manual effort.",
       name: "Riley Smith",
       username: "@rileysmithcfo",
       avatar: "RS"
-    },
-    {
-      text: "Adopting ProfitWise for our team has streamlined our payment processing and improved financial transparency across the board.",
-      name: "Jordan Patels",
-      username: "@jpatelsfinance",
-      avatar: "JP"
-    },
-    {
-      text: "With ProfitWise, we can easily process payments, track expenses, and manage payroll all in one place. The fraud detection is a game-changer.",
-      name: "Sam Dawson",
-      username: "@dawsonfintech",
-      avatar: "SD"
-    },
-    {
-      text: "Its user-friendly interface and robust features support our diverse financial needs. The instant payouts feature is absolutely brilliant.",
-      name: "Casey Harper",
-      username: "@casey09finance",
-      avatar: "CH"
     }
   ];
 
-  const firstColumn = testimonials.slice(0, 3);
-  const secondColumn = testimonials.slice(3, 6);
-  const thirdColumn = testimonials.slice(6, 9);
+
+  const firstColumn = testimonials.slice(0, 2);
+  const secondColumn = testimonials.slice(2, 4);
+  const thirdColumn = testimonials.slice(4, 6);
 
   const features = [
     {
       icon: Zap,
-      title: 'Instant Payouts',
-      description: 'Send payments instantly to your team, contractors, and vendors. No waiting, no delays.'
+      title: 'Instant Credit Insights',
+      description: 'Transform AA bank and GST data into real-time financial health summaries and risk signals.'
     },
     {
       icon: TrendingUp,
-      title: 'Smart Payroll',
-      description: 'Automated payroll processing with tax calculations, compliance checks, and direct deposits.'
+      title: 'Behavioral Credit Scoring',
+      description: 'AI-driven scoring based on cash flow patterns, business stability, and operational behavior—not traditional credit history.'
     },
     {
       icon: Shield,
-      title: 'Fraud Detection',
-      description: 'Advanced AI-powered fraud detection to protect your business from suspicious transactions.'
+      title: 'Explainable AI Decisions',
+      description: 'Clear, transparent explanations for approvals, rejections, and score changes using interpretable AI models.'
     },
     {
       icon: BarChart3,
-      title: 'Real-time Analytics',
-      description: 'Comprehensive dashboards with real-time insights into your financial operations and trends.'
+      title: 'Lender Product Matching',
+      description: 'Automatically match MSME profiles with the right loan products based on eligibility, risk tier, and policy rules.'
     }
   ];
+
 
   const pricingPlans = [
     {
@@ -208,15 +217,14 @@ const LandingPage = () => {
               <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#00FF75] to-[#0DF86A] flex items-center justify-center shadow-[0_0_20px_#00ff75]">
                 <span className="text-[#0a0d12] font-bold text-xl">$</span>
               </div>
-              <span className="text-xl font-bold text-white">ProfitWise</span>
+              <span className="text-xl font-bold text-white">AarohanCredit</span>
             </div>
 
             {/* Desktop Menu */}
             <div className="hidden md:flex items-center space-x-6 text-white">
               {['Home', 'About', 'Features', 'Pricing', 'Contact'].map((item) => (
-                <button key={item} className="flex items-center space-x-1 hover:text-[#00FF75] transition-colors group">
+                <button key={item} onClick={() => scrollToSection(item)} className="hover:text-[#00FF75] transition-colors">
                   <span>{item}</span>
-                  <ChevronDown className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </button>
               ))}
             </div>
@@ -255,7 +263,7 @@ const LandingPage = () => {
           <div className="md:hidden mt-2 mx-auto w-[94%] max-w-6xl bg-[#0a0d12]/95 backdrop-blur-xl border border-[#00FF75]/10 rounded-2xl shadow-[0_8px_24px_rgba(0,255,117,0.12)]">
             <div className="px-4 py-4 space-y-3">
               {['Home', 'About', 'Features', 'Pricing', 'Contact'].map((item) => (
-                <button key={item} className="block w-full text-left py-2 text-white hover:text-[#00FF75] transition-colors">
+                <button key={item} onClick={() => scrollToSection(item)} className="block w-full text-left py-2 text-white hover:text-[#00FF75] transition-colors">
                   {item}
                 </button>
               ))}
@@ -280,7 +288,7 @@ const LandingPage = () => {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
+      <section id="hero" className="relative pt-32 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
         {/* Glowing arc and money graphics background */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           {/* Large glowing arc */}
@@ -340,12 +348,10 @@ const LandingPage = () => {
 
           {/* Main Headline */}
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-8 leading-tight">
-            <span className="text-white/90">Effortless </span>
+            <span className="text-white/90">Reinventing MSME Lending Through </span>
             <span className="text-[#00FF75] bg-gradient-to-r from-[#00FF75] to-[#0DF86A] bg-clip-text text-transparent drop-shadow-[0_0_20px_#00ff75]">
-              Payments & Payroll
+              Agentic AI and Verified Financials
             </span>
-            <br />
-            <span className="text-white/90">Fast, Smart, and Seamless.</span>
           </h1>
 
           {/* Glowing gradient behind headline */}
@@ -360,7 +366,7 @@ const LandingPage = () => {
 
 
       {/* Dashboard Preview Card */}
-      <section className="px-4 sm:px-6 lg:px-8 pb-20 relative z-10">
+      <section id="dashboard" className="px-4 sm:px-6 lg:px-8 pb-20 relative z-10">
         <div className="max-w-6xl mx-auto">
           <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-[#00FF75]/30 bg-gradient-to-br from-[#0a0d12] to-[#151920] backdrop-blur-sm">
             {/* Top Bar */}
@@ -610,7 +616,7 @@ const LandingPage = () => {
       </section>
 
       {/* Features Grid */}
-      <section className="px-4 sm:px-6 lg:px-8 py-20 relative z-10">
+      <section id="features" className="px-4 sm:px-6 lg:px-8 py-20 relative z-10">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
@@ -638,7 +644,7 @@ const LandingPage = () => {
       </section>
 
       {/* Testimonials Section - Scrolling Columns */}
-      <section className="px-4 sm:px-6 lg:px-8 py-20 relative z-10 bg-[#0a0d12]">
+      <section id="testimonials" className="px-4 sm:px-6 lg:px-8 py-20 relative z-10 bg-[#0a0d12]">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <div className="inline-flex items-center justify-center mb-5">
@@ -676,7 +682,7 @@ const LandingPage = () => {
 
 
       {/* Pricing Section */}
-      <section className="px-4 sm:px-6 lg:px-8 py-20 relative z-10">
+      <section id="pricing" className="px-4 sm:px-6 lg:px-8 py-20 relative z-10">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
@@ -731,7 +737,7 @@ const LandingPage = () => {
       </section>
 
       {/* Footer */}
-      <footer className="px-4 sm:px-6 lg:px-8 py-12 border-t border-[#00FF75]/10 relative z-10">
+      <footer id="contact" className="px-4 sm:px-6 lg:px-8 py-12 border-t border-[#00FF75]/10 relative z-10">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
             {/* Logo & Description */}
@@ -822,8 +828,24 @@ const LandingPage = () => {
         .animate-float {
           animation: float 6s ease-in-out infinite;
         }
+          /* make the testimonial list scroll smoothly and seamlessly
+            - the inner list is duplicated, so translating -50% loops back to start
+            - animation duration is set inline via the duration prop
+            - use transform3d for better performance
+          */
         .animate-scroll-up {
-          animation: scroll-up linear infinite;
+          animation-name: scroll-up;
+          animation-timing-function: linear;
+          animation-iteration-count: infinite;
+          will-change: transform;
+          transform-origin: 0 0;
+          /* use GPU-accelerated transform */
+          backface-visibility: hidden;
+        }
+
+        /* Pause loop when user hovers the column */
+        .testimonial-column:hover .animate-scroll-up {
+          animation-play-state: paused;
         }
       `}</style>
     </div>
