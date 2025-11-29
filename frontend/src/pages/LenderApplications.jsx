@@ -16,46 +16,67 @@ const applicationsData = [
     { id: 'CRD776', msme: 'City Hardware', amount: '₹ 2 L', score: 610, status: 'Rejected', date: '2025-11-23', health: 'Poor' },
 ];
 
+// Reusable function for Status badge styles
 const getStatusStyles = (status) => {
     switch (status) {
-        case 'Reviewing': return 'bg-yellow-500/20 text-yellow-400';
-        case 'Pending Data': return 'bg-blue-500/20 text-blue-400';
-        case 'Approved': return 'bg-emerald-500/20 text-emerald-400';
-        case 'Rejected': return 'bg-rose-500/20 text-rose-400';
-        default: return 'bg-gray-500/20 text-gray-400';
+        case 'Reviewing': return 'bg-yellow-500/20 text-yellow-400 border border-yellow-500/30';
+        case 'Pending Data': return 'bg-blue-500/20 text-blue-400 border border-blue-500/30';
+        case 'Approved': return 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30';
+        case 'Rejected': return 'bg-rose-500/20 text-rose-400 border border-rose-500/30';
+        default: return 'bg-gray-500/20 text-gray-400 border border-gray-500/30';
     }
 };
 
+// Reusable function for Health text styles
 const getHealthStyles = (health) => {
     switch (health) {
-        case 'Excellent': return 'text-emerald-500';
-        case 'Good': return 'text-lime-500';
-        case 'Fair': return 'text-amber-500';
-        case 'Poor': return 'text-rose-500';
-        default: return 'text-gray-500';
+        case 'Excellent': return 'text-emerald-400 font-semibold';
+        case 'Good': return 'text-lime-400 font-semibold';
+        case 'Fair': return 'text-amber-400 font-semibold';
+        case 'Poor': return 'text-rose-400 font-semibold';
+        default: return 'text-gray-400 font-semibold';
     }
 }
 
 
+// Neon Card Component to match LenderDashboard StatCard aesthetic
+const NeonStatCard = ({ title, value, icon: Icon, color }) => {
+    // Determine card styling based on icon color (defaulting to neon blue)
+    const cardColor = color || '#4da3ff'; 
+
+    return (
+        <div 
+            className="p-5 rounded-xl border border-[#4da3ff]/50 shadow-[0_0_25px_#4da3ff]/50 bg-[#111217] transition-all duration-300 hover:shadow-[0_0_35px_#4da3ff]/70"
+        >
+            <div className="flex items-center justify-between">
+                <span className="text-sm font-medium text-gray-400">{title}</span>
+                <div 
+                    className={`w-8 h-8 rounded-full flex items-center justify-center`} 
+                    style={{ backgroundColor: cardColor, color: '#fff', opacity: '0.8' }}
+                >
+                    <Icon size={16} />
+                </div>
+            </div>
+            <p className="text-3xl font-bold mt-2 text-white">{value}</p>
+        </div>
+    );
+};
+
+
 export default function LenderApplications() {
     const navigate = useNavigate();
-    const [isDarkMode, setIsDarkMode] = useState(true);
+    // Set isDarkMode to true to enforce the dark theme
+    const [isDarkMode] = useState(true); 
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [user] = useState({ name: 'HDFC Bank Team', branch: 'Mumbai-HQ' }); 
     const [searchTerm, setSearchTerm] = useState('');
 
     useEffect(() => {
         const root = window.document.documentElement;
-        if (isDarkMode) {
-            root.classList.add('dark');
-        } else {
-            root.classList.remove('dark');
-        }
-    }, [isDarkMode]);
-
-    const toggleTheme = () => {
-        setIsDarkMode(!isDarkMode);
-    };
+        // Ensure dark mode is active to apply the neon theme
+        root.classList.add('dark');
+        root.classList.add('bg-[#0f1116]'); // Enforce background color on root
+    }, []);
 
     const handleLogout = () => {
         localStorage.removeItem('user');
@@ -69,7 +90,8 @@ export default function LenderApplications() {
     );
 
     return (
-        <div className="min-h-screen bg-gray-100 dark:bg-[#111217] font-sans text-gray-800 dark:text-gray-100">
+        // Set main background to off-black
+        <div className="min-h-screen bg-[#0f1116] font-sans text-gray-100 selection:bg-[#4da3ff]/30">
 
             <LenderSidebar
                 activeTab="applications" 
@@ -86,88 +108,70 @@ export default function LenderApplications() {
                     showSync={false}
                     toggleSidebar={() => setSidebarOpen(!sidebarOpen)}
                     isDarkMode={isDarkMode}
-                    toggleTheme={toggleTheme}
+                    toggleTheme={() => {}} // Disabled toggle as theme is fixed
                     pageTitle="Loan Applications Pipeline"
                 />
 
                 <main className="flex-1 p-6 lg:p-8 overflow-y-auto">
+                    {/* Summary Cards with Neon Styling */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-                        {/* Summary Cards */}
-                        <div className="bg-white dark:bg-[#1a1b23] p-5 rounded-xl shadow-lg border border-gray-200 dark:border-gray-800 flex items-center justify-between">
-                            <div>
-                                <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Total Applications</p>
-                                <p className="text-2xl font-bold mt-1 text-gray-900 dark:text-white">650</p>
-                            </div>
-                            <ListChecks size={32} className="text-indigo-500 opacity-70" />
-                        </div>
-                        <div className="bg-white dark:bg-[#1a1b23] p-5 rounded-xl shadow-lg border border-gray-200 dark:border-gray-800 flex items-center justify-between">
-                            <div>
-                                <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Pending Review</p>
-                                <p className="text-2xl font-bold mt-1 text-yellow-500">45</p>
-                            </div>
-                            <Clock size={32} className="text-yellow-500 opacity-70" />
-                        </div>
-                        <div className="bg-white dark:bg-[#1a1b23] p-5 rounded-xl shadow-lg border border-gray-200 dark:border-gray-800 flex items-center justify-between">
-                            <div>
-                                <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Approved (30D)</p>
-                                <p className="text-2xl font-bold mt-1 text-emerald-500">120</p>
-                            </div>
-                            <UserCheck size={32} className="text-emerald-500 opacity-70" />
-                        </div>
-                        <div className="bg-white dark:bg-[#1a1b23] p-5 rounded-xl shadow-lg border border-gray-200 dark:border-gray-800 flex items-center justify-between">
-                            <div>
-                                <p className="text-sm font-medium text-gray-500 dark:text-gray-400">High Risk Alerts</p>
-                                <p className="text-2xl font-bold mt-1 text-rose-500">8</p>
-                            </div>
-                            <FileWarning size={32} className="text-rose-500 opacity-70" />
-                        </div>
+                        <NeonStatCard title="Total Applications" value="650" icon={ListChecks} color="#4da3ff" />
+                        <NeonStatCard title="Pending Review" value="45" icon={Clock} color="#fcd34d" /> {/* Yellow for pending */}
+                        <NeonStatCard title="Approved (30D)" value="120" icon={UserCheck} color="#34d399" /> {/* Emerald for approved */}
+                        <NeonStatCard title="High Risk Alerts" value="8" icon={FileWarning} color="#f87171" /> {/* Red for risk */}
                     </div>
-
-                    {/* Applications Table */}
-                    <div className="bg-white dark:bg-[#1a1b23] rounded-xl shadow-lg border border-gray-200 dark:border-gray-800">
-                        <div className="p-5 border-b border-gray-200 dark:border-gray-800 flex justify-between items-center">
-                            <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Recent Applications</h2>
-                            <div className="relative">
+                    
+                    {/* Applications Table with Neon Styling */}
+                    <div className="bg-[#111217] rounded-xl border border-[#4da3ff]/50 shadow-[0_0_25px_#4da3ff]/40">
+                        <div className="p-5 border-b border-gray-700/50 flex flex-col sm:flex-row justify-between items-start sm:items-center">
+                            <h2 className="text-xl font-semibold text-white mb-4 sm:mb-0">Recent Applications</h2>
+                            
+                            <div className="relative w-full sm:w-64">
                                 <Search size={18} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
                                 <input
                                     type="text"
                                     placeholder="Search by ID or MSME Name..."
                                     value={searchTerm}
                                     onChange={(e) => setSearchTerm(e.target.value)}
-                                    className="pl-10 pr-4 py-2 bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg text-sm focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 dark:text-white w-64"
+                                    // Input Styling
+                                    className="pl-10 pr-4 py-2 bg-[#0f1116] border border-[#4da3ff]/30 rounded-lg text-sm focus:ring-[#4da3ff] focus:border-[#4da3ff] text-white w-full transition-all"
                                 />
                             </div>
                         </div>
+
                         <div className="overflow-x-auto">
-                            <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                                <thead className="bg-gray-50 dark:bg-gray-900">
+                            <table className="min-w-full divide-y divide-gray-700/50">
+                                <thead className="bg-[#1a1b23]"> {/* Slightly lighter dark background for header */}
                                     <tr>
-                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Application ID</th>
-                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">MSME Name</th>
-                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Requested Amount</th>
-                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">AI Score</th>
-                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Health</th>
-                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Status</th>
-                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Date</th>
-                                        <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Action</th>
+                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Application ID</th>
+                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">MSME Name</th>
+                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Requested Amount</th>
+                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">AI Score</th>
+                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Health</th>
+                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Status</th>
+                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Date</th>
+                                        <th className="px-6 py-3 text-right text-xs font-medium text-gray-400 uppercase tracking-wider">Action</th>
                                     </tr>
                                 </thead>
-                                <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
+                                <tbody className="divide-y divide-gray-700/50">
                                     {filteredApplications.map((app) => (
-                                        <tr key={app.id} className="hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
-                                            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-indigo-500">{app.id}</td>
-                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">{app.msme}</td>
-                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">{app.amount}</td>
-                                            <td className="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-700 dark:text-gray-300">{app.score}</td>
-                                            <td className={`px-6 py-4 whitespace-nowrap text-sm font-medium ${getHealthStyles(app.health)}`}>{app.health}</td>
+                                        <tr 
+                                            key={app.id} 
+                                            className="hover:bg-[#1a1b23]/50 transition-colors cursor-pointer" // Subtle hover effect
+                                        >
+                                            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-[#4da3ff]">{app.id}</td> {/* Neon blue text */}
+                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{app.msme}</td>
+                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{app.amount}</td>
+                                            <td className="px-6 py-4 whitespace-nowrap text-sm font-semibold text-white">{app.score}</td>
+                                            <td className={`px-6 py-4 whitespace-nowrap text-sm ${getHealthStyles(app.health)}`}>{app.health}</td>
                                             <td className="px-6 py-4 whitespace-nowrap">
                                                 <span className={`px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusStyles(app.status)}`}>
                                                     {app.status}
                                                 </span>
                                             </td>
-                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{app.date}</td>
+                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-400">{app.date}</td>
                                             <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                                <button className="text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-300 transition-colors p-1 rounded-md hover:bg-indigo-100/20">
+                                                <button className="text-[#4da3ff] hover:text-[#7abfff] transition-colors p-1 rounded-md hover:bg-[#4da3ff]/10">
                                                     View Details
                                                 </button>
                                             </td>
