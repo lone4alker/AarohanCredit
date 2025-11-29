@@ -1,16 +1,16 @@
 {
-  "report_id": "ef100506-9cd7-4395-a898-fdba72067661",
+  "report_id": "e4497f72-f785-47c2-900c-0254d1699c97",
   "msme_id": "MSME002",
-  "generated_at": "2025-11-29T02:48:06.325360",
-  "overall_creditworthiness": 55.52,
-  "summary": "This credit intelligence report evaluates the MSME's financial profile with an overall creditworthiness score of 55.5/100. The analysis reveals a RiskLevel.MEDIUM risk profile with a behavioral score of 665/1000. The business demonstrates positive cashflow of \u20b91,552,575.00. 1 credit products have been identified as suitable matches. Detailed analysis and recommendations are provided in the respective sections.",
+  "generated_at": "2025-11-29T05:31:31.250180",
+  "overall_creditworthiness": 67.72,
+  "summary": "This credit intelligence report evaluates the MSME's financial profile with an overall creditworthiness score of 67.7/100. The analysis reveals a RiskLevel.MEDIUM risk profile with a behavioral score of 720/1000. The business demonstrates positive cashflow of \u20b91,552,575.00. 1 credit products have been identified as suitable matches. Detailed analysis and recommendations are provided in the respective sections.",
   "risk_level": "medium",
-  "behavioral_score": 665.0,
+  "behavioral_score": 720.0,
   "net_cashflow": 1552575.0,
   "best_fit_products_count": 1,
   "key_insights": [
-    "Your business demonstrates strong financial health with a significant positive net cashflow and high cashflow stability, indicating a healthy ability to generate funds. / Su negocio demuestra una s\u00f3lida salud financiera con un flujo de caja neto positivo significativo y una alta estabilidad del flujo de caja, lo que indica una buena capacidad para generar fondos.",
-    "The current credit decision is primarily driven by concerns around liquidity management and cash flow predictability, specifically high balance volatility, low minimum balance, and frequent rapid changes. / La decisi\u00f3n crediticia actual se basa principalmente en preocupaciones sobre la gesti\u00f3n de la liquidez y la previsibilidad del flujo de caja, espec\u00edficamente la alta volatilidad del saldo, el saldo m\u00ednimo bajo y los cambios r\u00e1pidos y frecuentes.",
-    "These factors raise red flags for lenders, suggesting potential challenges in managing day-to-day liquidity and an elevated concentration risk, which currently prevent eligibility for the recommended loan products. / Estos factores plantean se\u00f1ales de alerta para los prestamistas, lo que sugiere posibles desaf\u00edos en la gesti\u00f3n de la liquidez diaria y un riesgo de concentraci\u00f3n elevado, lo que actualmente impide la elegibilidad para los productos de pr\u00e9stamo recomendados."
+    "The business exhibits strong fundamental financial health with substantial positive net cashflow (\u20b91.55M) and high cashflow stability (0.94).",
+    "Despite overall stability, the business faces short-term liquidity challenges, evidenced by frequent rapid balance drops and a low minimum balance (\u20b935k).",
+    "There is a potential revenue concentration risk due to a low number of inflow transactions (3 per month average), suggesting reliance on a few clients or infrequent large payments."
   ]
 }

@@ -6,6 +6,7 @@ import json
 import sys
 import os
 from pathlib import Path
+from datetime import datetime
 
 # Add parent directory to path
 sys.path.insert(0, str(Path(__file__).parent.parent))
@@ -13,13 +14,57 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 from agents_platform.orchestrator.orchestrator import OrchestratorAgent
 from agents_platform.report_builder.report_builder import ReportBuilder
 from agents_platform.core.types import UnifiedCreditReport
+from agents_platform.core.db import get_database
 
 
 def load_sample_data():
-    """Load sample transaction data."""
-    sample_file = Path(__file__).parent / "sample_data.json"
-    with open(sample_file, 'r') as f:
-        return json.load(f)
+    """Load sample transaction data from MongoDB."""
+    print("Connecting to MongoDB to fetch sample data...")
+    try:
+        db = get_database()
+        collection = db["msme_data"]
+        # Fetch the first document or a specific one
+        # For this example, we'll just fetch one document
+        data = collection.find_one()
+        
+        if not data:
+            print("No data found in 'msme_data' collection. Please run seed_db.py first.")
+            sys.exit(1)
+            
+        # Remove _id as it's not JSON serializable by default and might not be needed for analysis
+        if '_id' in data:
+            del data['_id']
+            
+        return data
+    except Exception as e:
+        print(f"Error loading data from MongoDB: {e}")
+        sys.exit(1)
+
+
+def save_results_to_db(report: UnifiedCreditReport, summary: dict):
+    """Save the report and summary to MongoDB."""
+    print("Saving results to MongoDB...")
+    try:
+        db = get_database()
+        
+        # Save full report
+        reports_collection = db["credit_reports"]
+        report_data = json.loads(ReportBuilder.to_json(report))
+        report_data["created_at"] = datetime.utcnow()
+        reports_collection.insert_one(report_data)
+        print(f"   ✓ Full report saved to 'credit_reports' collection")
+        
+        # Save summary
+        summaries_collection = db["credit_summaries"]
+        summary_data = summary.copy()
+        summary_data["msme_id"] = report.msme_id
+        summary_data["report_id"] = report.report_id
+        summary_data["created_at"] = datetime.utcnow()
+        summaries_collection.insert_one(summary_data)
+        print(f"   ✓ Summary saved to 'credit_summaries' collection")
+        
+    except Exception as e:
+        print(f"Error saving results to MongoDB: {e}")
 
 
 def main():
@@ -130,19 +175,25 @@ def main():
             print(f"  ⚠ {weakness}")
         print()
     
-    # Save full report
-    print("Step 5: Saving full report...")
+    # Save full report and summary to MongoDB
+    print("Step 5: Saving results...")
+    
+    # Generate summary dict
+    summary = ReportBuilder.to_summary(report)
+    
+    # Save to MongoDB
+    save_results_to_db(report, summary)
+    
+    # Also save to files for reference (optional, but good for debugging)
     output_file = Path(__file__).parent / "output_report.json"
     with open(output_file, 'w') as f:
         f.write(ReportBuilder.to_json(report))
-    print(f"   ✓ Full report saved to: {output_file}")
-    print()
+    print(f"   ✓ Full report also saved to file: {output_file}")
     
-    # Save summary
     summary_file = Path(__file__).parent / "output_summary.json"
     with open(summary_file, 'w') as f:
-        json.dump(ReportBuilder.to_summary(report), f, indent=2, default=str)
-    print(f"   ✓ Summary saved to: {summary_file}")
+        json.dump(summary, f, indent=2, default=str)
+    print(f"   ✓ Summary also saved to file: {summary_file}")
     print()
     
     print("=" * 80)

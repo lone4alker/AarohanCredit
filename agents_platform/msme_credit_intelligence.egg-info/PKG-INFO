@@ -1,0 +1,507 @@
+Metadata-Version: 2.4
+Name: msme-credit-intelligence
+Version: 1.0.0
+Summary: Agentic AI Orchestrator for MSME Credit Intelligence
+Home-page: https://github.com/yourusername/msme-credit-intelligence
+Author: Your Name
+Author-email: your.email@example.com
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Financial and Insurance Industry
+Classifier: Topic :: Office/Business :: Financial
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+Requires-Dist: pydantic>=2.0.0
+Requires-Dist: pydantic-settings>=2.0.0
+Requires-Dist: fastapi>=0.104.0
+Requires-Dist: uvicorn[standard]>=0.24.0
+Requires-Dist: python-dateutil>=2.8.2
+Requires-Dist: langchain>=0.2.0
+Requires-Dist: langgraph>=0.0.52
+Requires-Dist: langchain-google-genai>=2.0.0
+Requires-Dist: google-generativeai>=0.5.0
+Requires-Dist: pytest>=7.4.0
+Requires-Dist: pytest-asyncio>=0.21.0
+Requires-Dist: black>=23.0.0
+Requires-Dist: flake8>=6.1.0
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+# MSME Credit Intelligence Platform
+
+## Agentic AI Orchestrator for Credit Analysis
+
+A complete, production-ready agentic AI architecture that coordinates multiple LangChain-powered AI agents (backed by Google Gemini) to analyze Account Aggregator (AA) financial data and produce comprehensive credit intelligence reports.
+
+---
+
+## 🎯 System Overview
+
+This platform orchestrates **5 specialized AI agents** to analyze MSME financial data and generate:
+
+- **Financial Health Metrics** - Cashflow analysis, stability scores, stress indicators
+- **Behavioral Credit Scoring** - Alternative credit scores based on transaction patterns
+- **Policy/Product Matching** - Lender product eligibility and recommendations
+- **Transparent Explainability** - Human-readable explanations and recommendations
+- **Lender-Ready Output** - Unified credit reports in multiple formats
+
+---
+
+## 📁 Architecture
+
+```
+agents_platform/
+├── core/                    # Core utilities and base classes
+│   ├── types.py            # Pydantic models and type definitions
+│   ├── config.py           # Configuration management
+│   └── base_agent.py       # Base agent class
+│
+├── tools/                   # Tool functions (data processing)
+│   ├── data_parser.py      # JSON/CSV/PDF parsing
+│   ├── transaction_categorizer.py  # Transaction categorization
+│   ├── financial_calculator.py     # Financial metrics
+│   └── anomaly_detector.py         # Anomaly detection
+│
+├── agents/                  # Specialized AI agents
+│   ├── financial_health_agent.py
+│   ├── credit_scoring_agent.py
+│   ├── policy_matching_agent.py
+│   └── explainability_agent.py
+│
+├── orchestrator/            # Orchestrator agent
+│   └── orchestrator.py
+│
+├── report_builder/          # Report formatting utilities
+│   └── report_builder.py
+│
+├── api/                     # FastAPI application
+│   └── main.py
+│
+└── examples/                # Sample data and examples
+    ├── sample_data.json
+    └── run_end_to_end.py
+```
+
+---
+
+## 🤖 Agents & Their Roles
+
+### 1. Financial Health Agent
+- Extracts and cleans raw financial data
+- Categorizes transactions (credits, debits, EMI, GST)
+- Detects cashflow patterns and seasonality
+- Computes stability, volatility, and stress indicators
+- **Output**: `FinancialHealthSummary`
+
+### 2. Credit Scoring Agent (LangChain + Gemini)
+- Builds behavioral alternative credit scores (0-1000 scale) using Gemini reasoning
+- Detects repayment patterns and concentration risk
+- Analyzes cyclicality and stability
+- Flags anomalies and red flags
+- **Output**: `BehavioralScore`
+
+### 3. Policy Matching Agent (LangChain + Gemini)
+- Ingests lender policies (JSON or database)
+- Matches MSME profile to product eligibility with LLM reasoning
+- Determines best-fit products and risk buckets
+- Calculates recommended loan amounts
+- **Output**: `ProductRecommendation`
+
+### 4. Explainability Agent (LangChain + Gemini)
+- Explains scores in human language
+- Provides MSME improvement recommendations
+- Generates lender-facing argumentation for compliance
+- Identifies strengths, weaknesses, and risk factors
+- **Output**: `ExplainabilityReport`
+
+### 5. Orchestrator Agent
+- Coordinates all specialized agents
+- Routes data between agents
+- Merges outputs into unified report
+- Handles fallback reasoning
+- **Output**: `UnifiedCreditReport`
+
+---
+
+## 🚀 Quick Start
+
+### 1. Installation & Environment
+
+```bash
+# Clone or navigate to the project directory
+cd agents_platform
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Copy environment file
+cp env.example .env
+
+# Set your Gemini API key (required for LangChain agents)
+echo "GEMINI_API_KEY=<your-key>" >> .env
+```
+
+> ⚠️ Obtain a Gemini API key from [Google AI Studio](https://makersuite.google.com/). Credit scoring, policy matching, and explainability agents require it.
+
+### 2. Run End-to-End Example
+
+```bash
+# Run the complete analysis pipeline
+python -m agents_platform.examples.run_end_to_end
+```
+
+This will:
+- Load sample transaction data
+- Run all agents through the orchestrator
+- Generate a unified credit report
+- Display summary and save full report to JSON
+
+### 3. Start API Server
+
+```bash
+# Start FastAPI server
+python -m agents_platform.api.main
+
+# Or using uvicorn directly
+uvicorn agents_platform.api.main:app --reload
+```
+
+The API will be available at `http://localhost:8000`
+
+---
+
+## 📡 API Endpoints
+
+### Analyze Credit Profile
+```http
+POST /api/v1/analyze
+Content-Type: application/json
+
+{
+  "transactions": [...],
+  "msme_profile": {...},
+  "context": {"msme_id": "MSME_001"}
+}
+```
+
+### Individual Agent Endpoints
+Invoke specific agents independently from the frontend (consent-driven UX, debugging, etc.).
+
+```http
+POST /api/v1/agent/financial-health
+POST /api/v1/agent/credit-scoring
+POST /api/v1/agent/policy-matching
+POST /api/v1/agent/explainability
+```
+
+### Get Full Report
+```http
+GET /api/v1/report/{report_id}
+```
+
+### Get Report Summary
+```http
+GET /api/v1/report/{report_id}/summary
+```
+
+### Get Lender View
+```http
+GET /api/v1/report/{report_id}/lender
+```
+
+### Get MSME View
+```http
+GET /api/v1/report/{report_id}/msme
+```
+
+### Health Check
+```http
+GET /health
+```
+
+---
+
+## 💻 Usage Examples
+
+### Python API Usage
+
+```python
+from agents_platform.agents.credit_scoring_agent import CreditScoringAgent
+
+agent = CreditScoringAgent()
+result = agent.run(
+    {
+        "transactions": [...],  # raw AA transactions
+        "financial_health": {...}  # optional summary from FinancialHealthAgent
+    }
+)
+
+if result.success:
+    print("Behavioral score:", result.data["behavioral_score"])
+    print("Risk level:", result.data["risk_level"])
+```
+
+### REST API Usage
+
+```bash
+# Analyze credit profile
+curl -X POST "http://localhost:8000/api/v1/analyze" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "transactions": [...],
+    "msme_profile": {...}
+  }'
+
+# Get report summary
+curl "http://localhost:8000/api/v1/report/{report_id}/summary"
+```
+
+---
+
+## 📊 Output Format
+
+### Unified Credit Report Structure
+
+```json
+{
+  "report_id": "uuid",
+  "msme_id": "MSME_001",
+  "generated_at": "2024-01-15T10:30:00",
+  "overall_creditworthiness": 75.5,
+  "summary": "Human-readable summary...",
+  "financial_health": {
+    "net_cashflow": 450000.0,
+    "total_inflow": 970000.0,
+    "total_outflow": 520000.0,
+    "cashflow_stability_score": 0.75,
+    "volatility_score": 0.35,
+    "stress_indicators": []
+  },
+  "behavioral_score": {
+    "behavioral_score": 650.0,
+    "risk_level": "medium",
+    "red_flags": [],
+    "anomalies": []
+  },
+  "product_recommendations": {
+    "best_fit_products": [...],
+    "alternative_products": [...]
+  },
+  "explainability": {
+    "score_explanations": {...},
+    "improvement_recommendations": [...],
+    "lender_arguments": {...},
+    "key_insights": [...]
+  }
+}
+```
+
+---
+
+## 🔧 Configuration
+
+Edit `.env` file or set environment variables:
+
+```env
+# API Settings
+API_HOST=0.0.0.0
+API_PORT=8000
+
+# Scoring Weights
+FINANCIAL_HEALTH_WEIGHT=0.3
+BEHAVIORAL_SCORE_WEIGHT=0.4
+POLICY_MATCH_WEIGHT=0.3
+
+# Data Storage
+DATA_DIR=data
+DB_PATH=data/policies.db
+
+# Gemini / LLM
+GEMINI_MODEL=gemini-2.5-flash
+GEMINI_API_KEY=your_key_here
+```
+
+---
+
+## 🛠️ Development
+
+### Project Structure
+
+- **Agents**: Each agent is a class inheriting from `BaseAgent`
+- **Tools**: Pure functions for data processing (no AI logic)
+- **Orchestrator**: Coordinates agent execution and merges outputs
+- **API**: FastAPI REST endpoints for integration
+
+### Adding a New Agent
+
+1. Create agent class in `agents/`:
+```python
+from ..core.base_agent import BaseAgent
+from ..core.types import AgentOutput
+
+class MyNewAgent(BaseAgent):
+    def __init__(self):
+        super().__init__(
+            name="MyNewAgent",
+            description="Agent description"
+        )
+    
+    def run(self, input_data, context=None):
+        # Agent logic here
+        return self.create_output(success=True, data={...})
+```
+
+2. Register in orchestrator if needed
+3. Add to API endpoints if exposing directly
+
+### Adding a New Tool
+
+Create function in `tools/`:
+```python
+def my_new_tool(data: Dict[str, Any]) -> Dict[str, Any]:
+    """Tool description."""
+    # Tool logic here
+    return result
+```
+
+---
+
+## 📝 Design Decisions
+
+### Agent-as-a-Service Pattern
+- Each agent is a self-contained service with `run()` method
+- Agents can be called independently or through orchestrator
+- Easy to test, scale, and replace
+
+### Tools vs Agents
+- **Tools**: Pure functions for data processing (parsing, calculations)
+- **Agents**: Reasoning, decision-making, orchestrating tools
+- Clear separation of concerns
+
+### Type Safety
+- All I/O models use Pydantic for validation
+- Type hints throughout codebase
+- Prevents runtime errors
+
+### Modularity
+- Each component is independent
+- Easy to extend and modify
+- Clear interfaces between components
+
+---
+
+## 🧪 Testing
+
+```bash
+# Run tests (when implemented)
+pytest tests/
+
+# Run with coverage
+pytest --cov=agents_platform tests/
+```
+
+---
+
+## 📚 Documentation
+
+- **API Documentation**: Available at `http://localhost:8000/docs` (Swagger UI)
+- **Code Documentation**: Inline docstrings throughout
+- **Examples**: See `examples/` directory
+
+---
+
+## 🔐 Security Considerations
+
+- **Production**: Configure CORS appropriately
+- **Authentication**: Add auth middleware for production
+- **Data Privacy**: Ensure compliance with data protection regulations
+- **Input Validation**: All inputs validated via Pydantic models
+
+---
+
+## 🚧 Future Enhancements
+
+- [ ] Database persistence for reports
+- [ ] Advanced LangGraph orchestration (parallel agent execution)
+- [ ] Real-time streaming analysis
+- [ ] Multi-tenant support
+- [ ] Advanced anomaly detection with ML
+- [ ] PDF parsing for bank statements
+- [ ] Integration with actual AA APIs
+
+---
+
+## 📄 License
+
+[Specify your license here]
+
+---
+
+## 👥 Contributing
+
+[Contributing guidelines]
+
+---
+
+## 📞 Support
+
+[Support contact information]
+
+---
+
+## 🎓 Architecture Diagram
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    FastAPI REST API                         │
+└──────────────────────┬──────────────────────────────────────┘
+                       │
+                       ▼
+┌─────────────────────────────────────────────────────────────┐
+│              Orchestrator Agent                             │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐     │
+│  │ Financial    │  │ Credit       │  │ Policy       │     │
+│  │ Health       │  │ Scoring       │  │ Matching     │     │
+│  │ Agent        │  │ Agent         │  │ Agent        │     │
+│  └──────┬───────┘  └──────┬───────┘  └──────┬───────┘     │
+│         │                  │                  │              │
+│         └──────────────────┴──────────────────┘            │
+│                            │                                │
+│                            ▼                                │
+│              ┌─────────────────────────┐                    │
+│              │ Explainability Agent    │                    │
+│              └─────────────────────────┘                    │
+└──────────────────────┬──────────────────────────────────────┘
+                       │
+                       ▼
+┌─────────────────────────────────────────────────────────────┐
+│                    Tool Functions                            │
+│  • Data Parsing  • Categorization  • Calculations           │
+│  • Anomaly Detection  • Pattern Detection                   │
+└─────────────────────────────────────────────────────────────┘
+                       │
+                       ▼
+┌─────────────────────────────────────────────────────────────┐
+│              Unified Credit Report                          │
+│  • Financial Health  • Behavioral Score                     │
+│  • Product Recommendations  • Explainability                │
+└─────────────────────────────────────────────────────────────┘
+```
+
+---
+
+**Built with ❤️ for MSME Credit Intelligence**
+

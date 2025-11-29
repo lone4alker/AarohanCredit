@@ -1,42 +1,47 @@
-// src/App.jsx (UPDATED)
-
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
-import MsmeDashboard from './pages/MsmeDashboard';
-import LenderDashboard from './pages/LenderDashboard';
-import LenderApplications from './pages/LenderApplications'; // New Import
-import LenderPolicies from './pages/LenderPolicies'; // New Import
-import Login from './pages/Login';
-// Import or create placeholders for other lender pages if needed, 
-// but for this example, we'll focus on the requested ones.
+
+// Pages
 import LandingPage from './pages/Landing';
-// Placeholder pages for reports and notifications
+import Login from './pages/Login';
+
+// MSME Imports
+import MsmeDashboard from './pages/MsmeDashboard';
+import LoanApplications from './pages/LoanApplications'; // From your 2nd snippet (likely used by MSME)
+
+// Lender Imports
+import LenderDashboard from './pages/LenderDashboard';
+import LenderApplications from './pages/LenderApplications'; // From your 1st snippet
+import LenderPolicies from './pages/LenderPolicies';
+
+// Placeholder Components for Lender
 const LenderReports = () => <div className="p-8"><h1>Lender Reports Page</h1><p>Content coming soon.</p></div>;
 const LenderNotifications = () => <div className="p-8"><h1>Lender Notifications Page</h1><p>Content coming soon.</p></div>;
-
 
 function App() {
     return (
         <Router>
             <Routes>
-                {/* Public Route */}
+                {/* --- Public Routes --- */}
                 <Route path="/" element={<LandingPage />} />
-        <Route path="/login" element={<Login />} />
-                
-                {/* MSME Routes */}
+                <Route path="/login" element={<Login />} />
+
+                {/* --- MSME Routes --- */}
                 <Route path="/msme-dashboard" element={<MsmeDashboard />} />
-                
-                {/* Lender Routes */}
+
+                {/* These routes were missing in snippet 1, causing MSME features to break */}
+                <Route path="/loan-applications" element={<LoanApplications />} />
+                <Route path="/approvals" element={<LoanApplications />} />
+                <Route path="/reports" element={<LoanApplications />} />
+                <Route path="/notifications" element={<LoanApplications />} />
+
+                {/* --- Lender Routes --- */}
                 <Route path="/lender-dashboard" element={<LenderDashboard />} />
-                <Route path="/lender-loans" element={<LenderApplications />} /> {/* Updated Loan Applications Route */}
-                <Route path="/lender-policies" element={<LenderPolicies />} /> {/* New Policies Route */}
-                
-                {/* Placeholder Lender Routes */}
+                <Route path="/lender-loans" element={<LenderApplications />} />
+                <Route path="/lender-policies" element={<LenderPolicies />} />
                 <Route path="/lender-reports" element={<LenderReports />} />
                 <Route path="/lender-notifications" element={<LenderNotifications />} />
-                
-                {/* Fallback/Error Route (Optional) */}
-                {/* <Route path="*" element={<div>404 Not Found</div>} /> */}
+
             </Routes>
         </Router>
     );
