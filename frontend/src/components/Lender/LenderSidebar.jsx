@@ -57,7 +57,7 @@ const LenderSidebar = ({ activeTab, setActiveTab, isOpen, setIsOpen, onLogout })
                         <Activity className="text-[#0a0d12] w-6 h-6" />
                     </div>
                     <span className="text-xl font-bold text-white tracking-tight">
-                        CrediFlow
+                        Aarohan Credit
                     </span>
                 </div>
 
@@ -73,19 +73,17 @@ const LenderSidebar = ({ activeTab, setActiveTab, isOpen, setIsOpen, onLogout })
                             onClick={() => handleNavigation(item)}
                             className={`w-full flex items-center space-x-3 px-4 py-3.5 rounded-xl
                                 transition-all duration-200 group
-                                ${
-                                    activeTab === item.id
-                                        ? 'bg-[#4da3ff]/25 text-white border border-[#4da3ff]/40 shadow-[0_0_15px_#4da3ff]/40'
-                                        : 'hover:bg-[#4da3ff]/15 text-white/60 hover:text-white hover:border border-[#4da3ff]/30'
+                                ${activeTab === item.id
+                                    ? 'bg-[#4da3ff]/25 text-white border border-[#4da3ff]/40 shadow-[0_0_15px_#4da3ff]/40'
+                                    : 'hover:bg-[#4da3ff]/15 text-white/60 hover:text-white hover:border border-[#4da3ff]/30'
                                 }`}
                         >
                             <item.icon
                                 size={20}
-                                className={`${
-                                    activeTab === item.id
+                                className={`${activeTab === item.id
                                         ? 'text-[#4da3ff]'
                                         : 'text-white/40 group-hover:text-[#4da3ff]'
-                                } transition-colors`}
+                                    } transition-colors`}
                             />
 
                             <span className="font-medium text-sm">{item.label}</span>

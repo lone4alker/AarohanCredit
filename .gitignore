@@ -15,6 +15,9 @@ lerna-debug.log*
 .env
 .env.local
 .env.*.local
+agents_platform/.env
+backend/.env
+frontend/.env
 
 # Dist / Build folders (Vite + Node)
 dist/

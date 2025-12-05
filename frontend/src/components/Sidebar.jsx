@@ -29,7 +29,7 @@ const Sidebar = ({ activeTab, setActiveTab, isOpen, setIsOpen, onLogout }) => {
     setIsOpen(false);
     // Navigate to the corresponding path
     if (item.path) {
-        navigate(item.path);
+      navigate(item.path);
     }
   };
 
@@ -48,11 +48,16 @@ const Sidebar = ({ activeTab, setActiveTab, isOpen, setIsOpen, onLogout }) => {
       <aside className={`fixed inset-y-0 left-0 z-50 w-64 bg-[#0a0d12] text-white/60 border-r border-[#00FF75]/10 transition-transform duration-300 ease-in-out ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}>
 
         {/* Logo Section */}
-        <div className="h-20 flex items-center px-6 border-b border-[#00FF75]/10">
-          <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#00FF75] to-[#0DF86A] flex items-center justify-center mr-3 shadow-[0_0_15px_#00ff75]">
-            <span className="text-[#0a0d12] font-bold text-lg">CS</span>
+        <div className="h-20 flex items-center px-6 border-b border-[#4da3ff]/20">
+          <div className="w-10 h-10 rounded-lg 
+                                bg-gradient-to-br from-[#4da3ff] to-[#82c0ff]
+                                flex items-center justify-center mr-3 
+                                shadow-[0_0_15px_#4da3ff]">
+            <Activity className="text-[#0a0d12] w-6 h-6" />
           </div>
-          <span className="text-xl font-bold text-white tracking-tight">CreditSphere AI</span>
+          <span className="text-xl font-bold text-white tracking-tight">
+            Aarohan Credit
+          </span>
         </div>
 
         {/* Navigation */}
@@ -63,8 +68,8 @@ const Sidebar = ({ activeTab, setActiveTab, isOpen, setIsOpen, onLogout }) => {
               key={item.id}
               onClick={() => handleNavigation(item)}
               className={`w-full flex items-center space-x-3 px-4 py-3.5 rounded-xl transition-all duration-200 group ${activeTab === item.id
-                  ? 'bg-[#00FF75]/20 text-white border border-[#00FF75]/30 shadow-[0_0_15px_#00ff75]/20'
-                  : 'hover:bg-[#00FF75]/10 text-white/60 hover:text-white hover:border border-[#00FF75]/20'
+                ? 'bg-[#00FF75]/20 text-white border border-[#00FF75]/30 shadow-[0_0_15px_#00ff75]/20'
+                : 'hover:bg-[#00FF75]/10 text-white/60 hover:text-white hover:border border-[#00FF75]/20'
                 }`}
             >
               <item.icon size={20} className={`${activeTab === item.id ? 'text-[#00FF75]' : 'text-white/40 group-hover:text-[#00FF75]'} transition-colors`} />

@@ -2,10 +2,10 @@
 
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import LenderSidebar from '../components/Lender/LenderSidebar'; 
+import LenderSidebar from '../components/Lender/LenderSidebar';
 import Header from '../components/Header';
 // FIX: Added 'X' to the imports to resolve 'ReferenceError: X is not defined'
-import { Bell, Zap, Clock, FileWarning, CheckCircle, TrendingUp, X } from 'lucide-react'; 
+import { Bell, Zap, Clock, FileWarning, CheckCircle, TrendingUp, X } from 'lucide-react';
 
 // Neon Blue Accent Color
 const NEON_BLUE = '#4da3ff';
@@ -63,7 +63,7 @@ const NOTIFICATIONS = [
  * Notification Item Component
  */
 const NotificationItem = ({ type, message, time, icon: Icon, iconColor, borderColor }) => (
-    <div 
+    <div
         className={`flex items-start p-5 rounded-xl border ${borderColor} bg-[#111217] transition-all duration-300 hover:shadow-[0_0_15px_#4da3ff]/20 cursor-pointer`}
     >
         <div className={`mr-4 pt-1 ${iconColor}`}>
@@ -84,7 +84,7 @@ const NotificationItem = ({ type, message, time, icon: Icon, iconColor, borderCo
 export default function LenderNotifications() {
     const navigate = useNavigate();
     const [sidebarOpen, setSidebarOpen] = useState(false);
-    const [user] = useState({ name: 'HDFC Bank Team', branch: 'Mumbai-HQ' }); 
+    const [user] = useState({ name: 'HDFC Bank Team', branch: 'Mumbai-HQ' });
     const [isDarkMode] = useState(true);
 
     useEffect(() => {
@@ -101,8 +101,8 @@ export default function LenderNotifications() {
         <div className="min-h-screen bg-[#0f1116] font-sans text-gray-100 selection:bg-[#4da3ff]/30">
 
             <LenderSidebar
-                activeTab="notifications" 
-                setActiveTab={(tab) => navigate(`/lender-${tab}`)} 
+                activeTab="notifications"
+                setActiveTab={(tab) => navigate(`/lender-${tab}`)}
                 isOpen={sidebarOpen}
                 setIsOpen={setSidebarOpen}
                 onLogout={handleLogout}
@@ -115,12 +115,12 @@ export default function LenderNotifications() {
                     showSync={false}
                     toggleSidebar={() => setSidebarOpen(!sidebarOpen)}
                     isDarkMode={isDarkMode}
-                    toggleTheme={() => {}} 
+                    toggleTheme={() => { }}
                     pageTitle="Real-time Notifications"
                 />
 
                 <main className="flex-1 p-6 lg:p-8 overflow-y-auto">
-                    
+
                     <div className="flex justify-between items-center mb-6">
                         <h1 className="text-3xl font-bold text-white flex items-center">
                             <Bell size={28} className={`mr-3 text-[${NEON_BLUE}]`} style={{ color: NEON_BLUE }} />
@@ -138,17 +138,17 @@ export default function LenderNotifications() {
 
                     {/* --- Notification List Container (Neon Styled) --- */}
                     <div className="space-y-4">
-                        
+
                         {NOTIFICATIONS.length > 0 ? (
                             NOTIFICATIONS.map(notification => (
-                                <NotificationItem 
+                                <NotificationItem
                                     key={notification.id}
                                     type={notification.type}
                                     message={notification.message}
                                     time={notification.time}
                                     icon={notification.icon}
                                     // Use style prop for NEON_BLUE if necessary for dynamic Tailwind classes, but iconColor property is mostly text-utility classes which are fine
-                                    iconColor={notification.iconColor} 
+                                    iconColor={notification.iconColor}
                                     borderColor={notification.borderColor}
                                 />
                             ))

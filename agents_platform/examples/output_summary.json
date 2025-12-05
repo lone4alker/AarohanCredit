@@ -1,16 +1,16 @@
 {
-  "report_id": "0a92167a-9c3b-49a7-8ef6-47c27aa00c79",
+  "report_id": "3d61d11f-fc4f-4a95-b365-ce34286089db",
   "msme_id": "MSME001",
-  "generated_at": "2025-11-29T11:27:49.323107",
-  "overall_creditworthiness": 63.75,
-  "summary": "This credit intelligence report evaluates the MSME's financial profile with an overall creditworthiness score of 63.8/100. The analysis reveals a RiskLevel.MEDIUM risk profile with a behavioral score of 645/1000. The business demonstrates positive cashflow of \u20b9442,711.00. 1 credit products have been identified as suitable matches. Detailed analysis and recommendations are provided in the respective sections.",
+  "generated_at": "2025-12-05T10:36:54.668325",
+  "overall_creditworthiness": 79.75,
+  "summary": "This credit intelligence report evaluates the MSME's financial profile with an overall creditworthiness score of 79.8/100. The analysis reveals a RiskLevel.MEDIUM risk profile with a behavioral score of 795/1000. The business demonstrates positive cashflow of \u20b9442,711.00. 2 credit products have been identified as suitable matches. Detailed analysis and recommendations are provided in the respective sections.",
   "risk_level": "medium",
-  "behavioral_score": 645.0,
+  "behavioral_score": 795.0,
   "net_cashflow": 442711.0,
-  "best_fit_products_count": 1,
+  "best_fit_products_count": 2,
   "key_insights": [
-    "Your business shows strong overall financial health with significant positive net cashflow and stable cash flow patterns.",
-    "However, managing liquidity is a critical area for improvement due to high balance volatility, rapid balance changes, and a very low minimum balance.",
-    "Seasonality is a natural part of your business, but it requires careful cash flow planning to avoid liquidity crunches."
+    "The MSME exhibits strong financial health with consistent positive net cash flow and high cash flow stability.",
+    "Seasonality is a characteristic of the business, but it is effectively managed, demonstrating resilience.",
+    "The behavioral score is excellent, indicating responsible financial conduct and a high likelihood of timely repayments."
   ]
 }

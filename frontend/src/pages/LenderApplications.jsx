@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import LenderSidebar from '../components/Lender/LenderSidebar'; 
+import LenderSidebar from '../components/Lender/LenderSidebar';
 import Header from '../components/Header';
 import { ListChecks, UserCheck, Clock, FileWarning, Search } from 'lucide-react';
 
@@ -42,16 +42,16 @@ const getHealthStyles = (health) => {
 // Neon Card Component to match LenderDashboard StatCard aesthetic
 const NeonStatCard = ({ title, value, icon: Icon, color }) => {
     // Determine card styling based on icon color (defaulting to neon blue)
-    const cardColor = color || '#4da3ff'; 
+    const cardColor = color || '#4da3ff';
 
     return (
-        <div 
+        <div
             className="p-5 rounded-xl border border-[#4da3ff]/50 shadow-[0_0_25px_#4da3ff]/50 bg-[#111217] transition-all duration-300 hover:shadow-[0_0_35px_#4da3ff]/70"
         >
             <div className="flex items-center justify-between">
                 <span className="text-sm font-medium text-gray-400">{title}</span>
-                <div 
-                    className={`w-8 h-8 rounded-full flex items-center justify-center`} 
+                <div
+                    className={`w-8 h-8 rounded-full flex items-center justify-center`}
                     style={{ backgroundColor: cardColor, color: '#fff', opacity: '0.8' }}
                 >
                     <Icon size={16} />
@@ -66,9 +66,9 @@ const NeonStatCard = ({ title, value, icon: Icon, color }) => {
 export default function LenderApplications() {
     const navigate = useNavigate();
     // Set isDarkMode to true to enforce the dark theme
-    const [isDarkMode] = useState(true); 
+    const [isDarkMode] = useState(true);
     const [sidebarOpen, setSidebarOpen] = useState(false);
-    const [user] = useState({ name: 'HDFC Bank Team', branch: 'Mumbai-HQ' }); 
+    const [user] = useState({ name: 'HDFC Bank Team', branch: 'Mumbai-HQ' });
     const [searchTerm, setSearchTerm] = useState('');
 
     useEffect(() => {
@@ -94,8 +94,8 @@ export default function LenderApplications() {
         <div className="min-h-screen bg-[#0f1116] font-sans text-gray-100 selection:bg-[#4da3ff]/30">
 
             <LenderSidebar
-                activeTab="applications" 
-                setActiveTab={(tab) => navigate(`/lender-${tab}`)} 
+                activeTab="applications"
+                setActiveTab={(tab) => navigate(`/lender-${tab}`)}
                 isOpen={sidebarOpen}
                 setIsOpen={setSidebarOpen}
                 onLogout={handleLogout}
@@ -108,7 +108,7 @@ export default function LenderApplications() {
                     showSync={false}
                     toggleSidebar={() => setSidebarOpen(!sidebarOpen)}
                     isDarkMode={isDarkMode}
-                    toggleTheme={() => {}} // Disabled toggle as theme is fixed
+                    toggleTheme={() => { }} // Disabled toggle as theme is fixed
                     pageTitle="Loan Applications Pipeline"
                 />
 
@@ -120,12 +120,12 @@ export default function LenderApplications() {
                         <NeonStatCard title="Approved (30D)" value="120" icon={UserCheck} color="#34d399" /> {/* Emerald for approved */}
                         <NeonStatCard title="High Risk Alerts" value="8" icon={FileWarning} color="#f87171" /> {/* Red for risk */}
                     </div>
-                    
+
                     {/* Applications Table with Neon Styling */}
                     <div className="bg-[#111217] rounded-xl border border-[#4da3ff]/50 shadow-[0_0_25px_#4da3ff]/40">
                         <div className="p-5 border-b border-gray-700/50 flex flex-col sm:flex-row justify-between items-start sm:items-center">
                             <h2 className="text-xl font-semibold text-white mb-4 sm:mb-0">Recent Applications</h2>
-                            
+
                             <div className="relative w-full sm:w-64">
                                 <Search size={18} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
                                 <input
@@ -155,8 +155,8 @@ export default function LenderApplications() {
                                 </thead>
                                 <tbody className="divide-y divide-gray-700/50">
                                     {filteredApplications.map((app) => (
-                                        <tr 
-                                            key={app.id} 
+                                        <tr
+                                            key={app.id}
                                             className="hover:bg-[#1a1b23]/50 transition-colors cursor-pointer" // Subtle hover effect
                                         >
                                             <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-[#4da3ff]">{app.id}</td> {/* Neon blue text */}
