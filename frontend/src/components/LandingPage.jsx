@@ -16,7 +16,7 @@ const LandingPage = () => {
           <div className="w-8 h-8 bg-[#00ff88] rounded-full flex items-center justify-center">
             <span className="text-black font-bold text-xl">$</span>
           </div>
-          <span className="text-xl font-bold">ProfitWise</span>
+          <span className="text-xl font-bold">AarohanCredit</span>
         </div>
 
         {/* Navigation Links */}
@@ -84,6 +84,7 @@ const LandingPage = () => {
                   </div>
                 </div>
               </div>
+            </div>
             );
             })}
           </div>

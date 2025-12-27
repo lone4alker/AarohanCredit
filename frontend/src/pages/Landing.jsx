@@ -376,7 +376,7 @@ const LandingPage = () => {
                   <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#00FF75] to-[#0DF86A] flex items-center justify-center shadow-[0_0_10px_#00ff75]">
                     <span className="text-[#0a0d12] font-bold text-sm">$</span>
                   </div>
-                  <span className="text-[#00FF75] font-bold">ProfitWise</span>
+                  <span className="text-[#00FF75] font-bold">AarohanCredit</span>
                 </div>
                 <div className="hidden md:flex items-center space-x-2 bg-[#151920] rounded-lg px-3 py-1.5 border border-[#00FF75]/20">
                   <Search className="w-4 h-4 text-white/60" />
@@ -656,7 +656,7 @@ const LandingPage = () => {
               What our users say
             </h2>
             <p className="text-white/60 text-lg max-w-2xl mx-auto">
-              From intuitive design to powerful features, ProfitWise has become an essential tool for businesses around the world.
+              From intuitive design to powerful features, AarohanCredit has become an essential tool for businesses around the world.
             </p>
           </div>
 
@@ -746,7 +746,7 @@ const LandingPage = () => {
                 <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#00FF75] to-[#0DF86A] flex items-center justify-center shadow-[0_0_15px_#00ff75]">
                   <span className="text-[#0a0d12] font-bold text-xl">$</span>
                 </div>
-                <span className="text-xl font-bold text-white">ProfitWise</span>
+                <span className="text-xl font-bold text-white">AarohanCredit</span>
               </div>
               <p className="text-white/60 text-sm mb-4 max-w-md">
                 The all-in-one platform for effortless payments, payroll, and financial management.
@@ -796,7 +796,7 @@ const LandingPage = () => {
 
           <div className="pt-8 border-t border-[#00FF75]/10 flex flex-col md:flex-row justify-between items-center">
             <p className="text-white/40 text-sm mb-4 md:mb-0">
-              © 2024 ProfitWise. All rights reserved.
+              © 2025 AarohanCredit. All rights reserved.
             </p>
             <div className="flex space-x-6 text-sm">
               <a href="#" className="text-white/60 hover:text-[#00FF75] transition-colors">Privacy Policy</a>
